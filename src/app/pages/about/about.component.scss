@@ -1,8 +1,8 @@
 .row {
   div.col div {
     display: inline-block;
-    width: 40%;
-    border: 2px black solid;
+    width: 80%;
+    border: 2px white;
     border-radius: 5px;
     padding: 0px;
     margin-bottom: 5px;
@@ -20,13 +20,20 @@ img {
 }
 
 .card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: gray;
   img {
-    width: 200px;
+    width: 230px;
     height: 300px;
     padding: 0px;
   }
+  #description {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
   display: inline-block;
-  border: 2px black solid;
+  border: 2px white;
   padding: 5px;
   padding-inline: 20px;
 }

@@ -4,3 +4,19 @@
 .redX {
   color: red;
 }
+
+fieldset {
+  min-width: 100px;
+  display: inline-block;
+  label {
+    margin-right: 5px;
+  }
+}
+
+fieldset input {
+  float: right;
+}
+
+button {
+  margin-top: 10px;
+}
