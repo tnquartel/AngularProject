@@ -12,6 +12,7 @@ import { UserListComponent } from './pages/user/user-list/user-list.component';
 import { UserAddEditComponent } from './pages/user/user-add-edit/user-add-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserComponent,
     UserListComponent,
     UserAddEditComponent,
+    GameComponent,
   ],
   imports: [
     BrowserModule,
