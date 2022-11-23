@@ -1,7 +1,22 @@
 .btn-danger {
-  color: red;
+  color: rgb(6, 19, 26);
+  background-color: rgb(187, 45, 59);
 }
 
 .btn-warning {
-  color: orange;
+  color: rgb(6, 19, 26);
+  background-color: rgb(255, 202, 44);
+}
+
+.btn:hover {
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: rgb(13, 31, 61);
+}
+
+tr {
+  color: white;
+  border-bottom: 1px solid white;
 }

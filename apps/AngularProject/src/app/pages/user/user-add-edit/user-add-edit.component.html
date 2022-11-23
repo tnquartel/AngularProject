@@ -29,7 +29,7 @@
                             <p><label for="emailAdress">Emailaddress</label>
                                 <input type="email" class="form-control" [(ngModel)]="user!.emailAdress"
                                     placeholder="Your email adress" name="emailAdress" #emailAdress="ngModel" required
-                                    pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                             </p>
                             <p><label for="phoneNumber">Phonenumber</label>
                                 <input type="tel" class="form-control" [(ngModel)]="user!.phoneNumber"
