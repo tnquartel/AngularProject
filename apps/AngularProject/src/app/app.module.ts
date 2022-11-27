@@ -13,6 +13,9 @@ import { UserAddEditComponent } from './pages/user/user-add-edit/user-add-edit.c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameComponent } from './pages/game/game.component';
+import { GameListComponent } from './pages/game/game-list/game-list.component';
+import { GameCardComponent } from './pages/game/game-list/game-card/game-card.component';
+import { GameAddEditComponent } from './pages/game/game-add-edit/game-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { GameComponent } from './pages/game/game.component';
     UserListComponent,
     UserAddEditComponent,
     GameComponent,
+    GameListComponent,
+    GameCardComponent,
+    GameAddEditComponent,
   ],
   imports: [
     BrowserModule,

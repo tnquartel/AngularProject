@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit {
     this.users = this.userService.getUsers();
   }
   deleteUser(id: number): void {
-    console.log('delte');
+    console.log('delete');
     this.userService.deleteUser(id);
   }
 }

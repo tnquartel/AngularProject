@@ -5,6 +5,7 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { UserAddEditComponent } from './pages/user/user-add-edit/user-add-edit.component';
 import { UserComponent } from './pages/user/user.component';
 import { GameComponent } from './pages/game/game.component';
+import { GameAddEditComponent } from './pages/game/game-add-edit/game-add-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'user/new', pathMatch: 'full', component: UserAddEditComponent },
   { path: 'user/:id/edit', pathMatch: 'full', component: UserAddEditComponent },
   { path: 'game', component: GameComponent },
+  { path: 'game/new', pathMatch: 'full', component: GameAddEditComponent },
+  { path: 'game/:id/edit', pathMatch: 'full', component: GameAddEditComponent },
 ];
 
 @NgModule({
