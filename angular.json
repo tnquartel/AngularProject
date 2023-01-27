@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "AngularProject": "apps/AngularProject"
+    "AngularProject": "apps/AngularProject",
+    "all-my-games-api": "apps/all-my-games-api"
   }
 }
