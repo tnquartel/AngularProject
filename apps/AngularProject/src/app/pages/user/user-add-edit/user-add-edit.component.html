@@ -2,10 +2,10 @@
     <div class="row"></div>
 
     <div *ngIf="userExists">
-        <h1>{{ staticUser?.firstName }} {{ staticUser?.lastName }}</h1>
+        <h1 class="mb-4">{{ staticUser?.firstName }} {{ staticUser?.lastName }}</h1>
     </div>
     <div *ngIf="!userExists">
-        <h1>Add user</h1>
+        <h1 class="mb-4">Add user</h1>
     </div>
 
     <div class="row">
