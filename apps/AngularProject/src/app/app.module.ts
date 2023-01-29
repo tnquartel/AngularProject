@@ -17,6 +17,7 @@ import { GameListComponent } from './pages/game/game-list/game-list.component';
 import { GameCardComponent } from './pages/game/game-list/game-card/game-card.component';
 import { GameAddEditComponent } from './pages/game/game-add-edit/game-add-edit.component';
 import { GameDetailComponent } from './pages/game/game-detail/game-detail.component';
+import { ReviewComponent } from './pages/game/game-detail/review/review.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { GameDetailComponent } from './pages/game/game-detail/game-detail.compon
     GameCardComponent,
     GameAddEditComponent,
     GameDetailComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,

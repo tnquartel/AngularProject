@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "projects": {
     "AngularProject": "apps/AngularProject",
     "all-my-games-api": "apps/all-my-games-api"
