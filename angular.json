@@ -3,5 +3,8 @@
   "projects": {
     "AngularProject": "apps/AngularProject",
     "all-my-games-api": "apps/all-my-games-api"
+  },
+  "cli": {
+    "analytics": false
   }
 }
