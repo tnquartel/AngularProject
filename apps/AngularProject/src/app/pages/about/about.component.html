@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-sm-4 col-md-6 col-lg-7 card">
             <div class="d-flex justify-content-center align-items-center">
                 <div id="description">
-                    <h3 class="mt-4" id="aboutTitle">Over deze applicatie</h3>
+                    <h3 id="aboutTitle">Over deze applicatie</h3>
                     <p>
                         Deze applicatie is gemaakt in het kader van het vak 'Clientside web
                         frameworks' van Avans Hogeschool Breda.
@@ -11,16 +11,11 @@
                     <h1>AllMyGames</h1>
                     <p>
                         Bij dit project is het doel om een Angular frontend applicatie te
-                        realiseren in combinatie met een NoSQL database. Er horen 6 entiteiten bij dit project,
-                        namelijk:
-                        User,
-                        Gamelist, Game, Review, Developer en Adres.
-                        Het doel van mijn applicatie is dat gebruikers kunnen in verschillende lijsten (of 1 grote
-                        lijst)
-                        kunnen
-                        bijhouden welke games zij op het moment bezitten. Ook kunnen gebruikers reviews schrijven over
-                        deze
-                        games.
+                        realiseren in combinatie met een NoSQL database. Er horen 4 entiteiten bij dit project,
+                        namelijk: 
+                        User, Game, Review en Developer.
+                        Het doel van mijn applicatie is dat gebruikers bij kunnen houden welke games zei en hun vrienden gespeeld 
+                        hebben, nieuwe games kunnen ontdekken en games kunnen reviewen.
                     </p>
                 </div>
             </div>
@@ -50,71 +45,140 @@
     <div class="row row-cols-2 gy-3">
         <div class="col">
             <div>
-                <p>User</p>
+                <p><strong>User</strong></p>
                 <ul>
-                    <li>id: number</li>
+                    <li>id: string</li>
                     <li>name: string</li>
                     <li>age: number</li>
                     <li>emailAdres: string</li>
                     <li>phoneNumber: string</li>
+                    <li>password: string</li>
+                    <li>friends: User[]</li>
+                    <li>completedGames: Game[]</li>
                 </ul>
             </div>
         </div>
+
         <div class="col">
             <div>
-                <p>GameList</p>
+                <p><strong>Review</strong></p>
                 <ul>
-                    <li>id: number</li>
-                    <li>name: string</li>
-                    <li>description: string</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col">
-            <div>
-                <p>Review</p>
-                <ul>
-                    <li>id: number</li>
-                    <li>title: string</li>
-                    <li>description: string</li>
-                    <li>rating: number</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col">
-            <div>
-                <p>Game</p>
-                <ul>
-                    <li>id: number</li>
+                    <li>id: string</li>
                     <li>title: string</li>
                     <li>summary: string</li>
+                    <li>genre: string</li>
                     <li>rating: number</li>
                     <li>ageRating: string</li>
                     <li>price: number</li>
-                    <li>completed: boolean</li>
+                    <li>developers: Developer[]</li>
+                    <li>reviews: Review[]</li>
                 </ul>
             </div>
         </div>
+
         <div class="col">
             <div>
-                <p>Developer</p>
+                <p><strong>Game</strong></p>
                 <ul>
-                    <li>id: number</li>
+                    <li>id: string</li>
                     <li>name: string</li>
-                    <li>dateFounded: date</li>
+                    <li>dateFounded: Date</li>
+                    <li>summary: string</li>
+                    <li>games: Game[]</li>
                 </ul>
             </div>
         </div>
+
         <div class="col">
             <div>
-                <p>Adres</p>
+                <p><strong>Developer</strong></p>
                 <ul>
-                    <li>id: number</li>
-                    <li>postalCode: string</li>
-                    <li>street: string</li>
-                    <li>houseNumber: number</li>
+                    <li>id: string</li>
+                    <li>userId: User</li>
+                    <li>gameId: Game</li>
+                    <li>title: string</li>
+                    <li>description: string</li>
+                    <li>rating: number</li>
                 </ul>
             </div>
         </div>
+    </div>
+    <!-- Functionele eisen -->
+    <div class="relative overflow-x-auto py-4">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Nr.</th>
+                    <th scope="col" class="px-6 py-3">Requirement</th>
+                    <th scope="col" class="px-6 py-3">Toelichting</th>
+                    <th scope="col" class="px-6 py-3">M/S/C/W</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">1</td>
+                    <td class="px-6 py-4">
+                        De gebruiker kan een lijst van maaltijden inzien.
+                    </td>
+                    <td class="px-6 py-4">
+                        De lijst is een tabel. Door te klikken op een maaltijd
+                        navigeer je naar de details.
+                    </td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">2</td>
+                    <td class="px-6 py-4">
+                        De gebruiker kan alle details van een maaltijd inzien.
+                    </td>
+                    <td class="px-6 py-4">beschrijving.</td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--  -->
+
+    <h2 class="text-4xl font-extrabold dark:text-white">
+        Non-functional requirements
+    </h2>
+    <p class="my-4 text-lg text-gray-500">korte toelichting</p>
+
+    <!-- Functionele eisen -->
+    <div class="relative overflow-x-auto py-4">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Nr.</th>
+                    <th scope="col" class="px-6 py-3">Non-functional</th>
+                    <th scope="col" class="px-6 py-3">Toelichting</th>
+                    <th scope="col" class="px-6 py-3">M/S/C/W</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">1</td>
+                    <td class="px-6 py-4">Modulariteit, uitbreidbaarheid</td>
+                    <td class="px-6 py-4">
+                        Het systeem is zo ontwikkeld dat functionaliteiten in
+                        modules zijn gegroepeerd. Deze modules kunnen worden
+                        hergebruikt.
+                    </td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">2</td>
+                    <td class="px-6 py-4">Gebruiksvriendelijkheid</td>
+                    <td class="px-6 py-4">
+                        Het systeem gebruikt een CSS framework voor styling. Het
+                        systeem geeft heldere foutmeldingen naar de gebruiker. De
+                        gebruiker ziet via breadcrumbs op ieder scherm van de
+                        applicatie waar hij zich bevindt. De webapplicatie heeft een
+                        herkenbare en consequent toegepaste ontwerpstijl.
+                    </td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
