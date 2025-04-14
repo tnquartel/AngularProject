@@ -39,10 +39,11 @@ export class UserAddEditComponent implements OnInit {
       } else {
         this.user = {
           id: 0,
-          firstName: '',
-          lastName: '',
+          name: '',
+          age: 0,
           phoneNumber: '',
           emailAdress: '',
+          password: '',
         };
       }
     });
