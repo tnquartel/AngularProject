@@ -7,18 +7,20 @@ import { UserService } from '../../../user/user.service';
 })
 
 export class ReviewService {
-constructor(private userService: UserService) {}
+  readonly reviews: IReview[];
 
-  readonly reviews: IReview[] = [
-    {
-      id: 0,
-      title: 'Very cool game',
-      description:
-        'I really like how the characters control and think the difficulty is just right',
-      rating: 4,
-      user: this.userService.getUserById(0),
-    },
-  ];
+  constructor(private userService: UserService) {
+    this.reviews = [
+      {
+        id: 0,
+        title: 'Very cool game',
+        description:
+          'I really like how the characters control and think the difficulty is just right',
+        rating: 4,
+        user: this.userService.getUserById(0),
+      },
+    ];
+  }
 
   getReviews(): IReview[] {
     return this.reviews;
