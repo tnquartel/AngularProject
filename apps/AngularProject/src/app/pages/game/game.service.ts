@@ -12,6 +12,7 @@ export class GameService {
       title: 'GTA V',
       summary:
         'When a young street hustler, a retired bank robber, and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government, and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody — least of all each other.',
+      genre: 'shooter',
       rating: 4.3,
       ageRating: '18+',
       price: 30,
@@ -23,6 +24,7 @@ export class GameService {
       title: 'Pokemon Scarlet',
       summary:
         'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
+      genre: 'rpg',
       rating: 2.3,
       ageRating: '6+',
       price: 60,
@@ -34,6 +36,7 @@ export class GameService {
       title: 'Diep.io',
       summary:
         'From the creator of Agar.io, the newest online smash hit game comes to mobile! Upgrade your tank, shoot down other players and reach the top of the leaderboard!',
+      genre: 'multiplayer',
       rating: 5,
       ageRating: '8+',
       price: 0,
@@ -45,6 +48,7 @@ export class GameService {
       title: 'Pokemon Violet',
       summary:
         'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
+      genre: 'rpg',
       rating: 2.3,
       ageRating: '6+',
       price: 60,
@@ -56,6 +60,7 @@ export class GameService {
       title: 'Agar.io',
       summary:
         'Control your tiny cell and eat other players to grow larger! But watch out: players bigger than you will be trying to make you their lunch. Survive and eat long enough to become the biggest cell in the game!',
+      genre: 'multiplayer',
       rating: 5,
       ageRating: '8+',
       price: 0,

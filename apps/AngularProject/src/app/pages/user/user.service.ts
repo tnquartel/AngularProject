@@ -9,24 +9,27 @@ export class UserService {
   readonly users: IUser[] = [
     {
       id: 0,
-      firstName: 'Thomas',
-      lastName: 'Quartel',
+      name: 'Thomas',
+      age: 21,
       emailAdress: 'thomasquartel@icloud.com',
       phoneNumber: '0612345678',
+      password: 'password123',
     },
     {
       id: 1,
-      firstName: 'John',
-      lastName: 'doe',
+      name: 'John',
+      age: 25,
       emailAdress: 'test@mail.com',
       phoneNumber: '0612345678',
+      password: 'password123',
     },
     {
       id: 2,
-      firstName: 'Test',
-      lastName: 'doe',
+      name: 'Test',
+      age: 50,
       emailAdress: 'testmail@mail.com',
       phoneNumber: '0612345678',
+      password: 'password123',
     },
   ];
 

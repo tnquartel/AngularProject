@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IReview } from './review.model';
 import { ReviewService } from './review.service';
+import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-review',
@@ -9,6 +10,7 @@ import { ReviewService } from './review.service';
 })
 export class ReviewComponent implements OnInit {
   reviews: IReview[] = [];
+  faStar = faStar;
 
   constructor(private reviewService: ReviewService) {}
 

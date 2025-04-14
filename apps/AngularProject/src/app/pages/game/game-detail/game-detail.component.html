@@ -9,6 +9,8 @@
                 <h3 class="text-center">Summary</h3>
                     <p class="fst-italic">{{ game!.summary }}</p>
                     <p>Price: {{ game!.price | currency : 'EUR' }}</p>
+                    <p>Genre: {{ game!.genre}}</p>
+                    <!-- <p>Developer(s)</p> -->
                     <p>Rating:</p>
                     <p>{{ game!.rating }} <fa-icon [icon]="faStar" style="color: yellow"></fa-icon>
                     <p>Age Rating: {{ game!.ageRating }}</p>

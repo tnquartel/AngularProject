@@ -1,5 +1,6 @@
 {
   "name": "AngularProject",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "generators": {
     "@schematics/angular:component": {
@@ -22,9 +23,7 @@
           "apps/AngularProject/src/favicon.ico",
           "apps/AngularProject/src/assets"
         ],
-        "styles": [
-          "apps/AngularProject/src/styles.scss"
-        ],
+        "styles": ["apps/AngularProject/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -90,9 +89,7 @@
           "apps/AngularProject/src/favicon.ico",
           "apps/AngularProject/src/assets"
         ],
-        "styles": [
-          "apps/AngularProject/src/styles.scss"
-        ],
+        "styles": ["apps/AngularProject/src/styles.scss"],
         "scripts": []
       }
     }

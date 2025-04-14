@@ -1,6 +1,13 @@
-<div id="review" *ngFor="let review of reviews">
-    <h5>{{review.title}}</h5><br>
-    <p>{{review.description}}</p>
-    <br>
-    <hr>
-</div>
+<div class="review-container" *ngFor="let review of reviews">
+    <h3 class="review-title">{{ review.title }}</h3>
+    <div class="review-meta">
+      <span class="review-user">{{ review.user.name }}</span>
+      <span class="review-rating">
+        {{ review.rating }}
+        <fa-icon [icon]="faStar" class="star-icon"></fa-icon>
+      </span>
+    </div>
+    <p class="review-description">{{ review.description }}</p>
+    <hr />
+  </div>
+  

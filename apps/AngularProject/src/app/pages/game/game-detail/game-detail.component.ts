@@ -46,6 +46,7 @@ export class GameDetailComponent implements OnInit {
           id: 0,
           title: '',
           summary: '',
+          genre: '',
           rating: 0,
           price: 0,
           img: '',
