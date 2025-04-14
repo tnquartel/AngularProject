@@ -8,6 +8,7 @@
 <div class="card-body">
     <h5 class="card-title">{{ game!.title }}</h5>
     <p class="summary">{{ game!.summary.slice(0, 120) }}...</p>
+    <p>{{ game!.genre }}</p>
     <p>{{ game!.rating }} <fa-icon [icon]="faStar" style="color: yellow"></fa-icon>
     </p>
     <p>{{ game!.ageRating }} </p>

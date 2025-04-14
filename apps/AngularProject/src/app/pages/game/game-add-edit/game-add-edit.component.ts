@@ -41,6 +41,7 @@ export class GameAddEditComponent implements OnInit {
           id: 0,
           title: '',
           summary: '',
+          genre: '',
           rating: 0,
           ageRating: '',
           price: 0,
