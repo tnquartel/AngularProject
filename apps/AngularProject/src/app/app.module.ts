@@ -18,6 +18,7 @@ import { GameCardComponent } from './pages/game/game-list/game-card/game-card.co
 import { GameAddEditComponent } from './pages/game/game-add-edit/game-add-edit.component';
 import { GameDetailComponent } from './pages/game/game-detail/game-detail.component';
 import { ReviewComponent } from './pages/game/game-detail/review/review.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ReviewComponent } from './pages/game/game-detail/review/review.componen
     GameAddEditComponent,
     GameDetailComponent,
     ReviewComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
