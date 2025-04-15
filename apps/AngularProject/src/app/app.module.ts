@@ -19,6 +19,8 @@ import { GameAddEditComponent } from './pages/game/game-add-edit/game-add-edit.c
 import { GameDetailComponent } from './pages/game/game-detail/game-detail.component';
 import { ReviewComponent } from './pages/game/game-detail/review/review.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { DeveloperComponent } from './pages/developer/developer.component';
+import { DeveloperListComponent } from './pages/developer/developer-list/developer-list.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { UserProfileComponent } from './pages/user/user-profile/user-profile.com
     GameDetailComponent,
     ReviewComponent,
     UserProfileComponent,
+    DeveloperComponent,
+    DeveloperListComponent,
   ],
   imports: [
     BrowserModule,
