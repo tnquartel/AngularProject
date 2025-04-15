@@ -22,6 +22,7 @@ import { UserProfileComponent } from './pages/user/user-profile/user-profile.com
 import { DeveloperComponent } from './pages/developer/developer.component';
 import { DeveloperListComponent } from './pages/developer/developer-list/developer-list.component';
 import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/developer-add-edit.component';
+import { DeveloperDetailComponent } from './pages/developer/developer-detail/developer-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/
     DeveloperComponent,
     DeveloperListComponent,
     DeveloperAddEditComponent,
+    DeveloperDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -31,9 +31,12 @@ export class DeveloperAddEditComponent implements OnInit {
         this.developerExists = true;
         this.staticDeveloper = this.developerService.getDeveloperById(Number(this.developerId));
         this.developer = {
-          ...JSON.parse(
-            JSON.stringify(this.developerService.getDeveloperById(Number(this.developerId)))
-          ),
+          id: this.staticDeveloper.id,
+          name: this.staticDeveloper.name,
+          dateFounded: new Date(this.staticDeveloper.dateFounded),
+          summary: this.staticDeveloper.summary,
+          games: [], // tijdelijk leeg houden
+          gameIds: this.staticDeveloper.games?.map(g => g.id) ?? []
         };
         //Create
       } else {
@@ -42,6 +45,8 @@ export class DeveloperAddEditComponent implements OnInit {
           name: '',
           dateFounded: new Date(),
           summary: '',
+          games: [],
+          gameIds: [],
         };
       }
     });

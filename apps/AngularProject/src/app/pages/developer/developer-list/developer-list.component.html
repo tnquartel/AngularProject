@@ -16,6 +16,11 @@
                 <td>{{ developer.dateFounded | date: 'dd-MM-yyyy' }}</td>
                 <td>{{ developer.summary }}</td>
                 <td>
+                    <button class="btn btn-success" type="button" routerLink="{{ developer.id }}/detail">
+                        details
+                    </button>
+                </td>
+                <td>
                     <button class="btn btn-warning" type="button" routerLink="{{ developer.id }}/edit">
                         edit
                     </button>

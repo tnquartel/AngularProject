@@ -31,9 +31,17 @@ export class GameAddEditComponent implements OnInit {
         this.gameExists = true;
         this.staticGame = this.gameService.getGameById(Number(this.gameId));
         this.game = {
-          ...JSON.parse(
-            JSON.stringify(this.gameService.getGameById(Number(this.gameId)))
-          ),
+          id: this.staticGame.id,
+          title: this.staticGame.title,
+          summary: this.staticGame.summary,
+          genre: this.staticGame.genre,
+          rating: this.staticGame.rating,
+          price: this.staticGame.price,
+          developers: [],
+          developerIds: this.staticGame.developers.map(g => g.id) ?? [],
+          img: this.staticGame.img,
+          ageRating: this.staticGame.ageRating,
+          completed: this.staticGame.completed,
         };
         //Create
       } else {
@@ -45,6 +53,8 @@ export class GameAddEditComponent implements OnInit {
           rating: 0,
           ageRating: '',
           price: 0,
+          developers: [],
+          developerIds: [],
           img: '',
           completed: false,
         };

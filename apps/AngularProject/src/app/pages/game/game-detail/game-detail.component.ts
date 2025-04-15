@@ -30,30 +30,9 @@ export class GameDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      this.gameId = params.get('id');
-      //Edit
-      if (this.gameId) {
-        this.gameExists = true;
-        this.staticGame = this.gameService.getGameById(Number(this.gameId));
-        this.game = {
-          ...JSON.parse(
-            JSON.stringify(this.gameService.getGameById(Number(this.gameId)))
-          ),
-        };
-        //Create
-      } else {
-        this.game = {
-          id: 0,
-          title: '',
-          summary: '',
-          genre: '',
-          rating: 0,
-          price: 0,
-          img: '',
-          ageRating: '',
-          completed: false,
-        };
-      }
+      const id = Number(params.get('id'));
+      const allGames = this.gameService.getGames(); // of uit AppComponent
+      this.game = allGames.find(dev => dev.id === id);
     });
   }
 }

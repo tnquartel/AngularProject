@@ -1,21 +1,9 @@
 {
   "run": {
-    "command": "nx run all-my-games-api:serve",
-    "startTime": "2025-04-14T21:33:10.994Z",
-    "endTime": "2025-04-14T21:33:11.948Z",
+    "command": "nx serve AngularProject",
+    "startTime": "2025-04-15T15:49:08.960Z",
+    "endTime": "2025-04-15T15:49:08.987Z",
     "inner": false
   },
-  "tasks": [
-    {
-      "taskId": "all-my-games-api:serve",
-      "target": "serve",
-      "projectName": "all-my-games-api",
-      "hash": "8947641174540677213",
-      "startTime": "2025-04-14T21:33:11.008Z",
-      "endTime": "2025-04-14T21:33:11.943Z",
-      "params": "",
-      "cacheStatus": "cache-miss",
-      "status": 1
-    }
-  ]
+  "tasks": []
 }

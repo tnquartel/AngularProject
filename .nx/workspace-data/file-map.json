@@ -6,24 +6,40 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": ".vscode/launch.json",
+        "hash": "6678024648911621172"
+      },
+      {
+        "file": "tools/generators/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
         "file": "tools/tsconfig.tools.json",
         "hash": "11810713488198132402"
       },
       {
-        "file": ".prettierrc",
-        "hash": "6820402234827505055"
+        "file": "jest.config.ts",
+        "hash": "2950215254536237782"
       },
       {
         "file": "nx.json",
         "hash": "16397379125514989802"
       },
       {
-        "file": "migrations.json",
-        "hash": "18238927641211791598"
+        "file": "karma.conf.js",
+        "hash": "2404127352602669761"
       },
       {
-        "file": ".vscode/settings.json",
-        "hash": "811044757471405147"
+        "file": ".eslintrc.json",
+        "hash": "1659929058009100827"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "6820402234827505055"
+      },
+      {
+        "file": "migrations.json",
+        "hash": "18238927641211791598"
       },
       {
         "file": "tsconfig.base.json",
@@ -34,40 +50,28 @@
         "hash": "10093397977228577162"
       },
       {
-        "file": "package-lock.json",
-        "hash": "16578899171080576160"
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
       },
       {
-        "file": "package.json",
-        "hash": "4595618011849831491"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "1324685984948235314"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "2950215254536237782"
-      },
-      {
-        "file": "decorate-angular-cli.js",
-        "hash": "11823390707371404862"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "1659929058009100827"
+        "file": ".vscode/settings.json",
+        "hash": "811044757471405147"
       },
       {
         "file": "jest.preset.js",
         "hash": "2772139696069860212"
       },
       {
-        "file": ".vscode/launch.json",
-        "hash": "6678024648911621172"
+        "file": ".gitignore",
+        "hash": "4689145951703824387"
       },
       {
-        "file": "karma.conf.js",
-        "hash": "2404127352602669761"
+        "file": "angular.json",
+        "hash": "674685140099096838"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "18037487075392171512"
       },
       {
         "file": "README.md",
@@ -78,133 +82,23 @@
         "hash": "17241496168097493888"
       },
       {
-        "file": "libs/.gitkeep",
-        "hash": "3244421341483603138"
+        "file": "decorate-angular-cli.js",
+        "hash": "11823390707371404862"
       },
       {
-        "file": "angular.json",
-        "hash": "674685140099096838"
+        "file": ".prettierignore",
+        "hash": "1324685984948235314"
       },
       {
-        "file": ".gitignore",
-        "hash": "4689145951703824387"
+        "file": "package.json",
+        "hash": "4595618011849831491"
       },
       {
-        "file": "tools/generators/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "18037487075392171512"
+        "file": "package-lock.json",
+        "hash": "16578899171080576160"
       }
     ],
     "projectFileMap": {
-      "all-my-games-api": [
-        {
-          "file": "apps/all-my-games-api/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/all-my-games-api/jest.config.ts",
-          "hash": "11155649628690765080"
-        },
-        {
-          "file": "apps/all-my-games-api/project.json",
-          "hash": "12176376820117302356"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/app.controller.spec.ts",
-          "hash": "1174030326354595900"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/app.controller.ts",
-          "hash": "9005150069945785676"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/app.module.ts",
-          "hash": "6267817688893699713"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/app.service.spec.ts",
-          "hash": "8083513501028812037"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/app.service.ts",
-          "hash": "1714978675769535762"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/data.module.ts",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j-config.interface.ts",
-          "hash": "8455451528824424067"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.constants.ts",
-          "hash": "1917100148092231247"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.module.ts",
-          "hash": "1886294860492641128"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.query.ts",
-          "hash": "41711025527482235"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.service.ts",
-          "hash": "12045908522966625789"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.util.ts",
-          "hash": "12303681601035323456"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/user/user.controller.ts",
-          "hash": "44317039052764541"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/user/user.schema.ts",
-          "hash": "3351357634181754960"
-        },
-        {
-          "file": "apps/all-my-games-api/src/app/user/user.service.ts",
-          "hash": "17191833480578201794"
-        },
-        {
-          "file": "apps/all-my-games-api/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/all-my-games-api/src/environments/environment.prod.ts",
-          "hash": "10220522844224226756"
-        },
-        {
-          "file": "apps/all-my-games-api/src/environments/environment.ts",
-          "hash": "1135292433917692033"
-        },
-        {
-          "file": "apps/all-my-games-api/src/main.ts",
-          "hash": "11698191049156946126"
-        },
-        {
-          "file": "apps/all-my-games-api/tsconfig.app.json",
-          "hash": "9015013673434960875"
-        },
-        {
-          "file": "apps/all-my-games-api/tsconfig.json",
-          "hash": "9214820933160915425"
-        },
-        {
-          "file": "apps/all-my-games-api/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
       "AngularProject": [
         {
           "file": "apps/AngularProject/.browserslistrc",
@@ -220,7 +114,7 @@
         },
         {
           "file": "apps/AngularProject/src/app/app-routing.module.ts",
-          "hash": "9801704573168778728"
+          "hash": "6046702361703443446"
         },
         {
           "file": "apps/AngularProject/src/app/app.component.html",
@@ -236,11 +130,11 @@
         },
         {
           "file": "apps/AngularProject/src/app/app.component.ts",
-          "hash": "14177807771061797985"
+          "hash": "15870375724740244619"
         },
         {
           "file": "apps/AngularProject/src/app/app.module.ts",
-          "hash": "11713903062263680460"
+          "hash": "10686862335347756259"
         },
         {
           "file": "apps/AngularProject/src/app/pages/about/about.component.html",
@@ -272,15 +166,31 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer-add-edit/developer-add-edit.component.ts",
-          "hash": "985838897829849807"
+          "hash": "11452792163814012916"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-detail/developer-detail.component.html",
+          "hash": "14182775614993724310"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-detail/developer-detail.component.scss",
+          "hash": "1684451936731166007"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-detail/developer-detail.component.spec.ts",
+          "hash": "14120774074181131316"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-detail/developer-detail.component.ts",
+          "hash": "10414993043202598895"
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer-list/developer-list.component.html",
-          "hash": "4535980226395742356"
+          "hash": "922345316848034224"
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer-list/developer-list.component.scss",
-          "hash": "9089079600432785727"
+          "hash": "3141726122411079084"
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer-list/developer-list.component.spec.ts",
@@ -308,15 +218,15 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer.model.ts",
-          "hash": "8828931945266600912"
+          "hash": "11768851415798076663"
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer.service.ts",
-          "hash": "15250572199540334029"
+          "hash": "17065113916965605838"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-add-edit/game-add-edit.component.html",
-          "hash": "11455660996723238709"
+          "hash": "6113179685668368146"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-add-edit/game-add-edit.component.scss",
@@ -328,11 +238,11 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-add-edit/game-add-edit.component.ts",
-          "hash": "6422629602851013021"
+          "hash": "15441402966250999924"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-detail/game-detail.component.html",
-          "hash": "9909761696671977342"
+          "hash": "15611844595737907175"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-detail/game-detail.component.scss",
@@ -344,7 +254,7 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-detail/game-detail.component.ts",
-          "hash": "5654419734217975855"
+          "hash": "10217391470523345936"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game-detail/review/review.component.html",
@@ -420,11 +330,11 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game.model.ts",
-          "hash": "12576429943140270990"
+          "hash": "12047552403192584455"
         },
         {
           "file": "apps/AngularProject/src/app/pages/game/game.service.ts",
-          "hash": "1265729298796531740"
+          "hash": "1244002679429442201"
         },
         {
           "file": "apps/AngularProject/src/app/pages/homepage/homepage.component.html",
@@ -621,6 +531,112 @@
         {
           "file": "apps/AngularProject/tsconfig.spec.json",
           "hash": "11826815875857164144"
+        }
+      ],
+      "all-my-games-api": [
+        {
+          "file": "apps/all-my-games-api/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "apps/all-my-games-api/jest.config.ts",
+          "hash": "11155649628690765080"
+        },
+        {
+          "file": "apps/all-my-games-api/project.json",
+          "hash": "12176376820117302356"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/app.controller.spec.ts",
+          "hash": "1174030326354595900"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/app.controller.ts",
+          "hash": "9005150069945785676"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/app.module.ts",
+          "hash": "6267817688893699713"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/app.service.spec.ts",
+          "hash": "8083513501028812037"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/app.service.ts",
+          "hash": "1714978675769535762"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/data.module.ts",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j-config.interface.ts",
+          "hash": "8455451528824424067"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.constants.ts",
+          "hash": "1917100148092231247"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.module.ts",
+          "hash": "1886294860492641128"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.query.ts",
+          "hash": "41711025527482235"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.service.ts",
+          "hash": "12045908522966625789"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/neo4j/neo4j.util.ts",
+          "hash": "12303681601035323456"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/user/user.controller.ts",
+          "hash": "44317039052764541"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/user/user.schema.ts",
+          "hash": "3351357634181754960"
+        },
+        {
+          "file": "apps/all-my-games-api/src/app/user/user.service.ts",
+          "hash": "17191833480578201794"
+        },
+        {
+          "file": "apps/all-my-games-api/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/all-my-games-api/src/environments/environment.prod.ts",
+          "hash": "10220522844224226756"
+        },
+        {
+          "file": "apps/all-my-games-api/src/environments/environment.ts",
+          "hash": "1135292433917692033"
+        },
+        {
+          "file": "apps/all-my-games-api/src/main.ts",
+          "hash": "11698191049156946126"
+        },
+        {
+          "file": "apps/all-my-games-api/tsconfig.app.json",
+          "hash": "9015013673434960875"
+        },
+        {
+          "file": "apps/all-my-games-api/tsconfig.json",
+          "hash": "9214820933160915425"
+        },
+        {
+          "file": "apps/all-my-games-api/tsconfig.spec.json",
+          "hash": "11550347367511341917"
         }
       ]
     }

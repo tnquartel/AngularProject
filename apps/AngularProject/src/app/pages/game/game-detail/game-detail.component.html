@@ -10,7 +10,12 @@
                     <p class="fst-italic">{{ game!.summary }}</p>
                     <p>Price: {{ game!.price | currency : 'EUR' }}</p>
                     <p>Genre: {{ game!.genre}}</p>
-                    <!-- <p>Developer(s)</p> -->
+                    <p *ngIf="game?.developers?.length">
+                        Developers: 
+                        <ng-container *ngFor="let dev of game!.developers; let last = last">
+                            <a [routerLink]="['../../../developer/' + dev.id, 'detail']">{{ dev.name }}</a><span *ngIf="!last">, </span>
+                        </ng-container>
+                    </p>  
                     <p>Rating:</p>
                     <p>{{ game!.rating }} <fa-icon [icon]="faStar" style="color: yellow"></fa-icon>
                     <p>Age Rating: {{ game!.ageRating }}</p>

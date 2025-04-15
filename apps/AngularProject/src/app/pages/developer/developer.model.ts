@@ -1,7 +1,9 @@
+import { IGame } from "../game/game.model"
 export interface IDeveloper {
     id: number;
     name: string;
     dateFounded: Date;
     summary: string;
-    // games: Game[];
+    games: IGame[];
+    gameIds: number[];
   }
