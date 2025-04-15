@@ -1,0 +1,15 @@
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mCannot read properties of undefined (reading 'projects')[39m
+
+TypeError: Cannot read properties of undefined (reading 'projects')
+    at validateProject (C:\dev\AngularProject\node_modules\@nrwl\js\node_modules\nx\src\command-line\run.js:20:31)
+    at C:\dev\AngularProject\node_modules\@nrwl\js\node_modules\nx\src\command-line\run.js:80:9
+    at Generator.next (<anonymous>)
+    at C:\dev\AngularProject\node_modules\tslib\tslib.js:170:75
+    at new Promise (<anonymous>)
+    at Object.__awaiter (C:\dev\AngularProject\node_modules\tslib\tslib.js:166:16)
+    at runExecutorInternal (C:\dev\AngularProject\node_modules\@nrwl\js\node_modules\nx\src\command-line\run.js:79:20)
+    at C:\dev\AngularProject\node_modules\@nrwl\js\node_modules\nx\src\command-line\run.js:163:22
+    at Generator.next (<anonymous>)
+    at C:\dev\AngularProject\node_modules\tslib\tslib.js:170:75
+
