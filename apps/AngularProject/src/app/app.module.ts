@@ -21,6 +21,7 @@ import { ReviewComponent } from './pages/game/game-detail/review/review.componen
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { DeveloperComponent } from './pages/developer/developer.component';
 import { DeveloperListComponent } from './pages/developer/developer-list/developer-list.component';
+import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/developer-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DeveloperListComponent } from './pages/developer/developer-list/develop
     UserProfileComponent,
     DeveloperComponent,
     DeveloperListComponent,
+    DeveloperAddEditComponent,
   ],
   imports: [
     BrowserModule,

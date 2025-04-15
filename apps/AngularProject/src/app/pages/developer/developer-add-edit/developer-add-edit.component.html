@@ -1,0 +1,58 @@
+<div class="component edit">
+    <div class="row"></div>
+
+    <div *ngIf="developerExists">
+        <h1 class="mb-4">{{ staticDeveloper?.name }}</h1>
+    </div>
+    <div *ngIf="!developerExists">
+        <h1 class="mb-4">Add developer</h1>
+    </div>
+
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="col-6">
+                <div class="container">
+                    <form #developerEditForm="ngForm" name="form" (ngSubmit)="onSubmit()">
+                        <fieldset>
+                            <div class="form-group">
+                                <p><label for="name">Name</label>
+                                    <input type="text" class="form-control" placeholder="Developer name"
+                                        [(ngModel)]="developer!.name" name="name" required #name="ngModel"
+                                        minlength="3" />
+                                </p>
+                            </div>
+                            <p><label for="dateFounded">Date founded</label>
+                                <input type="date" class="form-control" placeholder="Date developer was founded"
+                                    [(ngModel)]="developer!.dateFounded" name="dateFounded" #dateFounded="ngModel" required
+                                    />
+                            </p>
+                            <p><label for="summary">Summary</label>
+                                <input type="text" class="form-control" [(ngModel)]="developer!.summary"
+                                    placeholder="Summary about developer" name="summary" #summary="ngModel" required
+                                     />
+                            </p>
+                        </fieldset>
+
+                        <div class="row">
+                            <!-- Bij Save roepen we de save() functie aan, en navigeren
+                              terug naar details binnen die functie -->
+                            <div class="col">
+                                <button role="button" type="submit" class="btn btn-primary mx-2"
+                                    [disabled]="!developerEditForm.valid">
+                                    Submit
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-secondary float-right" href="#" role="button"
+                                    routerLink="/developer">
+                                    Cancel
+                                </button>
+                            </div>
+                            <!-- Bij Cancel doen we nu nog niets, maar gaan gewoon terug naar de details -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

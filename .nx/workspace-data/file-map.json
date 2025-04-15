@@ -6,72 +6,16 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "tools/generators/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": "decorate-angular-cli.js",
-        "hash": "11823390707371404862"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "4689145951703824387"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "1324685984948235314"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "16578899171080576160"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "1659929058009100827"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "2772139696069860212"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "9150558264404859199"
-      },
-      {
-        "file": ".vscode/launch.json",
-        "hash": "6678024648911621172"
-      },
-      {
-        "file": "nx.json",
-        "hash": "16397379125514989802"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "2950215254536237782"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "17241496168097493888"
-      },
-      {
         "file": "tools/tsconfig.tools.json",
         "hash": "11810713488198132402"
       },
       {
-        "file": "README.md",
-        "hash": "14607139272372896250"
+        "file": ".prettierrc",
+        "hash": "6820402234827505055"
       },
       {
-        "file": "karma.conf.js",
-        "hash": "2404127352602669761"
-      },
-      {
-        "file": ".vscode/tasks.json",
-        "hash": "10093397977228577162"
-      },
-      {
-        "file": "angular.json",
-        "hash": "674685140099096838"
+        "file": "nx.json",
+        "hash": "16397379125514989802"
       },
       {
         "file": "migrations.json",
@@ -82,20 +26,76 @@
         "hash": "811044757471405147"
       },
       {
-        "file": ".vscode/extensions.json",
-        "hash": "18037487075392171512"
+        "file": "tsconfig.base.json",
+        "hash": "9150558264404859199"
       },
       {
-        "file": "libs/.gitkeep",
-        "hash": "3244421341483603138"
+        "file": ".vscode/tasks.json",
+        "hash": "10093397977228577162"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "16578899171080576160"
       },
       {
         "file": "package.json",
         "hash": "4595618011849831491"
       },
       {
-        "file": ".prettierrc",
-        "hash": "6820402234827505055"
+        "file": ".prettierignore",
+        "hash": "1324685984948235314"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "2950215254536237782"
+      },
+      {
+        "file": "decorate-angular-cli.js",
+        "hash": "11823390707371404862"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "1659929058009100827"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "2772139696069860212"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "6678024648911621172"
+      },
+      {
+        "file": "karma.conf.js",
+        "hash": "2404127352602669761"
+      },
+      {
+        "file": "README.md",
+        "hash": "14607139272372896250"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "17241496168097493888"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "angular.json",
+        "hash": "674685140099096838"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "4689145951703824387"
+      },
+      {
+        "file": "tools/generators/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "18037487075392171512"
       }
     ],
     "projectFileMap": {
@@ -220,7 +220,7 @@
         },
         {
           "file": "apps/AngularProject/src/app/app-routing.module.ts",
-          "hash": "13832853939491461422"
+          "hash": "9801704573168778728"
         },
         {
           "file": "apps/AngularProject/src/app/app.component.html",
@@ -240,7 +240,7 @@
         },
         {
           "file": "apps/AngularProject/src/app/app.module.ts",
-          "hash": "5033197508968989425"
+          "hash": "11713903062263680460"
         },
         {
           "file": "apps/AngularProject/src/app/pages/about/about.component.html",
@@ -257,6 +257,22 @@
         {
           "file": "apps/AngularProject/src/app/pages/about/about.component.ts",
           "hash": "1499232244363578907"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-add-edit/developer-add-edit.component.html",
+          "hash": "5173525970515625926"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-add-edit/developer-add-edit.component.scss",
+          "hash": "5437530239789302659"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-add-edit/developer-add-edit.component.spec.ts",
+          "hash": "15209739383994281833"
+        },
+        {
+          "file": "apps/AngularProject/src/app/pages/developer/developer-add-edit/developer-add-edit.component.ts",
+          "hash": "985838897829849807"
         },
         {
           "file": "apps/AngularProject/src/app/pages/developer/developer-list/developer-list.component.html",
@@ -432,7 +448,7 @@
         },
         {
           "file": "apps/AngularProject/src/app/pages/user/user-add-edit/user-add-edit.component.scss",
-          "hash": "9246606556115353673"
+          "hash": "11857796801527536359"
         },
         {
           "file": "apps/AngularProject/src/app/pages/user/user-add-edit/user-add-edit.component.spec.ts",
