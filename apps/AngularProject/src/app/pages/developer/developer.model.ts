@@ -1,4 +1,5 @@
 import { IGame } from "../game/game.model"
+import { IReview } from "../game/game-detail/review/review.model"
 export interface IDeveloper {
     id: number;
     name: string;
@@ -6,4 +7,6 @@ export interface IDeveloper {
     summary: string;
     games: IGame[];
     gameIds: number[];
+    reviews: IReview[];
+    reviewIds: number[];
   }

@@ -42,6 +42,9 @@ export class GameAddEditComponent implements OnInit {
           img: this.staticGame.img,
           ageRating: this.staticGame.ageRating,
           completed: this.staticGame.completed,
+          releaseDate: this.staticGame.releaseDate,
+          reviews: [],
+          reviewIds: this.staticGame.developers.map(g => g.id) ?? [],
         };
         //Create
       } else {
@@ -57,6 +60,9 @@ export class GameAddEditComponent implements OnInit {
           developerIds: [],
           img: '',
           completed: false,
+          releaseDate: new Date (1500, 0, 0),
+          reviews: [],
+          reviewIds: [],
         };
       }
     });

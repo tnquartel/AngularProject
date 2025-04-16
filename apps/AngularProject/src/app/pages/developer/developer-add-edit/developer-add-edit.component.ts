@@ -36,7 +36,9 @@ export class DeveloperAddEditComponent implements OnInit {
           dateFounded: new Date(this.staticDeveloper.dateFounded),
           summary: this.staticDeveloper.summary,
           games: [], // tijdelijk leeg houden
-          gameIds: this.staticDeveloper.games?.map(g => g.id) ?? []
+          gameIds: this.staticDeveloper.games?.map(g => g.id) ?? [],
+          reviews: [],
+          reviewIds: this.staticDeveloper.reviews?.map(g => g.id) ?? [],
         };
         //Create
       } else {
@@ -47,6 +49,8 @@ export class DeveloperAddEditComponent implements OnInit {
           summary: '',
           games: [],
           gameIds: [],
+          reviews: [],
+          reviewIds: [],
         };
       }
     });

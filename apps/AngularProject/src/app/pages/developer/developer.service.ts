@@ -16,16 +16,20 @@ export class DeveloperService {
         name: 'Nintendo',
         dateFounded: new Date(1889, 9, 23),
         summary: 'Nintendo is a japanese based game developer which also creates game consoles',
-        gameIds: [1,3],
+        gameIds: [1, 3],
         games: [],
+        reviews: [],
+        reviewIds: [3]
       },
       {
         id: 1,
         name: 'Gamefreak',
         dateFounded: new Date(1989, 4, 26),
         summary: 'Gamefreak is a japanese based game developer best known for their work on Pokemon',
-        gameIds: [1,3],
+        gameIds: [1, 3],
         games: [],
+        reviews: [],
+        reviewIds: []
       },
       {
         id: 2,
@@ -34,6 +38,8 @@ export class DeveloperService {
         summary: 'Rockstar is the company behind the development of games like GTA',
         gameIds: [0],
         games: [],
+        reviews: [],
+        reviewIds: []
       },
     ]
   }

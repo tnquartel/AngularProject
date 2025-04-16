@@ -1,3 +1,6 @@
+import { IReview } from "../game/game-detail/review/review.model";
+import { IGame } from "../game/game.model";
+
 export interface IUser {
   id: number;
   name: string;
@@ -5,4 +8,10 @@ export interface IUser {
   emailAdress: string;
   phoneNumber: string;
   password: string;
+  placedReviews: IReview[];
+  placedReviewIds: number[];
+  friends: IUser[];
+  friendIds: number[];
+  completedGames: IGame[];
+  completedGameIds: number[];
 }

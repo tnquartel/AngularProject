@@ -12,9 +12,10 @@
                     <p>
                         Bij dit project is het doel om een Angular frontend applicatie te
                         realiseren in combinatie met een NoSQL database. Er horen 4 entiteiten bij dit project,
-                        namelijk: 
+                        namelijk:
                         User, Game, Review en Developer.
-                        Het doel van mijn applicatie is dat gebruikers bij kunnen houden welke games zei en hun vrienden gespeeld 
+                        Het doel van mijn applicatie is dat gebruikers bij kunnen houden welke games zei en hun vrienden
+                        gespeeld
                         hebben, nieuwe games kunnen ontdekken en games kunnen reviewen.
                     </p>
                 </div>
@@ -70,6 +71,7 @@
                     <li>rating: number</li>
                     <li>ageRating: string</li>
                     <li>price: number</li>
+                    <li>completed: boolean</li>
                     <li>developers: Developer[]</li>
                     <li>reviews: Review[]</li>
                 </ul>
@@ -107,31 +109,87 @@
         <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Nr.</th>
-                    <th scope="col" class="px-6 py-3">Requirement</th>
-                    <th scope="col" class="px-6 py-3">Toelichting</th>
-                    <th scope="col" class="px-6 py-3">M/S/C/W</th>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Functional Requirement</th>
+                    <th scope="col" class="px-6 py-3">Acceptatiecriteria</th>
+                    <th scope="col" class="px-6 py-3">Prioriteit</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="bg-white dark:bg-gray-800">
-                    <td class="px-6 py-4">1</td>
+                    <td class="px-6 py-4">F-01</td>
                     <td class="px-6 py-4">
-                        De gebruiker kan een lijst van maaltijden inzien.
+                        Als user wil ik een lijst van games kunnen zien, zodanig dat ik weet welke games er beschikbaar
+                        zijn.
                     </td>
                     <td class="px-6 py-4">
-                        De lijst is een tabel. Door te klikken op een maaltijd
-                        navigeer je naar de details.
+                        <ul class="list-disc pl-4">
+                            <li>Er moet een lijst van games weergegeven worden.</li>
+                            <li>Elke game toont de titel, genre, prijs, releasedatum en age rating.</li>
+                            <li>Elke game toont een gemiddelde rating indien beschikbaar.</li>
+                            <li>De lijst is klikbaar om naar de detailpagina te gaan.</li>
+                        </ul>
                     </td>
-                    <td class="px-6 py-4">M</td>
+                    <td class="px-6 py-4">Must</td>
                 </tr>
                 <tr class="bg-white dark:bg-gray-800">
-                    <td class="px-6 py-4">2</td>
+                    <td class="px-6 py-4">F-02</td>
                     <td class="px-6 py-4">
-                        De gebruiker kan alle details van een maaltijd inzien.
+                        Als user wil ik vanuit de gamelijst naar de detailpagina van een game kunnen navigeren, zodanig
+                        dat ik weet wat de game inhoudt.
                     </td>
-                    <td class="px-6 py-4">beschrijving.</td>
-                    <td class="px-6 py-4">M</td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>Elke game heeft een eigen detailpagina.</li>
+                            <li>Op de detailpagina staat een samenvatting en de bijbehorende ontwikkelaar(s).</li>
+                            <li>Op de detailpagina worden ook alle reviews getoond.</li>
+                            <li>Gebruikers kunnen vanaf hier een review toevoegen.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Must</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-03</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik een review kunnen plaatsen bij een game of developer, zodanig dat ik mijn mening
+                        kan delen.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>De review bevat een titel, beschrijving, rating en plaatsingsdatum.</li>
+                            <li>De review wordt gekoppeld aan een user en een game of developer.</li>
+                            <li>Een user kan maar één review per game of developer plaatsen.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Must</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-04</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik mijn afgeronde games kunnen zien, zodanig dat ik mijn voortgang kan bijhouden.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>De gebruiker heeft een profielpagina met een overzicht van voltooide games.</li>
+                            <li>De lijst toont titels en voltooiingsdatum (indien beschikbaar).</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Should</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-05</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik andere gebruikers kunnen toevoegen als vriend, zodanig dat ik hun voortgang en
+                        reviews kan volgen.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>Gebruikers kunnen vriendschapsverzoeken versturen en accepteren.</li>
+                            <li>Een gebruikersprofiel toont een lijst van vrienden.</li>
+                            <li>Het profiel van een vriend is toegankelijk via de lijst.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Could</td>
                 </tr>
             </tbody>
         </table>

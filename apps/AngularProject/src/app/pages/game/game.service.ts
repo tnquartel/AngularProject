@@ -13,8 +13,7 @@ export class GameService {
       {
         id: 0,
         title: 'GTA V',
-        summary:
-        'When a young street hustler, a retired bank robber, and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government, and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody — least of all each other.',
+        summary: 'When a young street hustler, a retired bank robber, and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government, and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody — least of all each other.',
         genre: 'shooter',
         rating: 4.3,
         ageRating: '18+',
@@ -23,12 +22,14 @@ export class GameService {
         developerIds: [],
         img: 'assets/images/gta.jpg',
         completed: true,
+        releaseDate: new Date (2013, 9, 17),
+        reviews: [],
+        reviewIds: [1]
       },
       {
         id: 1,
         title: 'Pokemon Scarlet',
-        summary:
-        'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
+        summary: 'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
         genre: 'rpg',
         rating: 2.3,
         ageRating: '6+',
@@ -37,12 +38,14 @@ export class GameService {
         developerIds: [0, 1],
         img: 'assets/images/scarlet.jpg',
         completed: false,
+        releaseDate: new Date (2022, 11, 18),
+        reviews: [],
+        reviewIds: [0, 2]
       },
       {
         id: 2,
         title: 'Diep.io',
-        summary:
-        'From the creator of Agar.io, the newest online smash hit game comes to mobile! Upgrade your tank, shoot down other players and reach the top of the leaderboard!',
+        summary: 'From the creator of Agar.io, the newest online smash hit game comes to mobile! Upgrade your tank, shoot down other players and reach the top of the leaderboard!',
         genre: 'multiplayer',
         rating: 5,
         ageRating: '8+',
@@ -51,12 +54,14 @@ export class GameService {
         developerIds: [],
         img: 'assets/images/diep.jpg',
         completed: false,
+        releaseDate: new Date (2016, 4, 16),
+        reviews: [],
+        reviewIds: []
       },
       {
         id: 3,
         title: 'Pokemon Violet',
-        summary:
-        'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
+        summary: 'Pokémon Scarlet and Pokémon Violet are the first open-world RPGs in the Pokémon series. As you enjoy the hallmarks of the series—meeting, teaming up with, battling, training, and trading Pokémon—you’ll be able to immerse yourself in a newly evolved adventure.',
         genre: 'rpg',
         rating: 2.3,
         ageRating: '6+',
@@ -65,12 +70,14 @@ export class GameService {
         developerIds: [0, 1],
         img: 'assets/images/violet.jpg',
         completed: false,
+        releaseDate: new Date (2022, 11, 18),
+        reviews: [],
+        reviewIds: [0, 2]
       },
       {
         id: 4,
         title: 'Agar.io',
-        summary:
-        'Control your tiny cell and eat other players to grow larger! But watch out: players bigger than you will be trying to make you their lunch. Survive and eat long enough to become the biggest cell in the game!',
+        summary: 'Control your tiny cell and eat other players to grow larger! But watch out: players bigger than you will be trying to make you their lunch. Survive and eat long enough to become the biggest cell in the game!',
         genre: 'multiplayer',
         rating: 5,
         ageRating: '8+',
@@ -79,6 +86,9 @@ export class GameService {
         developerIds: [],
         img: 'assets/images/agar.jpg',
         completed: false,
+        releaseDate: new Date (2015, 4, 28),
+        reviews: [],
+        reviewIds: []
       },
     ];
   

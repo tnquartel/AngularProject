@@ -14,22 +14,40 @@ export class UserService {
       emailAdress: 'thomasquartel@icloud.com',
       phoneNumber: '0612345678',
       password: 'password123',
+      placedReviews: [],
+      placedReviewIds: [0, 3],
+      friends: [],
+      friendIds: [1],
+      completedGames: [],
+      completedGameIds: [1]
     },
     {
       id: 1,
       name: 'John',
       age: 25,
-      emailAdress: 'test@mail.com',
+      emailAdress: 'john@outlook.com',
       phoneNumber: '0612345678',
       password: 'password123',
+      placedReviews: [],
+      placedReviewIds: [1, 2],
+      friends: [],
+      friendIds: [0],
+      completedGames: [],
+      completedGameIds: [2]
     },
     {
       id: 2,
-      name: 'Test',
+      name: 'Dirk',
       age: 50,
-      emailAdress: 'testmail@mail.com',
+      emailAdress: 'dirk@mail.com',
       phoneNumber: '0612345678',
       password: 'password123',
+      placedReviews: [],
+      placedReviewIds: [],
+      friends: [],
+      friendIds: [],
+      completedGames: [],
+      completedGameIds: []
     },
   ];
 

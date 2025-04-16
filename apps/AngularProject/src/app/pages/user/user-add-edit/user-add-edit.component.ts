@@ -44,6 +44,12 @@ export class UserAddEditComponent implements OnInit {
           phoneNumber: '',
           emailAdress: '',
           password: '',
+          placedReviews: [],
+          placedReviewIds: [],
+          friends: [],
+          friendIds: [],
+          completedGames: [],
+          completedGameIds: [],
         };
       }
     });
