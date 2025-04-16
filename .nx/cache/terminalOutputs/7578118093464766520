@@ -1,0 +1,10 @@
+Compiling TypeScript files for project "all-my-games-api"...
+[1m[31m[96mnode_modules/mongoose/types/types.d.ts[0m:[93m63[0m:[93m83[0m - [91merror[0m[90m TS2344: [0mType 'Subdocument<InferId<T>, any, T> & T' does not satisfy the constraint 'Subdocument<any, any, any>'.[39m[22m
+[1m[31m  The types returned by 'toJSON(...)' are incompatible between these types.[39m[22m
+[1m[31m    Type 'ObjectIdToString<FlattenMaps<Default__v<Require_id<T>>>>' is not assignable to type '{ [x: string]: any; }'.[39m[22m
+[1m[31m      Type 'string | (FlattenMaps<Default__v<Require_id<T>>> extends Document<unknown, any, any> ? Document<unknown, any, any> & FlattenMaps<...> : FlattenMaps<...> extends TreatAsPrimitives ? TreatAsPrimitives & FlattenMaps<...> : FlattenMaps<...> extends Record<...> ? { [K in keyof FlattenMaps<...>]: FlattenMaps<...>[K] exten...' is not assignable to type '{ [x: string]: any; }'.[39m[22m
+[1m[31m        Type 'string' is not assignable to type '{ [x: string]: any; }'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m63[0m     class DocumentArray<T, THydratedDocumentType extends Types.Subdocument<any> = Types.Subdocument<InferId<T>, any, T> & T> extends Types.Array<THydratedDocumentType> {[39m[22m
+[1m[31m[7m  [0m [91m                                                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m

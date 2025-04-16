@@ -1,0 +1,26 @@
+Daemon process terminated and closed the connection
+
+Messages from the log:
+    at new Promise (<anonymous>)
+    at startServer (C:\dev\AngularProject\node_modules\nx\src\daemon\server\server.js:366:12)
+    at async C:\dev\AngularProject\node_modules\nx\src\daemon\server\start.js:8:9
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1944:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '\\\\.\\pipe\\nx\\C:\\Users\\thoma\\AppData\\Local\\Temp\\0a7ea0bde2c3a512f8d0\\d.sock',
+  port: -1
+}
+
+Node.js v20.19.0
+[NX v20.8.0 Daemon Server] - 2025-04-16T13:42:42.410Z - [WATCHER]: Stopping the watcher for c:\dev\AngularProject (sources)
+[NX v20.8.0 Daemon Server] - 2025-04-16T13:42:42.411Z - Closed a connection. Number of open connections: 1
+[NX v20.8.0 Daemon Server] - 2025-04-16T13:42:42.411Z - Closed a connection. Number of open connections: 0
+[NX v20.8.0 Daemon Server] - 2025-04-16T13:42:42.412Z - [WATCHER]: Stopping the watcher for c:\dev\AngularProject (outputs)
+[NX v20.8.0 Daemon Server] - 2025-04-16T13:42:42.413Z - Server stopped because: "this process is no longer the current daemon (native)"
+
+
+
+More information: c:\dev\AngularProject\.nx\workspace-data\d\daemon.log

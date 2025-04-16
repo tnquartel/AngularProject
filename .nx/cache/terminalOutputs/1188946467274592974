@@ -1,0 +1,19 @@
+[2J[3J[H2:20:27 PM - Starting compilation in watch mode...
+
+
+2:20:41 PM - Found 0 errors. Watching for file changes.
+[1m[31mDebugger listening on ws://localhost:9229/ab359cc7-92a1-4619-b139-42ed01bb84bf[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/ab359cc7-92a1-4619-b139-42ed01bb84bf[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMongooseModule dependencies initialized[39m[38;5;3m +22ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMongooseCoreModule dependencies initialized[39m[38;5;3m +430ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMongooseModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api}:[39m[38;5;3m +5ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 4204  - [39m04/16/2025, 2:21:00 PM [32m    LOG[39m [32m🚀 Application is running on: http://localhost:3333/api[39m
+[1m[31mWatch error: Daemon closed the connection[39m[22m

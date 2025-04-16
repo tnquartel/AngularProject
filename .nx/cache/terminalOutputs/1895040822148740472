@@ -1,0 +1,6 @@
+Compiling TypeScript files for project "all-my-games-api"...
+[1m[31m[96mnode_modules/mongoose/types/cursor.d.ts[0m:[93m17[0m:[93m13[0m - [91merror[0m[90m TS2550: [0mProperty 'asyncDispose' does not exist on type 'SymbolConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'esnext' or later.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m17[0m     [Symbol.asyncDispose](): Promise<void>;[39m[22m
+[1m[31m[7m  [0m [91m            ~~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
