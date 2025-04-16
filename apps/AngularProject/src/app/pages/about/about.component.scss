@@ -20,15 +20,34 @@ img {
   padding-bottom: 10px;
 }
 
-tbody {
-  background-color: black;
-  border-width: 1px;
-  border-color: gray;
- }
-
 table {
-  background-color: black;
+  width: 100%;
+  background-color: black !important;
+  color: white;
+  border: 2px solid white;
+  border-collapse: collapse;
+
+  thead {
+    background-color: #1f2937; // Donkere achtergrond voor de koptekst
+  }
+
+  tbody {
+    background-color: black !important;  // Zorg dat de achtergrond zwart is voor tbody
+  }
+
+  tr {
+    background-color: black !important;  // Zorg dat de rijen in tbody zwart zijn
+    &:nth-child(even) {
+      background-color: #111827; // Afwisselend donkere rijen (grijs-zwart)
+    }
+  }
+
+  th, td {
+    border: 1px solid white;
+    padding: 0.75rem 1.5rem; // Vergelijkbaar met px-6 py-3/4 in Tailwind
+  }
 }
+
 
 .card {
   margin-top: 20px;
