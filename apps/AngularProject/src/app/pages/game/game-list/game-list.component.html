@@ -1,0 +1,17 @@
+<div class="component list">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-success d-inline float-end" href="#" role="button" routerLink="new">New</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-cols-sm-12 row-cols-md-6 row-cols-lg-4">
+            <div class="col" *ngFor="let game of games">
+                <div class="gameItem card">
+                    <app-game-card [game]="game"></app-game-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

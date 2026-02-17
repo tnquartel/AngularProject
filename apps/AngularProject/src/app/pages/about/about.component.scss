@@ -1,0 +1,69 @@
+.row {
+  div.col div {
+    display: inline-block;
+    width: 80%;
+    border: 2px rgb(244, 254, 255) solid;
+    border-radius: 5px;
+    padding: 0px;
+    margin-bottom: 5px;
+    background-color: rgb(13, 31, 61);
+
+    p {
+      margin-top: 0px;
+      border-radius: 3px;
+      background-color: rgb(137, 190, 226);
+    }
+  }
+}
+
+img {
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  background-color: black !important;
+  color: white;
+  border: 2px solid white;
+  border-collapse: collapse;
+
+  thead {
+    background-color: #1f2937; // Donkere achtergrond voor de koptekst
+  }
+
+  tbody {
+    background-color: black !important;  // Zorg dat de achtergrond zwart is voor tbody
+  }
+
+  tr {
+    background-color: black !important;  // Zorg dat de rijen in tbody zwart zijn
+    &:nth-child(even) {
+      background-color: #111827; // Afwisselend donkere rijen (grijs-zwart)
+    }
+  }
+
+  th, td {
+    border: 1px solid white;
+    padding: 0.75rem 1.5rem; // Vergelijkbaar met px-6 py-3/4 in Tailwind
+  }
+}
+
+
+.card {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgb(13, 31, 61);
+  img {
+    width: 230px;
+    height: 300px;
+    padding: 0px;
+  }
+  #description {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  display: inline-block;
+  border: 2px rgb(244, 254, 255) solid;
+  padding: 5px;
+  padding-inline: 20px;
+}

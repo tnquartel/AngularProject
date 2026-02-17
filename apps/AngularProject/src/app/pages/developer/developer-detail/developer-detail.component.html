@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-2 m-auto">
+            <!-- <img src="{{ developer!.img }}" alt="" class="w-100" /> -->
+             <p> IMAGE ? </p>
+        </div>
+        <div class="col">
+            <div class="row m-5">
+                <h2>{{ developer!.name }}</h2>
+                <h3 class="text-center">Summary</h3>
+                    <p class="fst-italic">{{ developer!.summary }}</p>
+                    <p>{{ developer!.dateFounded | date: 'dd-MM-yyyy' }}</p>
+                    <div class="row row-cols-sm-12 row-cols-md-12 row-cols-lg-3">
+                        <ng-container *ngIf="developer?.games?.length">
+                            <ng-container *ngFor="let game of developer!.games">
+                                <app-game-card [game]="game"></app-game-card>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                <h3>Reviews</h3>
+                <hr>
+                <app-review></app-review>
+            </div>
+        </div>
+    </div>
+</div>

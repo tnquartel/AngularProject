@@ -1,0 +1,241 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-md-6 col-lg-7 card">
+            <div class="d-flex justify-content-center align-items-center">
+                <div id="description">
+                    <h3 id="aboutTitle">Over deze applicatie</h3>
+                    <p>
+                        Deze applicatie is gemaakt in het kader van het vak 'Clientside web
+                        frameworks' van Avans Hogeschool Breda.
+                    </p>
+                    <h1>AllMyGames</h1>
+                    <p>
+                        Bij dit project is het doel om een Angular frontend applicatie te
+                        realiseren in combinatie met een NoSQL database. Er horen 4 entiteiten bij dit project,
+                        namelijk:
+                        User, Game, Review en Developer.
+                        Het doel van mijn applicatie is dat gebruikers bij kunnen houden welke games zei en hun vrienden
+                        gespeeld
+                        hebben, nieuwe games kunnen ontdekken en games kunnen reviewen.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 offset-2">
+            <div class="card">
+                <div class="d-flex justify-content-center align-items-center px-3 py-3">
+                    <!-- Je mag een foto van jezelf toevoegen, maar dat is niet verplicht. -->
+                    <img src="/assets/images/pasfoto.jpg" class="card-img-top px-4 py-4" alt="..." />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Thomas Quartel</h5>
+                    <p class="card-text">Studentnummer: 2187613</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Entiteiten</h3>
+    <p>
+        Hier geef je een toelichting op je entiteiten. Voeg ook een afbeelding van
+        je model toe zoals dat bij NoSql gevraagd wordt.
+    </p>
+
+    <img src="assets/images/allmygames.drawio.png" class="px-5 py-5" alt="..." />
+
+    <div class="row row-cols-2 gy-3">
+        <div class="col">
+            <div>
+                <p><strong>User</strong></p>
+                <ul>
+                    <li>id: string</li>
+                    <li>name: string</li>
+                    <li>age: number</li>
+                    <li>emailAdres: string</li>
+                    <li>phoneNumber: string</li>
+                    <li>password: string</li>
+                    <li>friends: User[]</li>
+                    <li>completedGames: Game[]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <p><strong>Game</strong></p>
+                <ul>
+                    <li>id: string</li>
+                    <li>title: string</li>
+                    <li>summary: string</li>
+                    <li>genre: string</li>
+                    <li>rating: number</li>
+                    <li>ageRating: string</li>
+                    <li>price: number</li>
+                    <li>completed: boolean</li>
+                    <li>developers: Developer[]</li>
+                    <li>reviews: Review[]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <p><strong>Developer</strong></p>
+                <ul>
+                    <li>id: string</li>
+                    <li>name: string</li>
+                    <li>dateFounded: Date</li>
+                    <li>summary: string</li>
+                    <li>games: Game[]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <p><strong>Review</strong></p>
+                <ul>
+                    <li>userId: User</li>
+                    <li>gameId: Game</li>
+                    <li>title: string</li>
+                    <li>description: string</li>
+                    <li>rating: number</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Functionele eisen -->
+    <div class="relative overflow-x-auto py-4">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">ID</th>
+                    <th scope="col" class="px-6 py-3">Functional Requirement</th>
+                    <th scope="col" class="px-6 py-3">Acceptatiecriteria</th>
+                    <th scope="col" class="px-6 py-3">Prioriteit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-01</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik een lijst van games kunnen zien, zodanig dat ik weet welke games er beschikbaar
+                        zijn.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>Er moet een lijst van games weergegeven worden.</li>
+                            <li>Elke game toont de titel, genre, prijs, releasedatum en age rating.</li>
+                            <li>Elke game toont een gemiddelde rating indien beschikbaar.</li>
+                            <li>De lijst is klikbaar om naar de detailpagina te gaan.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Must</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-02</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik vanuit de gamelijst naar de detailpagina van een game kunnen navigeren, zodanig
+                        dat ik weet wat de game inhoudt.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>Elke game heeft een eigen detailpagina.</li>
+                            <li>Op de detailpagina staat een samenvatting en de bijbehorende ontwikkelaar(s).</li>
+                            <li>Op de detailpagina worden ook alle reviews getoond.</li>
+                            <li>Gebruikers kunnen vanaf hier een review toevoegen.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Must</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-03</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik een review kunnen plaatsen bij een game of developer, zodanig dat ik mijn mening
+                        kan delen.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>De review bevat een titel, beschrijving, rating en plaatsingsdatum.</li>
+                            <li>De review wordt gekoppeld aan een user en een game of developer.</li>
+                            <li>Een user kan maar één review per game of developer plaatsen.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Must</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-04</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik mijn afgeronde games kunnen zien, zodanig dat ik mijn voortgang kan bijhouden.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>De gebruiker heeft een profielpagina met een overzicht van voltooide games.</li>
+                            <li>De lijst toont titels en voltooiingsdatum (indien beschikbaar).</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Should</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">F-05</td>
+                    <td class="px-6 py-4">
+                        Als user wil ik andere gebruikers kunnen toevoegen als vriend, zodanig dat ik hun voortgang en
+                        reviews kan volgen.
+                    </td>
+                    <td class="px-6 py-4">
+                        <ul class="list-disc pl-4">
+                            <li>Gebruikers kunnen vriendschapsverzoeken versturen en accepteren.</li>
+                            <li>Een gebruikersprofiel toont een lijst van vrienden.</li>
+                            <li>Het profiel van een vriend is toegankelijk via de lijst.</li>
+                        </ul>
+                    </td>
+                    <td class="px-6 py-4">Could</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--  -->
+
+    <h2 class="text-4xl font-extrabold dark:text-white">
+        Non-functional requirements
+    </h2>
+    <p class="my-4 text-lg text-gray-500">korte toelichting</p>
+
+    <!-- Functionele eisen -->
+    <div class="relative overflow-x-auto py-4">
+        <table class="w-full text-sm text-left text-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Nr.</th>
+                    <th scope="col" class="px-6 py-3">Non-functional</th>
+                    <th scope="col" class="px-6 py-3">Toelichting</th>
+                    <th scope="col" class="px-6 py-3">M/S/C/W</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">1</td>
+                    <td class="px-6 py-4">Modulariteit, uitbreidbaarheid</td>
+                    <td class="px-6 py-4">
+                        Het systeem is zo ontwikkeld dat functionaliteiten in
+                        modules zijn gegroepeerd. Deze modules kunnen worden
+                        hergebruikt.
+                    </td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+                <tr class="bg-white dark:bg-gray-800">
+                    <td class="px-6 py-4">2</td>
+                    <td class="px-6 py-4">Gebruiksvriendelijkheid</td>
+                    <td class="px-6 py-4">
+                        Het systeem gebruikt een CSS framework voor styling. Het
+                        systeem geeft heldere foutmeldingen naar de gebruiker. De
+                        gebruiker ziet via breadcrumbs op ieder scherm van de
+                        applicatie waar hij zich bevindt. De webapplicatie heeft een
+                        herkenbare en consequent toegepaste ontwerpstijl.
+                    </td>
+                    <td class="px-6 py-4">M</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

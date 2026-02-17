@@ -1,0 +1,354 @@
+<avans-nx-workshop-alert></avans-nx-workshop-alert>
+<div class="space-y-12">
+    <!-- Titel -->
+    <div class="flex justify-start items-center">
+        <div>
+            <h1 class="text-5xl font-extrabold mr-6 dark:text-white">
+                {{ title }}
+            </h1>
+            <p class="my-4 text-lg text-gray-500">
+                Hier kun je je profiel aanpassen.
+            </p>
+        </div>
+        <!-- Image -->
+        <!-- <div *ngIf="item.profileImgUrl" class="basis-1/4 items-center px-10">
+            <img
+                class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                src="{{ item.profileImgUrl }}"
+            />
+        </div> -->
+    </div>
+
+    <ng-container *ngIf="item">
+        <!-- Form ---------------------------- -->
+        <form
+            #itemEditForm="ngForm"
+            name="form"
+            (ngSubmit)="itemEditForm.form.valid && onSubmit()"
+            novalidate
+        >
+            <div class="grid grid-cols-3 gap-6 mb-6">
+                <div class="col-span-2 grid grid-cols-2 gap-6">
+                    <!-- User name -->
+                    <div>
+                        <label
+                            for="itemname"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Name</label
+                        >
+                        <input
+                            type="text"
+                            id="itemname"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="John"
+                            [(ngModel)]="item.name"
+                            name="itemname"
+                            #itemname="ngModel"
+                            [ngClass]="{
+                                'bg-red-50 border border-red-500 text-red-900':
+                                    itemname.invalid && itemname.touched
+                            }"
+                            required
+                            minlength="3"
+                        />
+                        <div *ngIf="itemname.invalid && itemname.touched">
+                            <p
+                                class="mt-2 text-sm text-red-600 dark:text-red-500"
+                            >
+                                <span class="font-medium">Oh, snapp!</span> Some
+                                error message.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Gender radio button -->
+                    <div>
+                        <label
+                            for="gender"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Gender</label
+                        >
+                        <div class="flex">
+                            <div
+                                *ngFor="let gender of genderOptions"
+                                class="flex items-center me-4"
+                            >
+                                <input
+                                    id="inline-radio"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                    type="radio"
+                                    value="{{ gender }}"
+                                    name="inline-radio-group"
+                                    [(ngModel)]="item.gender"
+                                    name="itemgender"
+                                    #itemgender="ngModel"
+                                    required
+                                />
+                                <label
+                                    for="inline-radio"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                    >{{ gender }}</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label
+                            for="emailAddress"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Emailaddress</label
+                        >
+                        <input
+                            type="email"
+                            id="emailAddress"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            [(ngModel)]="item.emailAddress"
+                            name="emailAddress"
+                            #emailAddress="ngModel"
+                            [ngClass]="{
+                                'bg-red-50 border border-red-500 text-red-900':
+                                    emailAddress.invalid && emailAddress.touched
+                            }"
+                            required
+                            minlength="3"
+                        />
+                        <div
+                            *ngIf="emailAddress.invalid && emailAddress.touched"
+                        >
+                            <p
+                                class="mt-2 text-sm text-red-600 dark:text-red-500"
+                            >
+                                <span class="font-medium">Oh, snapp!</span> Some
+                                error message.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <!-- <div>
+                    <label
+                        for="password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Password</label
+                    >
+                    <input
+                        type="password"
+                        id="password"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        [(ngModel)]="item.password"
+                        name="password"
+                        #password="ngModel"
+                        [ngClass]="{
+                            'bg-red-50 border border-red-500 text-red-900':
+                                password.invalid && password.touched
+                        }"
+                        required
+                        minlength="3"
+                    />
+                    <div *ngIf="password.invalid && password.touched">
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                            <span class="font-medium">Oh, snapp!</span> Some
+                            error message.
+                        </p>
+                    </div>
+                </div> -->
+
+                    <!-- Preferences -->
+                    <div>
+                        <label
+                            for="website"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >Preferences</label
+                        >
+                        <ul
+                            class="items-center w-full text-sm font-medium text-gray-900 bg-white sm:flex"
+                        >
+                            <li
+                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                            >
+                                <div class="flex items-center ps-3">
+                                    <input
+                                        id="vue-checkbox-list"
+                                        type="checkbox"
+                                        value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <label
+                                        for="vue-checkbox-list"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Vue JS</label
+                                    >
+                                </div>
+                            </li>
+                            <li
+                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                            >
+                                <div class="flex items-center ps-3">
+                                    <input
+                                        id="react-checkbox-list"
+                                        type="checkbox"
+                                        value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <label
+                                        for="react-checkbox-list"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >React</label
+                                    >
+                                </div>
+                            </li>
+                            <li
+                                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                            >
+                                <div class="flex items-center ps-3">
+                                    <input
+                                        id="angular-checkbox-list"
+                                        type="checkbox"
+                                        value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <label
+                                        for="angular-checkbox-list"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Angular</label
+                                    >
+                                </div>
+                            </li>
+                            <li class="w-full dark:border-gray-600">
+                                <div class="flex items-center ps-3">
+                                    <input
+                                        id="laravel-checkbox-list"
+                                        type="checkbox"
+                                        value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    />
+                                    <label
+                                        for="laravel-checkbox-list"
+                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Laravel</label
+                                    >
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- User role -->
+                    <div>
+                        <label
+                            for="itemrole"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >User role</label
+                        >
+                        <select
+                            id="itemrole"
+                            [(ngModel)]="item.role"
+                            name="itemrole"
+                            #itemrole="ngModel"
+                            required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        >
+                            <option selected value="">Choose a role</option>
+                            <option
+                                *ngFor="let role of userRoles"
+                                value="{{ role }}"
+                            >
+                                {{ role }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-span-2 flex flex-row">
+                        <!-- Profile picture URL -->
+                        <div class="basis-3/4">
+                            <label
+                                for="profilePic"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Profile picture Url</label
+                            >
+                            <input
+                                type="text"
+                                id="profilePic"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                [(ngModel)]="item.profileImgUrl"
+                                name="profilePic"
+                                #profilePic="ngModel"
+                                [ngClass]="{
+                                    'bg-red-50 border border-red-500 text-red-900':
+                                        profilePic.invalid && profilePic.touched
+                                }"
+                                required
+                                minlength="6"
+                            />
+                            <div
+                                *ngIf="profilePic.invalid && profilePic.touched"
+                            >
+                                <p
+                                    class="mt-2 text-sm text-red-600 dark:text-red-500"
+                                >
+                                    <span class="font-medium">Oh, snapp!</span>
+                                    Fill in a valid image URL.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  -->
+                </div>
+                <!-- JSON info -->
+                <div
+                    class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow"
+                >
+                    <p class="mb-6">item | json</p>
+                    <pre>{{ item | json }}</pre>
+                </div>
+            </div>
+
+            <div class="flex items-start my-6">
+                <div class="flex items-center h-5">
+                    <input
+                        id="remember"
+                        type="checkbox"
+                        value=""
+                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                        [(ngModel)]="item.isActive"
+                        name="isActive"
+                        #isActive="ngModel"
+                        required
+                    />
+                </div>
+                <label
+                    for="remember"
+                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >I agree with the
+                    <a
+                        href="#"
+                        class="text-blue-600 hover:underline dark:text-blue-500"
+                        >terms and conditions</a
+                    >.</label
+                >
+            </div>
+
+            <!-- Submit button / Cancel -->
+            <div class="flex items-start my-6">
+                <button
+                    class="mr-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="submit"
+                    [ngClass]="{
+                        'opacity-50 cursor-not-allowed': !itemEditForm.valid
+                    }"
+                >
+                    Submit
+                </button>
+                <button
+                    class="py-2.5 px-5 me-2 mtext-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-200 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    type="button"
+                    routerLink=".."
+                >
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </ng-container>
+</div>

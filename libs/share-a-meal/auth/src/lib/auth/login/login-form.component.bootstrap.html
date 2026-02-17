@@ -1,0 +1,74 @@
+<form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!--  -->
+    <div class="form-group">
+        <label for="inputUsername">Username</label>
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Your username here"
+            formControlName="username"
+            id="inputUsername"
+            aria-describedby="usernameHelp"
+            [ngClass]="{
+                'is-invalid':
+                    loginForm.get('username')?.invalid &&
+                    loginForm.get('username')?.touched
+            }"
+        />
+        <span
+            *ngIf="
+                !loginForm.get('username')?.valid &&
+                loginForm.get('username')?.touched
+            "
+            class="invalid-feedback"
+        >
+            <p id="username-invalid">Please enter a valid username</p>
+        </span>
+    </div>
+    <!--  -->
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input
+            type="password"
+            class="form-control"
+            placeholder="Your password here"
+            formControlName="password"
+            id="inputPassword"
+            [ngClass]="{
+                'is-invalid':
+                    loginForm.get('password')?.invalid &&
+                    loginForm.get('password')?.touched
+            }"
+        />
+        <span
+            *ngIf="
+                !loginForm.get('password')?.valid &&
+                loginForm.get('password')?.touched
+            "
+            class="invalid-feedback"
+        >
+            <p id="password-invalid">Please enter a valid password</p>
+        </span>
+    </div>
+
+    <div class="form-group my-5">
+        <button
+            id="submitbutton"
+            class="btn btn-primary btn-block"
+            type="submit"
+            [disabled]="!loginForm.valid"
+        >
+            Sign in
+        </button>
+    </div>
+
+    <p>
+        <a routerLink="/">Homepage</a> |
+        <a routerLink="/register">Register</a>
+    </p>
+
+    <div class="form-group">
+        <!-- <fab-util-spinner *ngIf="submitted"></fab-util-spinner> -->
+        <fab-util-alert></fab-util-alert>
+    </div>
+</form>

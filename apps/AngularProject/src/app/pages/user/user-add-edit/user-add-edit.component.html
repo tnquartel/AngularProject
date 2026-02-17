@@ -1,0 +1,66 @@
+<div class="component edit">
+    <div class="row"></div>
+
+    <div *ngIf="userExists">
+        <h1 class="mb-4">{{ staticUser?.name }}</h1>
+    </div>
+    <div *ngIf="!userExists">
+        <h1 class="mb-4">Add user</h1>
+    </div>
+
+    <div class="row">
+        <div class="d-flex justify-content-center">
+            <div class="col-6">
+                <div class="container">
+                    <form #userEditForm="ngForm" name="form" (ngSubmit)="onSubmit()">
+                        <fieldset>
+                            <div class="form-group">
+                                <p><label for="name">Name</label>
+                                    <input type="text" class="form-control" placeholder="Your name"
+                                        [(ngModel)]="user!.name" name="name" required #name="ngModel"
+                                        minlength="3" />
+                                </p>
+                            </div>
+                            <p><label for="age">Age</label>
+                                <input type="number" class="form-control" placeholder="Your age"
+                                    [(ngModel)]="user!.age" name="age" #age="ngModel" required
+                                    />
+                            </p>
+                            <p><label for="emailAdress">Emailaddress</label>
+                                <input type="email" class="form-control" [(ngModel)]="user!.emailAdress"
+                                    placeholder="Your email adress" name="emailAdress" #emailAdress="ngModel" required
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                            </p>
+                            <p><label for="phoneNumber">Phonenumber</label>
+                                <input type="tel" class="form-control" [(ngModel)]="user!.phoneNumber"
+                                    placeholder="Your phonenumber" name="phoneNumber" #phoneNumber="ngModel" required />
+                            </p>
+                            <p><label for="password">Password</label>
+                                <input type="password" class="form-control" [(ngModel)]="user!.password"
+                                    placeholder="Your password" name="password" #password="ngModel" required />
+                            </p>
+                        </fieldset>
+
+                        <div class="row">
+                            <!-- Bij Save roepen we de save() functie aan, en navigeren
+                              terug naar details binnen die functie -->
+                            <div class="col">
+                                <button role="button" type="submit" class="btn btn-primary mx-2"
+                                    [disabled]="!userEditForm.valid">
+                                    Submit
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-secondary float-right" href="#" role="button"
+                                    routerLink="/user">
+                                    Cancel
+                                </button>
+                            </div>
+                            <!-- Bij Cancel doen we nu nog niets, maar gaan gewoon terug naar de details -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
