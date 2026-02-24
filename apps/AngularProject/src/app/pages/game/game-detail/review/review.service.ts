@@ -1,64 +1,86 @@
 import { Injectable } from '@angular/core';
-import { IReview } from './review.model';
-import { UserService } from '../../../user/user.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
+
+export interface IReview {
+    _id?: string;
+    id?: number;
+    title: string;
+    description: string;
+    rating: number;
+    datePlaced: Date;
+    userId: string;
+    reviewType: 'game' | 'developer';
+    reviewedEntityId: string;
+}
+
+export interface ICreateReview {
+    title: string;
+    description: string;
+    rating: number;
+    userId: string;
+    reviewType: 'game' | 'developer';
+    reviewedEntityId: string;
+}
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root'
 })
-
 export class ReviewService {
-  readonly reviews: IReview[];
+    private apiUrl = `${environment.apiUrl}/review`;
 
-  constructor(private userService: UserService) {
-    this.reviews = [
-      {
-        id: 0,
-        title: 'Very cool game',
-        description: 'I really like how the characters control and think the difficulty is just right',
-        rating: 4,
-        user: this.userService.getUserById(0),
-        datePlaced: new Date (2025, 4, 16),
-        userId: 0,
-        reviewedGame: [],
-        reviewedGameId: [0, 2],
-      },
-      {
-        id: 1,
-        title: 'My favorite game',
-        description: 'I think I will never play a game better than this one',
-        rating: 5,
-        user: this.userService.getUserById(1),
-        datePlaced: new Date (2025, 3, 14),
-        userId: 1,
-        reviewedGame: [],
-        reviewedGameId: [1],
-      },
-      {
-        id: 2,
-        title: 'Pretty mid',
-        description: 'The most middle of the road game I ever played',
-        rating: 3,
-        user: this.userService.getUserById(1),
-        datePlaced: new Date (2025, 3, 21),
-        userId: 1,
-        reviewedGame: [],
-        reviewedGameId: [0, 2],
-      },
-      {
-        id: 3,
-        title: 'Worst developer ever',
-        description: 'Litterly the worst company to ever exist.',
-        rating: 1,
-        user: this.userService.getUserById(0),
-        datePlaced: new Date (2025, 4, 1),
-        userId: 0,
-        reviewedDeveloper: [],
-        reviewedDeveloperId: [0],
-      },
-    ];
-  }
+    constructor(private http: HttpClient) {}
 
-  getReviews(): IReview[] {
-    return this.reviews;
-  }
+    // Get all reviews
+    getAll(): Observable<IReview[]> {
+        return this.http.get<any>(this.apiUrl).pipe(
+            map(response => response.results || response)
+        );
+    }
+
+    // Get reviews for a specific game or developer
+    getByEntity(entityId: string): Observable<IReview[]> {
+        return this.http.get<any>(`${this.apiUrl}?entityId=${entityId}`).pipe(
+            map(response => response.results || response)
+        );
+    }
+
+    // Get reviews by a specific user
+    getByUser(userId: string): Observable<IReview[]> {
+        return this.http.get<any>(`${this.apiUrl}?userId=${userId}`).pipe(
+            map(response => response.results || response)
+        );
+    }
+
+    // Get one review
+    getById(id: string): Observable<IReview> {
+        return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+            map(response => response.results || response)
+        );
+    }
+
+    // Create review
+    create(review: ICreateReview): Observable<IReview> {
+        return this.http.post<any>(this.apiUrl, review).pipe(
+            map(response => response.results || response),
+            tap(() => console.log('Review created'))
+        );
+    }
+
+    // Update review
+    update(id: string, review: Partial<IReview>): Observable<IReview> {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, review).pipe(
+            map(response => response.results || response),
+            tap(() => console.log('Review updated'))
+        );
+    }
+
+    // Delete review
+    delete(id: string): Observable<void> {
+        return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+            tap(() => console.log('Review deleted'))
+        );
+    }
 }

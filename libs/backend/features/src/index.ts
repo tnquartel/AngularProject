@@ -9,3 +9,8 @@ export * from './lib/developer/developer.module';
 export * from './lib/developer/developer.controller';
 export * from './lib/developer/developer.service';
 export * from './lib/developer/developer.schema';
+
+export * from './lib/review/review.module';
+export * from './lib/review/review.controller';
+export * from './lib/review/review.service';
+export * from './lib/review/review.schema';

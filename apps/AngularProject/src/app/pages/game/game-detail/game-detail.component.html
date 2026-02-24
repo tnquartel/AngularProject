@@ -1,33 +1,39 @@
-<div class="container">
+<div class="container" *ngIf="game">
     <div class="row">
         <div class="col-2 m-auto">
-            <img src="{{ game!.img }}" alt="" class="w-100" />
+            <img [src]="game?.imageUrl || game?.img || 'https://via.placeholder.com/400x600?text=No+Image'"
+                class="img-fluid" alt="{{ game?.title }}">
         </div>
         <div class="col">
             <div class="row m-5">
                 <h2>{{ game!.title }}</h2>
                 <h3 class="text-center">Summary</h3>
-                    <p class="fst-italic">{{ game!.summary }}</p>
-                    <p>Price: {{ game!.price | currency : 'EUR' }}</p>
-                    <p>Genre: {{ game!.genre}}</p>
-                    <p *ngIf="game?.developers?.length">
-                        Developers: 
-                        <ng-container *ngFor="let dev of game!.developers; let last = last">
-                            <a [routerLink]="['../../../developer/' + dev.id, 'detail']">{{ dev.name }}</a><span *ngIf="!last">, </span>
-                        </ng-container>
-                    </p>  
-                    <p>Rating:</p>
-                    <p>{{ game!.rating }} <fa-icon [icon]="faStar" style="color: yellow"></fa-icon>
-                    <p>Age Rating: {{ game!.ageRating }}</p>
-                    <p>Have you played this game?</p>
-                    <p>
-                        <fa-icon [icon]="faCheck" *ngIf="game!.completed" style="color: greenyellow"></fa-icon>
-                        <fa-icon [icon]="faX" *ngIf="!game!.completed" style="color: red"></fa-icon>
-                    </p>
+                <p class="fst-italic">{{ game!.summary }}</p>
+                <p>Price: {{ game!.price | currency : 'EUR' }}</p>
+                <p>Genre: {{ game!.genre}}</p>
+                <p *ngIf="game?.developers?.length">
+                    Developers:
+                    <ng-container *ngFor="let dev of game!.developers; let last = last">
+                        <a [routerLink]="['../../../developer/' + dev.id, 'detail']">{{ dev.name }}</a><span
+                            *ngIf="!last">, </span>
+                    </ng-container>
+                </p>
+                <p>Rating:</p>
+                <p>{{ game!.rating }} <fa-icon [icon]="faStar" style="color: yellow"></fa-icon>
+                <p>Age Rating: {{ game!.ageRating }}</p>
+                <p>Have you played this game?</p>
+                <p>
+                    <fa-icon [icon]="faCheck" *ngIf="game!.completed" style="color: greenyellow"></fa-icon>
+                    <fa-icon [icon]="faX" *ngIf="!game!.completed" style="color: red"></fa-icon>
+                </p>
                 <h3>Reviews</h3>
                 <hr>
-                <app-review></app-review>
+                <app-review [gameId]="game._id || game.id?.toString()"></app-review>
             </div>
         </div>
     </div>
+</div>
+
+<div class="container mt-4" *ngIf="!game">
+    <p>Loading game...</p>
 </div>

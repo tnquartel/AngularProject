@@ -1,13 +1,88 @@
-<div class="review-container" *ngFor="let review of reviews">
-    <h3 class="review-title">{{ review.title }}</h3>
-    <div class="review-meta">
-      <span class="review-user">{{ review.user.name }}</span>
-      <span class="review-rating">
-        {{ review.rating }}
-        <fa-icon [icon]="faStar" class="star-icon"></fa-icon>
-      </span>
+<div class="reviews-section">
+    <!-- Header met Add Review knop -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Reviews ({{ reviews.length }})</h3>
+        <button class="btn btn-primary" (click)="toggleForm()">
+            {{ showForm ? 'Cancel' : 'Add Review' }}
+        </button>
     </div>
-    <p class="review-description">{{ review.description }}</p>
-    <hr />
-  </div>
-  
+
+    <!-- Add Review Form -->
+    <div *ngIf="showForm && newReview" class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Write a Review</h5>
+            <form #reviewForm="ngForm" (ngSubmit)="submitReview()">
+                <div class="mb-3">
+                    <label for="title">Title</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="newReview.title" 
+                        name="title" 
+                        required
+                        placeholder="Review title">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description">Description</label>
+                    <textarea 
+                        class="form-control" 
+                        [(ngModel)]="newReview.description" 
+                        name="description" 
+                        rows="4"
+                        required
+                        placeholder="Write your review..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rating">Rating (1-10)</label>
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        [(ngModel)]="newReview.rating" 
+                        name="rating" 
+                        min="1" 
+                        max="10"
+                        required>
+                </div>
+
+                <button 
+                    type="submit" 
+                    class="btn btn-success" 
+                    [disabled]="!reviewForm.valid">
+                    Submit Review
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- No reviews message -->
+    <div *ngIf="reviews.length === 0 && !showForm" class="alert alert-info">
+        No reviews yet. Be the first to review!
+    </div>
+
+    <!-- Reviews List (jouw bestaande template) -->
+    <div class="review-container" *ngFor="let review of reviews">
+        <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+                <h3 class="review-title">{{ review.title }}</h3>
+                <div class="review-meta">
+                    <span class="review-user">User ID: {{ review.userId }}</span>
+                    <span class="review-rating">
+                        {{ review.rating }}
+                        <fa-icon [icon]="faStar" class="star-icon"></fa-icon>
+                    </span>
+                </div>
+                <p class="review-description">{{ review.description }}</p>
+                <small class="text-muted">{{ review.datePlaced | date:'dd-MM-yyyy' }}</small>
+            </div>
+            <button 
+                class="btn btn-sm btn-danger ms-2" 
+                (click)="deleteReview(review._id!)"
+                title="Delete review">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+        </div>
+        <hr />
+    </div>
+</div>
