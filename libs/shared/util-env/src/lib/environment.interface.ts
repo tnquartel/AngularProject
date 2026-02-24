@@ -6,6 +6,7 @@ export interface IEnvironment {
 
     MONGO_DB_CONNECTION_STRING: string;
 
-    // Hier kun je meer environment
-    // variabelen zetten als dat nodig is
+    NEO4J_URI?: string;
+    NEO4J_USERNAME?: string;
+    NEO4J_PASSWORD?: string;
 }

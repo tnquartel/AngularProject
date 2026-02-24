@@ -5,6 +5,7 @@ import { AuthModule } from '@avans-nx-workshop/backend/auth';
 import { MongooseModule } from '@nestjs/mongoose';
 import { environment } from '@avans-nx-workshop/shared/util-env';
 import { Logger } from '@nestjs/common';
+import { Neo4jModule } from '@avans-nx-workshop/backend/neo4j'; 
 
 @Module({
     imports: [
@@ -24,7 +25,8 @@ import { Logger } from '@nestjs/common';
                 return connection;
             }
         }),
-        UsersModule
+        UsersModule,
+        Neo4jModule
     ],
     controllers: [],
     providers: []

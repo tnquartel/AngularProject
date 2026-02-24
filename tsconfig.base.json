@@ -19,6 +19,7 @@
                 "libs/backend/auth/src/index.ts"
             ],
             "@avans-nx-workshop/backend/dto": ["libs/backend/dto/src/index.ts"],
+            "@avans-nx-workshop/backend/neo4j": ["libs/backend/neo4j/src/index.ts"],
             "@avans-nx-workshop/backend/features": [
                 "libs/backend/features/src/index.ts"
             ],
