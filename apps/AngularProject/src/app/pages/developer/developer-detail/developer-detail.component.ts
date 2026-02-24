@@ -5,7 +5,7 @@ import {
   Route,
   Router,
 } from '@angular/router';
-import { IDeveloper } from '../developer.model';
+import { IDeveloper } from '../developer.service';
 import { DeveloperService } from '../developer.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 

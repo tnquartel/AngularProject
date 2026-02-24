@@ -16,18 +16,20 @@
                 <td>{{ developer.dateFounded | date: 'dd-MM-yyyy' }}</td>
                 <td>{{ developer.summary }}</td>
                 <td>
-                    <button class="btn btn-success" type="button" routerLink="{{ developer.id }}/detail">
-                        details
+                    <button [routerLink]="['/developer', developer._id || developer.id, 'detail']"
+                        class="btn btn-success">
+                        Detail
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-warning" type="button" routerLink="{{ developer.id }}/edit">
-                        edit
+                    <button [routerLink]="['/developer', developer._id || developer.id, 'edit']"
+                        class="btn btn-warning">
+                        Edit
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-danger" type="button" (click)="deleteDeveloper(developer.id)">
-                        delete
+                    <button (click)="onDelete(developer)" class="btn btn-danger">
+                        Delete
                     </button>
                 </td>
             </tr>

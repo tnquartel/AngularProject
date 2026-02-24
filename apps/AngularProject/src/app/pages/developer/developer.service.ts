@@ -1,78 +1,115 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { IDeveloper } from './developer.model';
-import { GameService } from '../game/game.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap, catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+
+export interface IDeveloper {
+    _id?: string;
+    id?: number;
+    name: string;
+    dateFounded: Date;
+    summary: string;
+    gameIds: string[] | number[];
+    reviewIds: string[];
+    games?: any[];
+}
+
+export interface ICreateDeveloper {
+    name: string;
+    dateFounded: Date;
+    summary: string;
+}
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root'
 })
 export class DeveloperService {
-  readonly developers: IDeveloper[] = []
-  constructor(private gameService: GameService) {
-    this.developers = [
+    private apiUrl = `${environment.apiUrl}/developer`;
+    private developersSubject = new BehaviorSubject<IDeveloper[]>([]);
 
-      {
-        id: 0,
-        name: 'Nintendo',
-        dateFounded: new Date(1889, 9, 23),
-        summary: 'Nintendo is a japanese based game developer which also creates game consoles',
-        gameIds: [1, 3],
-        games: [],
-        reviews: [],
-        reviewIds: [3]
-      },
-      {
-        id: 1,
-        name: 'Gamefreak',
-        dateFounded: new Date(1989, 4, 26),
-        summary: 'Gamefreak is a japanese based game developer best known for their work on Pokemon',
-        gameIds: [1, 3],
-        games: [],
-        reviews: [],
-        reviewIds: []
-      },
-      {
-        id: 2,
-        name: 'Rockstar',
-        dateFounded: new Date(1998, 12, 1),
-        summary: 'Rockstar is the company behind the development of games like GTA',
-        gameIds: [0],
-        games: [],
-        reviews: [],
-        reviewIds: []
-      },
-    ]
-  }
+    constructor(private http: HttpClient) {
+        this.loadDevelopers();
+    }
 
-  getDevelopersAsObservable(): Observable<IDeveloper[]> {
-    console.log('getDevelopersAsObservable aangeroepen');
-    // 'of' is een rxjs operator die een Observable
-    // maakt van de gegeven data.
-    return of(this.developers);
-  }
+    private loadDevelopers(): void {
+        this.getAll().subscribe(developers => {
+            this.developersSubject.next(developers);
+        });
+    }
 
-  getDeveloperById(id: number): IDeveloper {
-    return this.developers.filter((c) => c.id == id)[0];
-  }
+    // Nieuwe API methods
+    getAll(): Observable<IDeveloper[]> {
+        return this.http.get<any>(this.apiUrl).pipe(
+            map(response => response.results || response),
+            catchError(error => {
+                console.error('Error fetching developers:', error);
+                return [];
+            })
+        );
+    }
 
-  getDevelopers(): IDeveloper[] {
-    return this.developers;
-  }
-  addDeveloper(developer: IDeveloper) {
-    console.log(developer);
-    developer.id = this.developers.length;
-    this.developers.push(developer);
-  }
-  updateDeveloper(updatedDeveloper: IDeveloper) {
-    console.log(updatedDeveloper);
+    getById(id: string): Observable<IDeveloper> {
+        return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
+            map(response => response.results || response)
+        );
+    }
 
-    let developer = this.developers.find((obj) => obj.id == updatedDeveloper.id);
-    let index = this.developers.indexOf(developer!);
-    this.developers[index] = updatedDeveloper;
-  }
-  deleteDeveloper(id: number) {
-    let developer = this.developers.find((obj) => obj.id == id);
-    let index = this.developers.indexOf(developer!);
-    this.developers.splice(index, 1);
-  }
+    create(developer: ICreateDeveloper): Observable<IDeveloper> {
+        return this.http.post<any>(this.apiUrl, developer).pipe(
+            map(response => response.results || response),
+            tap(() => this.loadDevelopers())
+        );
+    }
+
+    update(id: string, developer: Partial<IDeveloper>): Observable<IDeveloper> {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, developer).pipe(
+            map(response => response.results || response),
+            tap(() => this.loadDevelopers())
+        );
+    }
+
+    delete(id: string): Observable<void> {
+        return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+            tap(() => this.loadDevelopers())
+        );
+    }
+
+    // ===== OUDE METHODS VOOR BACKWARDS COMPATIBILITY =====
+    
+    getDevelopers(): IDeveloper[] {
+        return this.developersSubject.value;
+    }
+
+    getDevelopersAsObservable(): Observable<IDeveloper[]> {
+        return this.developersSubject.asObservable();
+    }
+
+    getDeveloperById(id: number): IDeveloper | undefined {
+        return this.developersSubject.value.find(d => 
+            d.id === id || d._id === id.toString()
+        );
+    }
+
+    addDeveloper(developer: IDeveloper): void {
+        const createDeveloper: ICreateDeveloper = {
+            name: developer.name,
+            dateFounded: developer.dateFounded,
+            summary: developer.summary
+        };
+        this.create(createDeveloper).subscribe();
+    }
+
+    updateDeveloper(developer: IDeveloper): void {
+        if (developer._id) {
+            this.update(developer._id, developer).subscribe();
+        }
+    }
+
+    deleteDeveloper(id: number): void {
+        const developer = this.getDeveloperById(id);
+        if (developer && developer._id) {
+            this.delete(developer._id).subscribe();
+        }
+    }
 }

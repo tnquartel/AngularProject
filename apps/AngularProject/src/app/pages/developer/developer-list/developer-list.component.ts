@@ -1,35 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { IDeveloper } from '../developer.model';
-import { DeveloperService } from '../developer.service';
-import {
-  faCheck,
-  faSchool,
-  faExclamationCircle,
-  faMarsStroke,
-  faPencilAlt,
-  faScroll,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { DeveloperService, IDeveloper } from '../developer.service';
+
 @Component({
-  selector: 'app-developer-list',
-  templateUrl: './developer-list.component.html',
-  styleUrls: ['./developer-list.component.scss'],
+    selector: 'app-developer-list',
+    templateUrl: './developer-list.component.html',
+    styleUrls: ['./developer-list.component.scss']
 })
 export class DeveloperListComponent implements OnInit {
-  developers: IDeveloper[] = [];
-  faTrash = faTrash;
-  faPencil = faPencilAlt;
-  faScroll = faScroll;
-  faCheck = faCheck;
-  faSchool = faSchool;
+    developers: IDeveloper[] = [];
+    loading = true;
 
-  constructor(private developerService: DeveloperService) {}
+    constructor(private developerService: DeveloperService) {}
 
-  ngOnInit(): void {
-    this.developers = this.developerService.getDevelopers();
-  }
-  deleteDeveloper(id: number): void {
-    console.log('delete');
-    this.developerService.deleteDeveloper(id);
-  }
+    ngOnInit(): void {
+        this.loadDevelopers();
+    }
+
+    loadDevelopers(): void {
+        this.loading = true;
+        this.developerService.getAll().subscribe({
+            next: (developers) => {
+                this.developers = developers;
+                this.loading = false;
+                console.log('Developers loaded:', developers);
+            },
+            error: (error) => {
+                console.error('Error loading developers:', error);
+                this.loading = false;
+            }
+        });
+    }
+
+    onDelete(developer: IDeveloper): void {
+        if (!developer) return;
+        
+        if (confirm(`Are you sure you want to delete ${developer.name}?`)) {
+            const id = developer._id?.toString() || developer.id?.toString();
+            
+            if (id) {
+                this.developerService.delete(id).subscribe({
+                    next: () => {
+                        console.log('Developer deleted successfully');
+                        this.loadDevelopers(); // Reload list
+                    },
+                    error: (err) => {
+                        console.error('Error deleting developer:', err);
+                        alert('Failed to delete developer');
+                    }
+                });
+            }
+        }
+    }
 }

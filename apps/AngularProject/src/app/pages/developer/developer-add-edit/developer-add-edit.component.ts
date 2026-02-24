@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { IDeveloper } from '../developer.model';
+import { IDeveloper } from '../developer.service';
 import { DeveloperService } from '../developer.service';
 
 @Component({
@@ -26,45 +26,76 @@ export class DeveloperAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.developerId = params.get('id');
-      //Edit
+      
+      // Edit mode
       if (this.developerId) {
         this.developerExists = true;
-        this.staticDeveloper = this.developerService.getDeveloperById(Number(this.developerId));
-        this.developer = {
-          id: this.staticDeveloper.id,
-          name: this.staticDeveloper.name,
-          dateFounded: new Date(this.staticDeveloper.dateFounded),
-          summary: this.staticDeveloper.summary,
-          games: [], // tijdelijk leeg houden
-          gameIds: this.staticDeveloper.games?.map(g => g.id) ?? [],
-          reviews: [],
-          reviewIds: this.staticDeveloper.reviews?.map(g => g.id) ?? [],
-        };
-        //Create
+        
+        // Load developer from API
+        this.developerService.getById(this.developerId).subscribe({
+          next: (developer) => {
+            this.staticDeveloper = developer;
+            this.developer = {
+              ...developer,
+              games: []
+            };
+          },
+          error: (err) => {
+            console.error('Developer not found', err);
+            alert('Developer not found');
+            this.router.navigate(['developer']);
+          }
+        });
+        
       } else {
+        // Create mode
         this.developer = {
-          id: 0,
           name: '',
           dateFounded: new Date(),
           summary: '',
           games: [],
           gameIds: [],
-          reviews: [],
-          reviewIds: [],
+          reviewIds: []
         };
       }
     });
   }
+
   onSubmit(): void {
+    if (!this.developer) {
+      console.error('No developer to submit');
+      return;
+    }
+
     console.log('Submit');
-    if (this.developerExists) {
+    if (this.developerExists && this.developer._id) {
       console.log('Update developer');
-      this.developerService.updateDeveloper(this.developer!);
-      this.router.navigate(['developer']);
+      this.developerService.update(this.developer._id, this.developer).subscribe({
+        next: () => {
+          console.log('Developer updated successfully');
+          this.router.navigate(['developer']);
+        },
+        error: (err) => {
+          console.error('Error updating developer:', err);
+        }
+      });
     } else {
       console.log('Add developer');
-      this.developerService.addDeveloper(this.developer!);
-      this.router.navigate(['developer']);
+      const createDeveloper = {
+        name: this.developer.name,
+        dateFounded: this.developer.dateFounded,
+        summary: this.developer.summary
+      };
+      
+      this.developerService.create(createDeveloper).subscribe({
+        next: () => {
+          console.log('Developer created successfully');
+          this.router.navigate(['developer']);
+        },
+        error: (err) => {
+          console.error('Error creating developer:', err);
+        }
+      });
     }
   }
 }

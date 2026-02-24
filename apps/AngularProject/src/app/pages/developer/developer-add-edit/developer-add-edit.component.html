@@ -8,7 +8,7 @@
         <h1 class="mb-4">Add developer</h1>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="developer">
         <div class="d-flex justify-content-center">
             <div class="col-6">
                 <div class="container">
@@ -34,8 +34,6 @@
                         </fieldset>
 
                         <div class="row">
-                            <!-- Bij Save roepen we de save() functie aan, en navigeren
-                              terug naar details binnen die functie -->
                             <div class="col">
                                 <button role="button" type="submit" class="btn btn-primary mx-2"
                                     [disabled]="!developerEditForm.valid">
@@ -48,11 +46,14 @@
                                     Cancel
                                 </button>
                             </div>
-                            <!-- Bij Cancel doen we nu nog niets, maar gaan gewoon terug naar de details -->
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="!developer && developerExists" class="text-center mt-4">
+        <p>Loading developer...</p>
     </div>
 </div>
