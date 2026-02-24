@@ -23,12 +23,12 @@
                 </td>
                 <td>
                     <button [routerLink]="['/developer', developer._id || developer.id, 'edit']"
-                        class="btn btn-warning">
+                        class="btn btn-warning" *ngIf="authService.isLoggedIn">
                         Edit
                     </button>
                 </td>
                 <td>
-                    <button (click)="onDelete(developer)" class="btn btn-danger">
+                    <button (click)="onDelete(developer)" class="btn btn-danger" *ngIf="authService.isLoggedIn">
                         Delete
                     </button>
                 </td>

@@ -10,6 +10,8 @@ import {
 } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ICreateReview, IUpdateReview, IReview } from '@avans-nx-workshop/shared/api';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard  } from '@avans-nx-workshop/backend/auth';
 
 @Controller('review')
 export class ReviewController {
@@ -35,11 +37,13 @@ export class ReviewController {
     }
 
     @Post()
+    @UseGuards(AuthGuard )
     async create(@Body() createReviewDto: ICreateReview): Promise<IReview> {
         return this.reviewService.create(createReviewDto);
     }
 
     @Put(':id')
+    @UseGuards(AuthGuard )
     async update(
         @Param('id') id: string,
         @Body() updateReviewDto: IUpdateReview
@@ -48,6 +52,7 @@ export class ReviewController {
     }
 
     @Delete(':id')
+    @UseGuards(AuthGuard )
     async delete(@Param('id') id: string): Promise<IReview> {
         return this.reviewService.delete(id);
     }

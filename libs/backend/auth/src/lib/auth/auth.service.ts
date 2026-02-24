@@ -12,6 +12,9 @@ import { IUserCredentials, IUserIdentity } from '@avans-nx-workshop/shared/api';
 import { CreateUserDto } from '@avans-nx-workshop/backend/user';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { hash, compare } from 'bcrypt';
+
+const HASH_ROUNDS = 10;
 
 @Injectable()
 export class AuthService {
@@ -20,9 +23,9 @@ export class AuthService {
     constructor(
         @InjectModel(UserModel.name) private userModel: Model<UserDocument>,
         private jwtService: JwtService
-    ) {}
+    ) { }
 
-    async validateUser(credentials: IUserCredentials): Promise<any> {
+    async validateUser(credentials: IUserCredentials): Promise<unknown> {
         this.logger.log('validateUser');
         const user = await this.userModel.findOne({
             emailAddress: credentials.emailAddress
@@ -35,59 +38,66 @@ export class AuthService {
 
     async login(credentials: IUserCredentials): Promise<IUserIdentity> {
         this.logger.log('login ' + credentials.emailAddress);
-        return await this.userModel
-            .findOne({
-                emailAddress: credentials.emailAddress
-            })
+
+        const user = await this.userModel
+            .findOne({ emailAddress: credentials.emailAddress })
             .select('+password')
-            .exec()
-            .then((user) => {
-                if (user && user.password === credentials.password) {
-                    const payload = {
-                        user_id: user._id
-                    };
-                    return {
-                        _id: user._id,
-                        name: user.name,
-                        emailAddress: user.emailAddress,
-                        profileImgUrl: user.profileImgUrl,
-                        token: this.jwtService.sign(payload)
-                    };
-                } else {
-                    const errMsg = 'Email not found or password invalid';
-                    this.logger.debug(errMsg);
-                    throw new UnauthorizedException(errMsg);
-                }
-            })
-            .catch((error) => {
-                return error;
-            });
+            .exec();
+
+        if (!user) {
+            const errMsg = 'Email not found or password invalid';
+            this.logger.debug(errMsg);
+            throw new UnauthorizedException(errMsg);
+        }
+
+        const isPasswordValid = await compare(credentials.password, user.password);
+
+        if (!isPasswordValid) {
+            const errMsg = 'Email not found or password invalid';
+            this.logger.debug(errMsg);
+            throw new UnauthorizedException(errMsg);
+        }
+
+        const payload = {
+            user_id: user._id
+        };
+
+        return {
+            _id: user._id,
+            name: user.name,
+            emailAddress: user.emailAddress,
+            profileImgUrl: user.profileImgUrl,
+            role: user.role,
+            token: this.jwtService.sign(payload)
+        };
     }
 
     async register(user: CreateUserDto): Promise<IUserIdentity> {
-    this.logger.log(`Register user ${user.name}`);
-    
-    if (await this.userModel.findOne({ emailAddress: user.emailAddress })) {
-        this.logger.debug('user exists');
-        throw new ConflictException('User already exist');
+        this.logger.log(`Register user ${user.name}`);
+
+        if (await this.userModel.findOne({ emailAddress: user.emailAddress })) {
+            this.logger.debug('user exists');
+            throw new ConflictException('User already exist');
+        }
+
+        this.logger.debug('User not found, creating');
+
+        const hashedPassword = await hash(user.password, HASH_ROUNDS);
+        user.password = hashedPassword;
+
+        const createdItem = await this.userModel.create(user);
+
+        const payload = {
+            user_id: createdItem._id
+        };
+
+        return {
+            _id: createdItem._id,
+            name: createdItem.name,
+            emailAddress: createdItem.emailAddress,
+            profileImgUrl: createdItem.profileImgUrl,
+            role: createdItem.role,
+            token: this.jwtService.sign(payload)
+        };
     }
-    
-    this.logger.debug('User not found, creating');
-    const createdItem = await this.userModel.create(user);
-    
-    // Generate JWT token
-    const payload = {
-        user_id: createdItem._id
-    };
-    
-    // Return IUserIdentity with token
-    return {
-        _id: createdItem._id,
-        name: createdItem.name,
-        emailAddress: createdItem.emailAddress,
-        profileImgUrl: createdItem.profileImgUrl,
-        role: createdItem.role,
-        token: this.jwtService.sign(payload)
-    };
-}
 }

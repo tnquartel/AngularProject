@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IGame } from '../../game.service';
 import { GameService } from '../../game.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
-
+import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -13,19 +13,22 @@ export class GameCardComponent implements OnInit {
   faCheck = faCheck;
   faX = faTimes;
   faStar = faStar;
-  
-  constructor(private gameService: GameService) {}
 
-  ngOnInit(): void {}
-  
+  constructor(
+    private gameService: GameService,
+    public authService: AuthService
+  ) { }
+
+  ngOnInit(): void { }
+
   deleteGame(): void {
     if (!this.game) return;
-    
+
     if (confirm('Are you sure you want to delete this game?')) {
       console.log('Deleting game...');
-      
+
       const id = this.game._id?.toString() || this.game.id?.toString();
-      
+
       if (id) {
         this.gameService.delete(id).subscribe({
           next: () => {

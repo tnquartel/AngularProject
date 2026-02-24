@@ -1,13 +1,11 @@
 <div class="reviews-section">
-    <!-- Header met Add Review knop -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Reviews ({{ reviews.length }})</h3>
-        <button class="btn btn-primary" (click)="toggleForm()">
+        <button class="btn btn-primary" (click)="toggleForm()" *ngIf="authService.isLoggedIn">
             {{ showForm ? 'Cancel' : 'Add Review' }}
         </button>
     </div>
 
-    <!-- Add Review Form -->
     <div *ngIf="showForm && newReview" class="card mb-4">
         <div class="card-body">
             <h5 class="card-title">Write a Review</h5>
@@ -56,12 +54,10 @@
         </div>
     </div>
 
-    <!-- No reviews message -->
     <div *ngIf="reviews.length === 0 && !showForm" class="alert alert-info">
         No reviews yet. Be the first to review!
     </div>
 
-    <!-- Reviews List (jouw bestaande template) -->
     <div class="review-container" *ngFor="let review of reviews">
         <div class="d-flex justify-content-between align-items-start">
             <div class="flex-grow-1">
@@ -79,7 +75,7 @@
             <button 
                 class="btn btn-sm btn-danger ms-2" 
                 (click)="deleteReview(review._id!)"
-                title="Delete review">
+                title="Delete review" *ngIf="authService.isLoggedIn">
                 <fa-icon [icon]="faTimes"></fa-icon>
             </button>
         </div>

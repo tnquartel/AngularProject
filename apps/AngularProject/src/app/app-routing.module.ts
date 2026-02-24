@@ -10,25 +10,32 @@ import { GameDetailComponent } from './pages/game/game-detail/game-detail.compon
 import { DeveloperComponent } from './pages/developer/developer.component';
 import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/developer-add-edit.component';
 import { DeveloperDetailComponent } from './pages/developer/developer-detail/developer-detail.component';
+import { LoginComponent } from './pages/auth/login.component';
+import { RegisterComponent } from './pages/auth/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'about', component: AboutComponent },
+
+  // Auth
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   
   // User
-  { path: 'user/new', component: UserAddEditComponent },
-  { path: 'user/:id/edit', component: UserAddEditComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'user/new', component: UserAddEditComponent, canActivate: [AuthGuard] },
+  { path: 'user/:id/edit', component: UserAddEditComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   
   // Game
-  { path: 'game/new', component: GameAddEditComponent },
-  { path: 'game/:id/edit', component: GameAddEditComponent },
+  { path: 'game/new', component: GameAddEditComponent, canActivate: [AuthGuard] },
+  { path: 'game/:id/edit', component: GameAddEditComponent, canActivate: [AuthGuard] },
   { path: 'game/:id/detail', component: GameDetailComponent },
   { path: 'game', component: GameComponent },
   
   // Developer
-  { path: 'developer/new', component: DeveloperAddEditComponent },
-  { path: 'developer/:id/edit', component: DeveloperAddEditComponent },
+  { path: 'developer/new', component: DeveloperAddEditComponent, canActivate: [AuthGuard] },
+  { path: 'developer/:id/edit', component: DeveloperAddEditComponent, canActivate: [AuthGuard] },
   { path: 'developer/:id/detail', component: DeveloperDetailComponent },
   { path: 'developer', component: DeveloperComponent },
 ];

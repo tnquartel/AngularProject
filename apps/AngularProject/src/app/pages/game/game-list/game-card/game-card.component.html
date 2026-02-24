@@ -20,18 +20,15 @@
     </p>
 </div>
 <div class="row m-0" id="buttons">
-    <!-- Detail button -->
     <button class="btn btn-sm btn-primary" [routerLink]="['/game', game._id || game.id, 'detail']">
         Detail
     </button>
 
-    <!-- Edit button -->
-    <button class="btn btn-sm btn-warning" [routerLink]="['/game', game._id || game.id, 'edit']">
+    <button class="btn btn-sm btn-warning" [routerLink]="['/game', game._id || game.id, 'edit']" *ngIf="authService.isLoggedIn">
         Edit
     </button>
 
-    <!-- Delete button -->
-    <button class="btn btn-sm btn-danger" (click)="deleteGame()">
+    <button class="btn btn-sm btn-danger" (click)="deleteGame()" *ngIf="authService.isLoggedIn">
         Delete
     </button>
 </div>

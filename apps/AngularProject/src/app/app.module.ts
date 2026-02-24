@@ -26,6 +26,8 @@ import { DeveloperComponent } from './pages/developer/developer.component';
 import { DeveloperListComponent } from './pages/developer/developer-list/developer-list.component';
 import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/developer-add-edit.component';
 import { DeveloperDetailComponent } from './pages/developer/developer-detail/developer-detail.component';
+import { LoginComponent } from './pages/auth/login.component';
+import { RegisterComponent } from './pages/auth/register.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { DeveloperDetailComponent } from './pages/developer/developer-detail/dev
     DeveloperListComponent,
     DeveloperAddEditComponent,
     DeveloperDetailComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,8 @@ import {
 } from '@nestjs/common';
 import { DeveloperService } from './developer.service';
 import { ICreateDeveloper, IUpdateDeveloper, IDeveloper } from '@avans-nx-workshop/shared/api';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard  } from '@avans-nx-workshop/backend/auth';
 
 @Controller('developer')
 export class DeveloperController {
@@ -25,11 +27,13 @@ export class DeveloperController {
     }
 
     @Post()
+    @UseGuards(AuthGuard )
     async create(@Body() createDeveloperDto: ICreateDeveloper): Promise<IDeveloper> {
         return this.developerService.create(createDeveloperDto);
     }
 
     @Put(':id')
+    @UseGuards(AuthGuard )
     async update(
         @Param('id') id: string,
         @Body() updateDeveloperDto: IUpdateDeveloper
@@ -38,6 +42,7 @@ export class DeveloperController {
     }
 
     @Delete(':id')
+    @UseGuards(AuthGuard )
     async delete(@Param('id') id: string): Promise<IDeveloper> {
         return this.developerService.delete(id);
     }

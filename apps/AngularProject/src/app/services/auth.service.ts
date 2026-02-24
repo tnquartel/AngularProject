@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { throwError } from 'rxjs';
 
 export interface IUserIdentity {
     _id: string;
@@ -56,13 +57,26 @@ export class AuthService {
 
     login(credentials: ILoginCredentials): Observable<IUserIdentity> {
         return this.http.post<any>(`${this.apiUrl}/login`, credentials).pipe(
-            map(response => response.results || response),
+            map(response => {
+                const user = response.results || response;
+
+                // ✅ CHECK: Als het een error object is, gooi een error
+                if (user.status === 401 || user.name === 'UnauthorizedException' || !user._id) {
+                    throw new Error(user.message || 'Invalid email or password');
+                }
+
+                return user;
+            }),
             tap(user => {
-                // Store user & token in localStorage
+                // Alleen opslaan als het echt een user is
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 localStorage.setItem('token', user.token);
                 this.currentUserSubject.next(user);
                 console.log('User logged in:', user);
+            }),
+            catchError(error => {
+                console.error('Login failed:', error);
+                return throwError(() => error);
             })
         );
     }
