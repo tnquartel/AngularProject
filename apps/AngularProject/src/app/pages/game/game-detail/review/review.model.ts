@@ -1,6 +1,6 @@
 import { IDeveloper } from "../../../developer/developer.model";
 import { IUser } from "../../../user/user.model";
-import { IGame } from "../../game.model";
+import { IGame } from "../../game.service";
 
 export interface IReview {
     id: number;

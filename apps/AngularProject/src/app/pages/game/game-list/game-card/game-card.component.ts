@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IGame } from '../../game.model';
+import { IGame } from '../../game.service';
 import { GameService } from '../../game.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,11 +13,33 @@ export class GameCardComponent implements OnInit {
   faCheck = faCheck;
   faX = faTimes;
   faStar = faStar;
+  
   constructor(private gameService: GameService) {}
 
   ngOnInit(): void {}
-  deleteGame() {
-    console.log('delete');
-    this.gameService.deleteGame(this.game!.id);
+  
+  deleteGame(): void {
+    if (!this.game) return;
+    
+    if (confirm('Are you sure you want to delete this game?')) {
+      console.log('Deleting game...');
+      
+      const id = this.game._id?.toString() || this.game.id?.toString();
+      
+      if (id) {
+        this.gameService.delete(id).subscribe({
+          next: () => {
+            console.log('Game deleted successfully');
+            window.location.reload();
+          },
+          error: (err) => {
+            console.error('Error deleting game:', err);
+            alert('Failed to delete game');
+          }
+        });
+      } else {
+        console.error('No valid ID found for game');
+      }
+    }
   }
 }

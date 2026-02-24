@@ -1,5 +1,5 @@
 import { IReview } from "../game/game-detail/review/review.model";
-import { IGame } from "../game/game.model";
+import { IGame } from "../game/game.service";
 
 export interface IUser {
   id: number;

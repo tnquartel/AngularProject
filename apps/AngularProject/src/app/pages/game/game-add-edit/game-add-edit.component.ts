@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { IGame } from '../game.model';
+import { IGame } from '../game.service';
 import { GameService } from '../game.service';
 
 @Component({
@@ -21,35 +21,36 @@ export class GameAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private gameService: GameService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.gameId = params.get('id');
-      //Edit
+
+      // Edit mode
       if (this.gameId) {
         this.gameExists = true;
-        this.staticGame = this.gameService.getGameById(Number(this.gameId));
-        this.game = {
-          id: this.staticGame.id,
-          title: this.staticGame.title,
-          summary: this.staticGame.summary,
-          genre: this.staticGame.genre,
-          rating: this.staticGame.rating,
-          price: this.staticGame.price,
-          developers: [],
-          developerIds: this.staticGame.developers.map(g => g.id) ?? [],
-          img: this.staticGame.img,
-          ageRating: this.staticGame.ageRating,
-          completed: this.staticGame.completed,
-          releaseDate: this.staticGame.releaseDate,
-          reviews: [],
-          reviewIds: this.staticGame.developers.map(g => g.id) ?? [],
-        };
-        //Create
+
+        // Load game from API (async)
+        this.gameService.getById(this.gameId).subscribe({
+          next: (game) => {
+            this.staticGame = game;
+            this.game = {
+              ...game,
+              developers: [],
+              reviews: []
+            };
+          },
+          error: (err) => {
+            console.error('Game not found', err);
+            alert('Game not found');
+            this.router.navigate(['game']);
+          }
+        });
+
       } else {
+        // Create mode
         this.game = {
-          id: 0,
           title: '',
           summary: '',
           genre: '',
@@ -58,25 +59,56 @@ export class GameAddEditComponent implements OnInit {
           price: 0,
           developers: [],
           developerIds: [],
+          imageUrl: '',
           img: '',
           completed: false,
-          releaseDate: new Date (1500, 0, 0),
+          releaseDate: new Date(),
           reviews: [],
           reviewIds: [],
         };
       }
     });
   }
+
   onSubmit(): void {
+    if (!this.game) {
+      console.error('No game to submit');
+      return;
+    }
+
     console.log('Submit');
-    if (this.gameExists) {
+    if (this.gameExists && this.game._id) {
       console.log('Update game');
-      this.gameService.updateGame(this.game!);
-      this.router.navigate(['game']);
+      this.gameService.update(this.game._id, this.game).subscribe({
+        next: () => {
+          console.log('Game updated successfully');
+          this.router.navigate(['game']);
+        },
+        error: (err) => {
+          console.error('Error updating game:', err);
+        }
+      });
     } else {
       console.log('Add game');
-      this.gameService.addGame(this.game!);
-      this.router.navigate(['game']);
+      const createGame = {
+        title: this.game.title,
+        summary: this.game.summary,
+        genre: this.game.genre,
+        releaseDate: this.game.releaseDate,
+        price: this.game.price,
+        ageRating: this.game.ageRating,
+        imageUrl: this.game.imageUrl || this.game.img || ''
+      };
+
+      this.gameService.create(createGame).subscribe({
+        next: () => {
+          console.log('Game created successfully');
+          this.router.navigate(['game']);
+        },
+        error: (err) => {
+          console.error('Error creating game:', err);
+        }
+      });
     }
   }
 }

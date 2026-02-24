@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,8 +15,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { UserComponent } from './pages/user/user.component';
 import { UserListComponent } from './pages/user/user-list/user-list.component';
 import { UserAddEditComponent } from './pages/user/user-add-edit/user-add-edit.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameComponent } from './pages/game/game.component';
 import { GameListComponent } from './pages/game/game-list/game-list.component';
 import { GameCardComponent } from './pages/game/game-list/game-card/game-card.component';
@@ -50,6 +53,7 @@ import { DeveloperDetailComponent } from './pages/developer/developer-detail/dev
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
   ],

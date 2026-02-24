@@ -8,73 +8,75 @@
         <h1 class="mb-4 mt-4">Add game</h1>
     </div>
 
-    <div class="row">
-        <div class="d-flex justify-content-center">
-            <div class="col-6">
-                <div class="container">
-                    <form #gameEditForm="ngForm" name="form" (ngSubmit)="onSubmit()">
-                        <fieldset>
-                            <div class="form-group">
-                                <p><label for="title">Title</label>
-                                    <input type="text" class="form-control" placeholder="Game title"
-                                        [(ngModel)]="game!.title" name="title" required #title="ngModel" />
+    <div class="row" *ngIf="game">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <div class="col-6">
+                    <div class="container">
+                        <form #gameEditForm="ngForm" name="form" (ngSubmit)="onSubmit()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <p><label for="title">Title</label>
+                                        <input type="text" class="form-control" placeholder="Game title"
+                                            [(ngModel)]="game!.title" name="title" required #title="ngModel" />
+                                    </p>
+                                </div>
+                                <p><label for="summary">
+                                        Summary
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="Game summary"
+                                        [(ngModel)]="game!.summary" name="summary" #sumaary="ngModel" required
+                                        minlength="3" />
                                 </p>
-                            </div>
-                            <p><label for="summary">
-                                    Summary
-                                </label>
-                                <input type="text" class="form-control" placeholder="Game summary"
-                                    [(ngModel)]="game!.summary" name="summary" #sumaary="ngModel" required
-                                    minlength="3" />
-                            </p>
-                            <p><label for="price">Price</label>
-                                <input type="number" class="form-control" [(ngModel)]="game!.price"
-                                    placeholder="Game price" name="price" #price="ngModel" required />
-                            </p>
-                            <p>ADD DEVELOPERS
-                            </p>
-                            <p><label for="genre">Genre</label>
-                                <input type="string" class="form-control" [(ngModel)]="game!.genre"
-                                    placeholder="Game genre" name="genre" #genre="ngModel" required />
-                            </p>
-                            <p><label for="rating">Rating</label>
-                                <input type="number" class="form-control" [(ngModel)]="game!.rating"
-                                    placeholder="Game rating" name="rating" #rating="ngModel" required />
-                            </p>
-                            <p><label for="ageRating">Age rating</label>
-                                <input type="text" class="form-control" [(ngModel)]="game!.ageRating"
-                                    placeholder="Game age rating" name="ageRating" #ageRating="ngModel" required />
-                            </p>
-                            <p><label for="image">Image URL</label>
-                                <input type="text" class="form-control" [(ngModel)]="game!.img"
-                                    placeholder="Game image url" name="image" #img="ngModel" required />
-                            </p>
-                            <p id="completed"><label for="completed">Have you completed the game?</label>
-                                <input type="checkbox" class="form-checkbox" [(ngModel)]="game!.completed"
-                                    name="completed" required #completed="ngModel" />
-                            </p>
-                        </fieldset>
+                                <p><label for="price">Price</label>
+                                    <input type="number" class="form-control" [(ngModel)]="game!.price"
+                                        placeholder="Game price" name="price" #price="ngModel" required />
+                                </p>
+                                <p>ADD DEVELOPERS
+                                </p>
+                                <p><label for="genre">Genre</label>
+                                    <input type="string" class="form-control" [(ngModel)]="game!.genre"
+                                        placeholder="Game genre" name="genre" #genre="ngModel" required />
+                                </p>
+                                <p><label for="rating">Rating</label>
+                                    <input type="number" class="form-control" [(ngModel)]="game!.rating"
+                                        placeholder="Game rating" name="rating" #rating="ngModel" required />
+                                </p>
+                                <p><label for="ageRating">Age rating</label>
+                                    <input type="text" class="form-control" [(ngModel)]="game!.ageRating"
+                                        placeholder="Game age rating" name="ageRating" #ageRating="ngModel" required />
+                                </p>
+                                <p><label for="image">Image URL</label>
+                                    <input type="text" class="form-control" [(ngModel)]="game!.img"
+                                        placeholder="Game image url" name="image" #img="ngModel" required />
+                                </p>
+                                <p id="completed"><label for="completed">Have you completed the game?</label>
+                                    <input type="checkbox" class="form-checkbox" [(ngModel)]="game.completed"
+                                        name="completed" #completed="ngModel" />
+                                </p>
+                            </fieldset>
 
-                        <div class="row">
-                            <!-- Bij Save roepen we de save() functie aan, en navigeren
-                              terug naar details binnen die functie -->
-                            <div class="col">
-                                <button role="button" type="submit" class="btn btn-primary mx-2"
-                                    [disabled]="!gameEditForm.valid">
-                                    Submit
-                                </button>
+                            <div class="row">
+                                <div class="col">
+                                    <button role="button" type="submit" class="btn btn-primary mx-2"
+                                        [disabled]="!gameEditForm.valid">
+                                        Submit
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-outline-secondary float-right" href="#" role="button"
+                                        routerLink="/game">
+                                        Cancel
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col">
-                                <button class="btn btn-outline-secondary float-right" href="#" role="button"
-                                    routerLink="/game">
-                                    Cancel
-                                </button>
-                            </div>
-                            <!-- Bij Cancel doen we nu nog niets, maar gaan gewoon terug naar de details -->
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="!game && gameExists" class="text-center mt-4">
+        <p>Loading game...</p>
     </div>
 </div>

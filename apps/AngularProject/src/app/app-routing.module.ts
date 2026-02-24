@@ -13,17 +13,24 @@ import { DeveloperDetailComponent } from './pages/developer/developer-detail/dev
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
-  { path: 'user', component: UserComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'user/new', pathMatch: 'full', component: UserAddEditComponent },
-  { path: 'user/:id/edit', pathMatch: 'full', component: UserAddEditComponent },
+  
+  // User
+  { path: 'user/new', component: UserAddEditComponent },
+  { path: 'user/:id/edit', component: UserAddEditComponent },
+  { path: 'user', component: UserComponent },
+  
+  // Game
+  { path: 'game/new', component: GameAddEditComponent },
+  { path: 'game/:id/edit', component: GameAddEditComponent },
+  { path: 'game/:id/detail', component: GameDetailComponent },
   { path: 'game', component: GameComponent },
-  { path: 'game/new', pathMatch: 'full', component: GameAddEditComponent },
-  { path: 'game/:id/edit', pathMatch: 'full', component: GameAddEditComponent },
-  { path: 'game/:id/detail', pathMatch: 'full', component: GameDetailComponent },
+  
+  // Developer
+  { path: 'developer/new', component: DeveloperAddEditComponent },
+  { path: 'developer/:id/edit', component: DeveloperAddEditComponent },
+  { path: 'developer/:id/detail', component: DeveloperDetailComponent },
   { path: 'developer', component: DeveloperComponent },
-  { path: 'developer/:id/edit', pathMatch: 'full', component: DeveloperAddEditComponent },
-  { path: 'developer/:id/detail', pathMatch: 'full', component: DeveloperDetailComponent },
 ];
 
 @NgModule({

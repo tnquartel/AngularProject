@@ -5,7 +5,7 @@ import {
   Route,
   Router,
 } from '@angular/router';
-import { IGame } from '../game.model';
+import { IGame } from '../game.service';
 import { GameService } from '../game.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 

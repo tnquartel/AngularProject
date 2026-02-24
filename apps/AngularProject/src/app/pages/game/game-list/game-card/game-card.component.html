@@ -20,13 +20,18 @@
     </p>
 </div>
 <div class="row m-0" id="buttons">
-    <button class="btn btn-sm btn-primary" routerLink="{{ game!.id }}/detail">
-        Details
+    <!-- Detail button -->
+    <button class="btn btn-sm btn-primary" [routerLink]="['/game', game._id || game.id, 'detail']">
+        Detail
     </button>
-    <button class="btn btn-sm btn-warning" routerLink="{{ game!.id }}/edit">
+
+    <!-- Edit button -->
+    <button class="btn btn-sm btn-warning" [routerLink]="['/game', game._id || game.id, 'edit']">
         Edit
     </button>
-    <button class="btn btn-danger" type="button" (click)="deleteGame()">
-        delete
+
+    <!-- Delete button -->
+    <button class="btn btn-sm btn-danger" (click)="deleteGame()">
+        Delete
     </button>
 </div>

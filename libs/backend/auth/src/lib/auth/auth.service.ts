@@ -15,7 +15,6 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class AuthService {
-    //
     private readonly logger = new Logger(AuthService.name);
 
     constructor(
@@ -66,13 +65,29 @@ export class AuthService {
     }
 
     async register(user: CreateUserDto): Promise<IUserIdentity> {
-        this.logger.log(`Register user ${user.name}`);
-        if (await this.userModel.findOne({ emailAddress: user.emailAddress })) {
-            this.logger.debug('user exists');
-            throw new ConflictException('User already exist');
-        }
-        this.logger.debug('User not found, creating');
-        const createdItem = await this.userModel.create(user);
-        return createdItem;
+    this.logger.log(`Register user ${user.name}`);
+    
+    if (await this.userModel.findOne({ emailAddress: user.emailAddress })) {
+        this.logger.debug('user exists');
+        throw new ConflictException('User already exist');
     }
+    
+    this.logger.debug('User not found, creating');
+    const createdItem = await this.userModel.create(user);
+    
+    // Generate JWT token
+    const payload = {
+        user_id: createdItem._id
+    };
+    
+    // Return IUserIdentity with token
+    return {
+        _id: createdItem._id,
+        name: createdItem.name,
+        emailAddress: createdItem.emailAddress,
+        profileImgUrl: createdItem.profileImgUrl,
+        role: createdItem.role,
+        token: this.jwtService.sign(payload)
+    };
+}
 }

@@ -1,4 +1,4 @@
-import { IGame } from "../game/game.model"
+import { IGame } from "../game/game.service"
 import { IReview } from "../game/game-detail/review/review.model"
 export interface IDeveloper {
     id: number;
