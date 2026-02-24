@@ -1,0 +1,13 @@
+.modal.show {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  font-size: 0.9rem;
+}/*# sourceMappingURL=friends.component.css.map */

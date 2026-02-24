@@ -1,0 +1,13 @@
+.container {
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+}
+
+hr {
+  height: 1px;
+}
+
+.card {
+  margin-bottom: 24px;
+}/*# sourceMappingURL=developer-detail.component.css.map */

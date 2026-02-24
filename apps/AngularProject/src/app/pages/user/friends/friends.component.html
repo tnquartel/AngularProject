@@ -1,0 +1,123 @@
+<div class="container mt-4">
+    <div class="row">
+        <!-- Friends List -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">My Friends ({{ friends.length }})</h5>
+                    <button class="btn btn-sm btn-primary" (click)="openAddFriendModal()">
+                        + Add Friend
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="loading" class="text-center">
+                        <p>Loading...</p>
+                    </div>
+
+                    <div *ngIf="!loading && friends.length === 0" class="text-muted">
+                        No friends yet. Add some!
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li *ngFor="let friend of friends" class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ friend.name }}</span>
+                            <button class="btn btn-sm btn-danger" (click)="removeFriend(friend.id)">
+                                Remove
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Friend Suggestions -->
+            <div class="card" *ngIf="suggestions.length > 0">
+                <div class="card-header">
+                    <h5 class="mb-0">People You May Know</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li *ngFor="let suggestion of suggestions" class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ suggestion.name }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ suggestion.mutualFriends }} mutual friends</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" (click)="addSuggestedFriend(suggestion.id)">
+                                    Add
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Games Your Friends Love</h5>
+                    <small class="text-muted">Based on what your friends are playing</small>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="loading" class="text-center">
+                        <p>Loading recommendations...</p>
+                    </div>
+
+                    <div *ngIf="!loading && recommendations.length === 0" class="alert alert-info">
+                        No recommendations yet. Add friends and they'll show games they love!
+                    </div>
+
+                    <div class="row">
+                        <div *ngFor="let rec of recommendations" class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ rec.title }}</h5>
+                                    <p class="card-text">
+                                        <span class="badge bg-primary">{{ rec.genre }}</span>
+                                    </p>
+                                    <div class="mb-2">
+                                        <small class="text-muted">
+                                            {{ rec.friendsPlayed }} friend(s) played this
+                                        </small>
+                                    </div>
+                                    <div class="mb-2">
+                                        <small class="text-muted">
+                                            Average rating: {{ rec.avgRating | number:'1.1-1' }}/10
+                                        </small>
+                                    </div>
+                                    <a [routerLink]="['/game', rec.id, 'detail']" class="btn btn-sm btn-outline-primary">
+                                        View Game
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" [class.show]="showAddModal" [style.display]="showAddModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Friend</h5>
+                <button type="button" class="btn-close" (click)="closeAddFriendModal()"></button>
+            </div>
+            <div class="modal-body">
+                <p>Select a user to add as friend:</p>
+                <ul class="list-group">
+                    <li *ngFor="let user of allUsers" class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ user.name }}</span>
+                        <button class="btn btn-sm btn-primary" (click)="addFriend(user._id)">
+                            Add
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop" *ngIf="showAddModal" (click)="closeAddFriendModal()"></div>

@@ -28,6 +28,7 @@ import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/
 import { DeveloperDetailComponent } from './pages/developer/developer-detail/developer-detail.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { RegisterComponent } from './pages/auth/register.component';
+import { FriendsComponent } from './pages/user/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { RegisterComponent } from './pages/auth/register.component';
     DeveloperAddEditComponent,
     DeveloperDetailComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

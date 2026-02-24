@@ -1,11 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IUser } from './user.model';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+
+  private apiUrl = `${environment.apiUrl}/user`;
+
+    constructor(private http: HttpClient) {}
+
+    // GET all users
+    getAll(): Observable<any[]> {
+        return this.http.get<any>(this.apiUrl).pipe(
+            map(response => response.results || response)
+        );
+    }
+    
   readonly users: IUser[] = [
     {
       id: 0,

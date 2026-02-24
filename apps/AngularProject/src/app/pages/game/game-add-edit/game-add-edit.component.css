@@ -1,0 +1,28 @@
+.greenCheck {
+  color: greenyellow;
+}
+
+.redX {
+  color: red;
+}
+
+fieldset {
+  min-width: 100px;
+  display: inline-block;
+}
+fieldset label {
+  margin-right: 5px;
+}
+
+fieldset input {
+  float: right;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+p {
+  padding-top: 5px;
+}/*# sourceMappingURL=game-add-edit.component.css.map */

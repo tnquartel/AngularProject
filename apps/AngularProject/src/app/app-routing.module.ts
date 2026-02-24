@@ -12,6 +12,7 @@ import { DeveloperAddEditComponent } from './pages/developer/developer-add-edit/
 import { DeveloperDetailComponent } from './pages/developer/developer-detail/developer-detail.component';
 import { LoginComponent } from './pages/auth/login.component';
 import { RegisterComponent } from './pages/auth/register.component';
+import { FriendsComponent } from './pages/user/friends/friends.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'user/new', component: UserAddEditComponent, canActivate: [AuthGuard] },
   { path: 'user/:id/edit', component: UserAddEditComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'friends', component: FriendsComponent, canActivate: [AuthGuard] },
   
   // Game
   { path: 'game/new', component: GameAddEditComponent, canActivate: [AuthGuard] },
