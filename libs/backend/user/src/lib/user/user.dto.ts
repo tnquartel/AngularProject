@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsString, IsBoolean, IsOptional } from 'class-validator';
 import {
-    IMeal,
     IUpdateUser,
     IUpsertUser,
     IUserRegistration,
@@ -30,33 +29,36 @@ export class UpsertUserDto implements IUpsertUser {
     @IsNotEmpty()
     name!: string;
 
-    @IsString()
     @IsNotEmpty()
-    password!: string;
+    age!: number;
 
     @IsString()
     @IsNotEmpty()
     emailAddress!: string;
 
-    @IsBoolean()
+    @IsString()
     @IsNotEmpty()
+    phoneNumber!: string;
+
+    @IsString()
+    @IsNotEmpty()
+    password!: string;
+
+    @IsOptional()
+    profileImgUrl?: string;
+
+    @IsString()
+    role!: UserRole;
+
+    @IsString()
+    gender!: UserGender;
+
+    @IsBoolean()
     isActive!: boolean;
 
-    @IsString()
-    @IsNotEmpty()
-    profileImgUrl = '';
-
-    @IsString()
-    @IsNotEmpty()
-    meals: IMeal[] = [];
-
-    @IsString()
-    @IsNotEmpty()
-    role: UserRole = UserRole.Unknown;
-
-    @IsString()
-    @IsNotEmpty()
-    gender: UserGender = UserGender.Unknown;
+    placedReviewIds: Id[] = [];
+    friendIds: Id[] = [];
+    completedGameIds: Id[] = [];
 }
 
 export class UpdateUserDto implements IUpdateUser {

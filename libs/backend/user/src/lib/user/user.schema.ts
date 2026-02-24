@@ -1,9 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-// import { v4 as uuid } from 'uuid';
 import isEmail from 'validator/lib/isEmail';
 import {
-    IMeal,
     IUser,
     UserGender,
     UserRole
@@ -25,7 +23,19 @@ export class User implements IUser {
 
     @Prop({
         required: true,
-        select: false, // do not return password in select statements
+        type: Number
+    })
+    age!: number;
+
+    @Prop({
+        required: true,
+        type: String
+    })
+    phoneNumber!: string;
+
+    @Prop({
+        required: true,
+        select: false,
         type: String
     })
     password = '';
@@ -34,11 +44,13 @@ export class User implements IUser {
         required: true,
         type: String,
         select: true,
-        unique: true
-        // validate: {
-        //     validator: isEmail,
-        //     message: 'should be a valid email address'
-        // }
+        unique: true,
+        validate: {
+            validator: function(v: string) {
+                return isEmail(v);
+            },
+            message: 'should be a valid email address'
+        }
     })
     emailAddress = '';
 
@@ -73,9 +85,23 @@ export class User implements IUser {
     @Prop({
         default: [],
         type: [MongooseSchema.Types.ObjectId],
-        ref: 'Meal'
+        ref: 'Review'
     })
-    meals: IMeal[] = [];
+    placedReviewIds: string[] = [];
+
+    @Prop({
+        default: [],
+        type: [MongooseSchema.Types.ObjectId],
+        ref: 'User'
+    })
+    friendIds: string[] = [];
+
+    @Prop({
+        default: [],
+        type: [MongooseSchema.Types.ObjectId],
+        ref: 'Game'
+    })
+    completedGameIds: string[] = [];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

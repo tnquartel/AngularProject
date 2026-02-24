@@ -1,51 +1,45 @@
-import { IEntity } from '@avans-nx-workshop/share-a-meal/entity';
-import { IMeal } from './meal.interface';
-import { IUserRegistration } from './auth.interface';
 import { Id } from './id.type';
-
-export enum UserRole {
-    Guest = 'Guest',
-    Admin = 'Admin',
-    Unknown = 'Unknown'
-}
 
 export enum UserGender {
     Male = 'Male',
     Female = 'Female',
-    None = 'None',
+    Other = 'Other',
     Unknown = 'Unknown'
 }
 
-/**
- * Minimal user information
- */
-
-export interface IUserIdentity extends IEntity {
-    name: string;
-    emailAddress: string;
-    profileImgUrl: string;
-    role: UserRole;
-    token?: string;
+export enum UserRole {
+    Admin = 'admin',
+    User = 'user',
+    Guest = 'guest'
 }
 
-/**
- * All user information, excl. domain entities
- */
-export interface IUserInfo extends IUserRegistration {
+export interface IUser {
     _id: Id;
-    profileImgUrl: string;
+    name: string;
+    age: number;
+    emailAddress: string;
+    phoneNumber: string;
+    password: string;
+    profileImgUrl?: string;
     role: UserRole;
     gender: UserGender;
     isActive: boolean;
+    placedReviewIds: Id[];
+    friendIds: Id[];
+    completedGameIds: Id[];
 }
 
-/**
- * All user information, incl. domain entities
- */
-export interface IUser extends IUserInfo {
-    meals: IMeal[];
+export interface IUserIdentity {
+    _id: Id;
+    name: string;
+    emailAddress: string;
+    profileImgUrl?: string;
+    role: UserRole;
+    token: string;
 }
 
-export type ICreateUser = Pick<IUser, 'name' | 'password' | 'emailAddress'>;
-export type IUpdateUser = Partial<Omit<IUser, '_id'>>;
+export type IUserInfo = Pick<IUser, '_id' | 'name' | 'emailAddress' | 'profileImgUrl' | 'role' | 'gender' | 'isActive' | 'age'>;
+
+export type ICreateUser = Pick<IUser, 'name' | 'age' | 'emailAddress' | 'phoneNumber' | 'password' | 'role' | 'gender'>;
+export type IUpdateUser = Partial<Omit<IUser, '_id' | 'password'>>;
 export type IUpsertUser = IUser;

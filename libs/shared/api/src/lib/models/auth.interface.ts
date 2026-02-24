@@ -1,5 +1,5 @@
 /**
- * User information required for loggin in
+ * User information required for logging in
  */
 export interface IUserCredentials {
     emailAddress: string;
