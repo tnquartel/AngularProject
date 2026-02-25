@@ -7,15 +7,17 @@ import {
     Body,
     Param,
     Query,
+    Request,
+    ForbiddenException
 } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ICreateReview, IUpdateReview, IReview } from '@avans-nx-workshop/shared/api';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard  } from '@avans-nx-workshop/backend/auth';
+import { AuthGuard } from '@avans-nx-workshop/backend/auth';
 
 @Controller('review')
 export class ReviewController {
-    constructor(private readonly reviewService: ReviewService) {}
+    constructor(private readonly reviewService: ReviewService) { }
 
     @Get()
     async findAll(
@@ -37,23 +39,39 @@ export class ReviewController {
     }
 
     @Post()
-    @UseGuards(AuthGuard )
+    @UseGuards(AuthGuard)
     async create(@Body() createReviewDto: ICreateReview): Promise<IReview> {
         return this.reviewService.create(createReviewDto);
     }
 
+    @UseGuards(AuthGuard)
     @Put(':id')
-    @UseGuards(AuthGuard )
     async update(
         @Param('id') id: string,
-        @Body() updateReviewDto: IUpdateReview
+        @Body() review: IUpdateReview,
+        @Request() req: any
     ): Promise<IReview> {
-        return this.reviewService.update(id, updateReviewDto);
+        const existingReview = await this.reviewService.findOne(id);
+
+        if (existingReview.userId !== req.user.sub) {
+            throw new ForbiddenException('You can only edit your own reviews');
+        }
+
+        return this.reviewService.update(id, review);
     }
 
+    @UseGuards(AuthGuard)
     @Delete(':id')
-    @UseGuards(AuthGuard )
-    async delete(@Param('id') id: string): Promise<IReview> {
+    async delete(
+        @Param('id') id: string,
+        @Request() req: any
+    ): Promise<IReview> {
+        const existingReview = await this.reviewService.findOne(id);
+
+        if (existingReview.userId !== req.user.sub) {
+            throw new ForbiddenException('You can only delete your own reviews');
+        }
+
         return this.reviewService.delete(id);
     }
 }

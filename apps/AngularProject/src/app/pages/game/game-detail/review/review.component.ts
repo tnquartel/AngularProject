@@ -29,6 +29,23 @@ export class ReviewComponent implements OnInit {
     this.loadReviews();
   }
 
+  isOwnReview(review: IReview): boolean {
+    const currentUser = this.authService.currentUserValue;
+    if (!currentUser) return false;
+
+    let reviewUserId: string;
+
+    if (typeof review.userId === 'string') {
+      reviewUserId = review.userId;
+    } else if (review.userId && typeof review.userId === 'object') {
+      reviewUserId = (review.userId as { _id: string })._id;
+    } else {
+      return false;
+    }
+
+    return reviewUserId === currentUser._id;
+  }
+
   loadReviews(): void {
     const entityId = this.gameId || this.developerId;
     if (entityId) {
@@ -52,7 +69,7 @@ export class ReviewComponent implements OnInit {
         title: '',
         description: '',
         rating: 5,
-        userId: userId, 
+        userId: userId,
         reviewType: this.gameId ? 'game' : 'developer',
         reviewedEntityId: entityId || ''
       };

@@ -1,1 +1,1 @@
-{"version":3,"sources":["game-detail.component.scss","game-detail.component.css"],"names":[],"mappings":"AAAA;EACI,mBAAA;EACA,kBAAA;ACCJ;;ADEA;EACI,WAAA;ACCJ","file":"game-detail.component.css"}
+{"version":3,"sources":["game-detail.component.scss","game-detail.component.css"],"names":[],"mappings":"AAAA;EACI,mBAAA;EACA,kBAAA;ACCJ;;ADEA;EACI,WAAA;ACCJ;;ADEA;EACI,iBAAA;ACCJ","file":"game-detail.component.css"}
