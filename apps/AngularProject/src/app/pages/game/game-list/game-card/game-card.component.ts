@@ -45,4 +45,9 @@ export class GameCardComponent implements OnInit {
       }
     }
   }
+
+  onImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    img.style.display = 'none';
+  }
 }

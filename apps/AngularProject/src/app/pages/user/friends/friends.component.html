@@ -1,6 +1,5 @@
 <div class="container mt-4">
     <div class="row">
-        <!-- Friends List -->
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -29,7 +28,6 @@
                 </div>
             </div>
 
-            <!-- Friend Suggestions -->
             <div class="card" *ngIf="suggestions.length > 0">
                 <div class="card-header">
                     <h5 class="mb-0">People You May Know</h5>
@@ -43,7 +41,7 @@
                                     <br>
                                     <small class="text-muted">{{ suggestion.mutualFriends }} mutual friends</small>
                                 </div>
-                                <button class="btn btn-sm btn-outline-primary" (click)="addSuggestedFriend(suggestion.id)">
+                                <button class="btn btn-sm btn-primary" (click)="addSuggestedFriend(suggestion.id)">
                                     Add
                                 </button>
                             </div>
@@ -74,7 +72,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ rec.title }}</h5>
                                     <p class="card-text">
-                                        <span class="badge bg-primary">{{ rec.genre }}</span>
+                                        <span class="badge bg-secondary">{{ rec.genre }}</span>
                                     </p>
                                     <div class="mb-2">
                                         <small class="text-muted">
@@ -86,7 +84,7 @@
                                             Average rating: {{ rec.avgRating | number:'1.1-1' }}/10
                                         </small>
                                     </div>
-                                    <a [routerLink]="['/game', rec.id, 'detail']" class="btn btn-sm btn-outline-primary">
+                                    <a [routerLink]="['/game', rec.id, 'detail']" class="btn btn-sm btn-primary">
                                         View Game
                                     </a>
                                 </div>

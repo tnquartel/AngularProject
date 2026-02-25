@@ -1,9 +1,6 @@
-<div class="row m-0 justify-content-center">
-    <img class="p-0 card-img" src="{{
-      game!.img
-        ? game!.img
-        : 'https://deconova.eu/wp-content/uploads/2016/02/default-placeholder.png'
-    }}" alt="" />
+<div class="p-0">
+    <img *ngIf="game?.imageUrl || game?.img" [src]="game.imageUrl || game.img" class="card-img-top game-img"
+        alt="{{ game?.title }}" (error)="onImageError($event)" />
 </div>
 <div class="card-body">
     <h5 class="card-title">{{ game!.title }}</h5>
@@ -24,7 +21,8 @@
         Detail
     </button>
 
-    <button class="btn btn-sm btn-warning" [routerLink]="['/game', game._id || game.id, 'edit']" *ngIf="authService.isLoggedIn">
+    <button class="btn btn-sm btn-warning" [routerLink]="['/game', game._id || game.id, 'edit']"
+        *ngIf="authService.isLoggedIn">
         Edit
     </button>
 

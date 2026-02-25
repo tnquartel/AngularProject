@@ -18,7 +18,6 @@ export class GameAddEditComponent implements OnInit {
   faCheck = faCheck;
   faTimes = faTimes;
 
-  // ✅ Add these
   allDevelopers: any[] = [];
   selectedDeveloperIds: string[] = [];
 

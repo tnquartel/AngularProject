@@ -3,12 +3,14 @@ body {
 }
 
 a {
-  color: rgb(244, 254, 255);
+  color: rgb(244, 254, 255) !important;
   padding: 4%;
   margin-top: 6px;
+  align-content: center;
+  text-decoration: underline !important;
 }
 
-h4 {
+h4, span {
   color: rgb(244, 254, 255);
   margin-top: 6px;
   margin-left: 2%;

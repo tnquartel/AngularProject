@@ -1,1 +1,1 @@
-{"version":3,"sources":["friends.component.scss","friends.component.css"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,8BAAA;ACCJ;;ADEA;EACI,kBAAA;EACA,wCAAA;ACCJ;;ADEA;EACI,iBAAA;ACCJ","file":"friends.component.css"}
+{"version":3,"sources":["friends.component.scss","friends.component.css"],"names":[],"mappings":"AAAA;EACI,cAAA;EACA,8BAAA;ACCJ;;ADEA;EACI,kBAAA;EACA,mBAAA;EACA,8BAAA;ACCJ;;ADEA;EACI,iBAAA;ACCJ","file":"friends.component.css"}

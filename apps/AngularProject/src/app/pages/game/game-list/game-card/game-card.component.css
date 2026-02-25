@@ -1,4 +1,11 @@
 .card-body {
   background-color: black;
   height: 320px;
+}
+
+.game-img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=game-card.component.css.map */

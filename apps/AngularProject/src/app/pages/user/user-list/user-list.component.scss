@@ -1,29 +1,36 @@
-.btn-danger {
-  color: rgb(6, 19, 26);
-  background-color: rgb(187, 45, 59);
-  width: 70%;
-}
+.table {
 
-.btn-warning {
-  color: rgb(6, 19, 26);
-  background-color: rgb(255, 202, 44);
-  width: 70%;
+  .btn-danger {
+    color: rgb(6, 19, 26);
+    background-color: rgb(187, 45, 59);
+    width: 40%;
+  }
+  
+  .btn-warning {
+    color: rgb(6, 19, 26);
+    background-color: rgb(255, 202, 44);
+    width: 30%;
+  }
+  
+  .btn:hover {
+    color: white;
+  }
 }
+  
+  tr:nth-child(even) {
+    background: rgb(13, 31, 61);
+  }
+  
+  tr {
+    color: white !important;
+    border-bottom: 1px solid white;
+  }
 
-.btn:hover {
-  color: white;
-}
-
-tr:nth-child(even) {
-  background: rgb(13, 31, 61);
-}
-
-tr {
-  color: white;
-  border-bottom: 1px solid white;
-}
-
-button {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+  td {
+    color: white !important;
+  }
+  
+  button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
