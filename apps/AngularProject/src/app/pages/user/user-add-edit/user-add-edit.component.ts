@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { IUser } from '../user.model';
-import { UserService } from '../user.service';
+import { UserService, IUser } from '../user.service';
 
 @Component({
   selector: 'app-user-add-edit',
   templateUrl: './user-add-edit.component.html',
-  styleUrls: ['./user-add-edit.component.scss'],
+  styleUrls: ['./user-add-edit.component.scss']
 })
 export class UserAddEditComponent implements OnInit {
   user: IUser | undefined;
   staticUser: IUser | undefined;
   userId: string | null = null;
   userExists: boolean = false;
-  faCheck = faCheck;
-  faTimes = faTimes;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,44 +22,65 @@ export class UserAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.userId = params.get('id');
-      //Edit
+
       if (this.userId) {
         this.userExists = true;
-        this.staticUser = this.userService.getUserById(Number(this.userId));
-        this.user = {
-          ...JSON.parse(
-            JSON.stringify(this.userService.getUserById(Number(this.userId)))
-          ),
-        };
-        //Create
+
+        this.userService.getById(this.userId).subscribe({
+          next: (user) => {
+            this.staticUser = user;
+            this.user = { ...user };
+          },
+          error: (err) => {
+            console.error('User not found', err);
+            alert('User not found');
+            this.router.navigate(['user']);
+          }
+        });
+        
       } else {
         this.user = {
-          id: 0,
           name: '',
-          age: 0,
+          age: 18,
+          emailAddress: '',
           phoneNumber: '',
-          emailAdress: '',
-          password: '',
-          placedReviews: [],
-          placedReviewIds: [],
-          friends: [],
-          friendIds: [],
-          completedGames: [],
-          completedGameIds: [],
-        };
+          role: 'user',
+          gender: 'Unknown',
+          isActive: true
+        } as IUser;
       }
     });
   }
+
   onSubmit(): void {
+    if (!this.user) {
+      console.error('No user to submit');
+      return;
+    }
+
     console.log('Submit');
-    if (this.userExists) {
+    if (this.userExists && this.user._id) {
       console.log('Update user');
-      this.userService.updateUser(this.user!);
-      this.router.navigate(['user']);
+      this.userService.update(this.user._id, this.user).subscribe({
+        next: () => {
+          console.log('User updated successfully');
+          this.router.navigate(['user']);
+        },
+        error: (err) => {
+          console.error('Error updating user:', err);
+        }
+      });
     } else {
       console.log('Add user');
-      this.userService.addUser(this.user!);
-      this.router.navigate(['user']);
+      this.userService.create(this.user).subscribe({
+        next: () => {
+          console.log('User created successfully');
+          this.router.navigate(['user']);
+        },
+        error: (err) => {
+          console.error('Error creating user:', err);
+        }
+      });
     }
   }
 }

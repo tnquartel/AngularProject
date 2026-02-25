@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Neo4jService } from './neo4j.service';
+import neo4j from 'neo4j-driver';
 
 @Injectable()
 export class FriendsService {
@@ -76,7 +77,10 @@ export class FriendsService {
         LIMIT $limit
     `;
 
-        const result = await this.neo4jService.runQuery(query, { userId, limit });
+        const result = await this.neo4jService.runQuery(query, {
+            userId,
+            limit: neo4j.int(limit)
+        });
         return result.map((record: any) => ({
             id: record.get('id'),
             name: record.get('name'),

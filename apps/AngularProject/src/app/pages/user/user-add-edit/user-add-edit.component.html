@@ -11,20 +11,18 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="col-6">
-                <div class="container">
+                <div class="container" *ngIf="user">
                     <form #userEditForm="ngForm" name="form" (ngSubmit)="onSubmit()">
                         <fieldset>
                             <div class="form-group">
                                 <p><label for="name">Name</label>
                                     <input type="text" class="form-control" placeholder="Your name"
-                                        [(ngModel)]="user!.name" name="name" required #name="ngModel"
-                                        minlength="3" />
+                                        [(ngModel)]="user!.name" name="name" required #name="ngModel" minlength="3" />
                                 </p>
                             </div>
                             <p><label for="age">Age</label>
-                                <input type="number" class="form-control" placeholder="Your age"
-                                    [(ngModel)]="user!.age" name="age" #age="ngModel" required
-                                    />
+                                <input type="number" class="form-control" placeholder="Your age" [(ngModel)]="user!.age"
+                                    name="age" #age="ngModel" required />
                             </p>
                             <p><label for="emailAdress">Emailaddress</label>
                                 <input type="email" class="form-control" [(ngModel)]="user!.emailAdress"
@@ -42,8 +40,6 @@
                         </fieldset>
 
                         <div class="row">
-                            <!-- Bij Save roepen we de save() functie aan, en navigeren
-                              terug naar details binnen die functie -->
                             <div class="col">
                                 <button role="button" type="submit" class="btn btn-primary mx-2"
                                     [disabled]="!userEditForm.valid">
@@ -56,9 +52,11 @@
                                     Cancel
                                 </button>
                             </div>
-                            <!-- Bij Cancel doen we nu nog niets, maar gaan gewoon terug naar de details -->
                         </div>
                     </form>
+                </div>
+                <div *ngIf="!user && userExists" class="container mt-4">
+                    <p>Loading user...</p>
                 </div>
             </div>
         </div>

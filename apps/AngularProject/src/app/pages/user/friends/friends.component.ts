@@ -26,12 +26,22 @@ export class FriendsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const currentUser = this.authService.currentUserValue;
-        if (currentUser) {
-            this.currentUserId = currentUser._id;
-            this.loadData();
-        }
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser) {
+        this.currentUserId = currentUser._id;
+        
+        this.friendsService.syncUser(currentUser._id, currentUser.name).subscribe({
+            next: () => {
+                console.log('User synced to Neo4j');
+                this.loadData();
+            },
+            error: (err) => {
+                console.error('Sync failed, loading data anyway:', err);
+                this.loadData();
+            }
+        });
     }
+}
 
     loadData(): void {
         if (!this.currentUserId) return;
