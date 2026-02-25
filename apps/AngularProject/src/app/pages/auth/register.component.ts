@@ -84,7 +84,8 @@ import { AuthService, IRegisterData } from '../../services/auth.service';
                 </div>
             </div>
         </div>
-    `
+    `,
+    styleUrls: ['./auth.scss']
 })
 export class RegisterComponent {
     userData: IRegisterData = {

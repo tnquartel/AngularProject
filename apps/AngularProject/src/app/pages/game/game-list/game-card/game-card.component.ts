@@ -14,12 +14,19 @@ export class GameCardComponent implements OnInit {
   faX = faTimes;
   faStar = faStar;
 
+  isCompletedByCurrentUser: boolean = false;
+
   constructor(
     private gameService: GameService,
     public authService: AuthService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser && this.game) {
+      this.isCompletedByCurrentUser = currentUser.completedGameIds?.includes(this.game._id || '') || false;
+    }
+  }
 
   deleteGame(): void {
     if (!this.game) return;

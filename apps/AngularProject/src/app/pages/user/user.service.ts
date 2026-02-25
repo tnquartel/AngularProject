@@ -53,10 +53,13 @@ export class UserService {
         );
     }
 
-    update(id: string, user: Partial<IUser>): Observable<IUser> {
+    update(id: string, user: any): Observable<IUser> {
         return this.http.put<any>(`${this.apiUrl}/${id}`, user).pipe(
             map(response => response.results || response),
-            tap(() => this.loadUsers())
+            tap((updatedUser) => {
+                console.log('User service - Updated user:', updatedUser);
+                this.loadUsers();
+            })
         );
     }
 
@@ -75,7 +78,7 @@ export class UserService {
     }
 
     getUserById(id: number): IUser | undefined {
-        return this.usersSubject.value.find(u => 
+        return this.usersSubject.value.find(u =>
             u.id === id || u._id === id.toString()
         );
     }

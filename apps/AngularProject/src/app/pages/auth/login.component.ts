@@ -56,7 +56,8 @@ import { AuthService, ILoginCredentials } from '../../services/auth.service';
                 </div>
             </div>
         </div>
-    `
+    `,
+    styleUrls: ['./auth.scss']
 })
 export class LoginComponent {
     credentials: ILoginCredentials = {

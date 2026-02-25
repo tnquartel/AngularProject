@@ -4,6 +4,8 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { IGame } from '../game.service';
 import { GameService } from '../game.service';
 import { DeveloperService } from '../../developer/developer.service';
+import { UserService } from '../../user/user.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-game-add-edit',
@@ -21,10 +23,14 @@ export class GameAddEditComponent implements OnInit {
   allDevelopers: any[] = [];
   selectedDeveloperIds: string[] = [];
 
+  isCompletedByCurrentUser: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
     private developerService: DeveloperService,
+    private userService: UserService,
+    public authService: AuthService,
     private router: Router
   ) { }
 
@@ -40,12 +46,11 @@ export class GameAddEditComponent implements OnInit {
         this.gameService.getById(this.gameId).subscribe({
           next: (game) => {
             this.staticGame = game;
-            this.game = {
-              ...game,
-              developers: [],
-              reviews: []
-            };
+            this.game = { ...game };
             this.selectedDeveloperIds = (game.developerIds || []).map(id => String(id));
+
+            // Check completed status
+            this.checkCompletedStatus();
           },
           error: (err) => {
             console.error('Game not found', err);
@@ -53,7 +58,6 @@ export class GameAddEditComponent implements OnInit {
             this.router.navigate(['game']);
           }
         });
-
       } else {
         this.game = {
           title: '',
@@ -62,16 +66,25 @@ export class GameAddEditComponent implements OnInit {
           rating: 0,
           ageRating: '',
           price: 0,
-          developers: [],
-          developerIds: [],
           imageUrl: '',
           completed: false,
           releaseDate: new Date(),
-          reviews: [],
+          developerIds: [],
           reviewIds: [],
+          developers: [],
+          reviews: []
         };
       }
     });
+  }
+
+  // ✅ Check if user has completed this game
+  checkCompletedStatus(): void {
+    const currentUser = this.authService.currentUserValue;
+    if (currentUser && this.gameId) {
+      this.isCompletedByCurrentUser = currentUser.completedGameIds?.includes(this.gameId) || false;
+      console.log('🎮 Initial completed status:', this.isCompletedByCurrentUser);
+    }
   }
 
   loadDevelopers(): void {
@@ -96,17 +109,59 @@ export class GameAddEditComponent implements OnInit {
     return this.selectedDeveloperIds.includes(developerId);
   }
 
+  // ✅ Toggle completed status
+  toggleCompleted(): void {
+    const currentUser = this.authService.currentUserValue;
+    if (!currentUser || !this.gameId) {
+      console.error('No user or game ID');
+      return;
+    }
+
+    // Toggle local state immediately for UI responsiveness
+    this.isCompletedByCurrentUser = !this.isCompletedByCurrentUser;
+    const newStatus = this.isCompletedByCurrentUser;
+
+    console.log('🔄 Toggling to:', newStatus);
+
+    // Update completedGameIds array
+    let updatedCompletedGameIds = [...(currentUser.completedGameIds || [])];
+
+    if (newStatus) {
+      // Add if not already there
+      if (!updatedCompletedGameIds.includes(this.gameId)) {
+        updatedCompletedGameIds.push(this.gameId);
+      }
+    } else {
+      // Remove
+      updatedCompletedGameIds = updatedCompletedGameIds.filter(id => id !== this.gameId);
+    }
+
+    console.log('📝 Updating completedGameIds:', updatedCompletedGameIds);
+
+    // Update user in database
+    this.userService.update(currentUser._id, { completedGameIds: updatedCompletedGameIds } as any).subscribe({
+      next: (updatedUser) => {
+        // Update auth service with new user data
+        this.authService.updateCurrentUser(updatedUser);
+      },
+      error: (err) => {
+        console.error('❌ Error updating user:', err);
+        // Rollback UI on error
+        this.isCompletedByCurrentUser = !newStatus;
+        alert('Failed to update completed status');
+      }
+    });
+  }
+
   onSubmit(): void {
     if (!this.game) {
       console.error('No game to submit');
       return;
     }
 
-    console.log('Submit');
+    this.game.developerIds = this.selectedDeveloperIds;
+
     if (this.gameExists && this.game._id) {
-      console.log('Update game');
-      this.game.developerIds = this.selectedDeveloperIds;
-      
       this.gameService.update(this.game._id, this.game).subscribe({
         next: () => {
           console.log('Game updated successfully');
@@ -117,7 +172,6 @@ export class GameAddEditComponent implements OnInit {
         }
       });
     } else {
-      console.log('Add game');
       const createGame = {
         title: this.game.title,
         summary: this.game.summary,

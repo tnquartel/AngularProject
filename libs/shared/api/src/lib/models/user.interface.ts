@@ -26,7 +26,7 @@ export interface IUser {
     isActive: boolean;
     placedReviewIds: Id[];
     friendIds: Id[];
-    completedGameIds: Id[];
+    completedGameIds?: string[];
 }
 
 export interface IUserIdentity {

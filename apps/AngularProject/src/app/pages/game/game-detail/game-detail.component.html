@@ -23,8 +23,8 @@
                 <p>Age Rating: {{ game!.ageRating }}</p>
                 <p>Have you played this game?</p>
                 <p>
-                    <fa-icon [icon]="faCheck" *ngIf="game!.completed" style="color: greenyellow"></fa-icon>
-                    <fa-icon [icon]="faX" *ngIf="!game!.completed" style="color: red"></fa-icon>
+                    <fa-icon [icon]="faCheck" *ngIf="isCompletedByCurrentUser" style="color: greenyellow"></fa-icon>
+                    <fa-icon [icon]="faX" *ngIf="!isCompletedByCurrentUser" style="color: red"></fa-icon>
                 </p>
                 <h3>Reviews</h3>
                 <hr>

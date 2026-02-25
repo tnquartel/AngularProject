@@ -13,6 +13,7 @@ export interface IUserIdentity {
     profileImgUrl?: string;
     role: string;
     token: string;
+    completedGameIds?: string[];
 }
 
 export interface ILoginCredentials {
@@ -96,5 +97,22 @@ export class AuthService {
         this.currentUserSubject.next(null);
         this.router.navigate(['/']);
         console.log('User logged out');
+    }
+
+    updateCurrentUser(user: any): void {
+        const currentUser = this.currentUserSubject.value;
+
+        if (!currentUser) {
+            console.error('No current user to update');
+            return;
+        }
+
+        const updatedUser: IUserIdentity = {
+            ...user,
+            token: currentUser.token
+        };
+
+        this.currentUserSubject.next(updatedUser);
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
     }
 }

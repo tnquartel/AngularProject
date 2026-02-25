@@ -67,9 +67,10 @@
                                     <input type="text" class="form-control" [(ngModel)]="game!.imageUrl"
                                         placeholder="Game image url" name="image" #img="ngModel" required />
                                 </p>
-                                <p id="completed"><label for="completed">Have you completed the game?</label>
-                                    <input type="checkbox" class="form-checkbox" [(ngModel)]="game.completed"
-                                        name="completed" #completed="ngModel" />
+                                <p id="completed">
+                                    <label for="completed">Have you completed this game?</label>
+                                    <input type="checkbox" class="form-check-input" [checked]="isCompletedByCurrentUser"
+                                        (click)="toggleCompleted()" id="completed" />
                                 </p>
                             </fieldset>
 

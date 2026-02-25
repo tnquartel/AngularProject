@@ -1,9 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User as UserModel, UserDocument } from './user.schema';
 import { IUser, IUserInfo } from '@avans-nx-workshop/shared/api';
-import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { CreateUserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -11,7 +11,7 @@ export class UserService {
 
     constructor(
         @InjectModel(UserModel.name) private userModel: Model<UserDocument>
-    ) {}
+    ) { }
 
     async findAll(): Promise<IUserInfo[]> {
         this.logger.log(`Finding all items`);
@@ -43,11 +43,23 @@ export class UserService {
         return createdItem;
     }
 
-    async update(_id: string, user: UpdateUserDto): Promise<IUserInfo | null> {
-        this.logger.log(`Update user ${user.name}`);
-        return this.userModel.findByIdAndUpdate({ _id }, user);
+    async update(id: string, updateUserDto: Partial<IUser>): Promise<IUser> {
+        const user = await this.userModel
+            .findByIdAndUpdate(id, updateUserDto, { new: true })
+            .exec();
+
+        if (!user) {
+            throw new NotFoundException(`User with ID ${id} not found`);
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const userObject: any = user.toObject();
+        delete userObject.password;
+
+        return userObject;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async delete(_id: string): Promise<any> {
         this.logger.log(`Delete ${_id}`);
         return this.userModel.deleteOne({ _id });

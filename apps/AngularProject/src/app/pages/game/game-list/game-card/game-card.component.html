@@ -12,8 +12,8 @@
     <p>{{ game!.price | currency : 'EUR' }}</p>
     <p>
         Completed
-        <fa-icon [icon]="faCheck" *ngIf="game!.completed" style="color: greenyellow"></fa-icon>
-        <fa-icon [icon]="faX" *ngIf="!game!.completed" style="color: red"></fa-icon>
+        <fa-icon [icon]="faCheck" *ngIf="isCompletedByCurrentUser" style="color: greenyellow"></fa-icon>
+        <fa-icon [icon]="faX" *ngIf="!isCompletedByCurrentUser" style="color: red"></fa-icon>
     </p>
 </div>
 <div class="row m-0" id="buttons">

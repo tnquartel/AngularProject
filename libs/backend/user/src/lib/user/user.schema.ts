@@ -46,7 +46,7 @@ export class User implements IUser {
         select: true,
         unique: true,
         validate: {
-            validator: function(v: string) {
+            validator: function (v: string) {
                 return isEmail(v);
             },
             message: 'should be a valid email address'
@@ -96,12 +96,8 @@ export class User implements IUser {
     })
     friendIds: string[] = [];
 
-    @Prop({
-        default: [],
-        type: [MongooseSchema.Types.ObjectId],
-        ref: 'Game'
-    })
-    completedGameIds: string[] = [];
+    @Prop({ type: [MongooseSchema.Types.ObjectId], ref: 'Game', default: [] })
+    completedGameIds?: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
