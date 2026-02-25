@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://jouw-deployed-backend.com/api'
+  apiUrl: 'https://angularproject-5078.onrender.com/api'
 };
