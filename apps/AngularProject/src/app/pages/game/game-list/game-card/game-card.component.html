@@ -1,5 +1,5 @@
 <div class="p-0">
-    <img *ngIf="game?.imageUrl || game?.img" [src]="game.imageUrl || game.img" class="card-img-top game-img"
+    <img *ngIf="game?.imageUrl" [src]="game.imageUrl || game.img" class="card-img-top game-img"
         alt="{{ game?.title }}" (error)="onImageError($event)" />
 </div>
 <div class="card-body">

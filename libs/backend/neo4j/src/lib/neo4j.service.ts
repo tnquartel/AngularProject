@@ -7,9 +7,9 @@ export class Neo4jService implements OnApplicationShutdown {
     private driver: Driver;
 
     constructor() {
-        const uri = process.env['NEO4J_URI'] || 'bolt://localhost:7687';
-        const username = process.env['NEO4J_USERNAME'] || 'neo4j';
-        const password = process.env['NEO4J_PASSWORD'] || 'ThomasQua03';
+        const uri = process.env['NEO4J_URI'] || 'neo4j+s://6d815ad2.databases.neo4j.io';
+        const username = process.env['NEO4J_USERNAME'] || '6d815ad2';
+        const password = process.env['NEO4J_PASSWORD'] || 'OL0_Z_my1cwJ7R8EeEGJSwlToegR_a8mshIHDFvt7qc';
 
         this.logger.log(`Connecting to Neo4j at ${uri}`);
 

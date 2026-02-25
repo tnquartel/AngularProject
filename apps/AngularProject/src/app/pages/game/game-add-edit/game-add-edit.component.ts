@@ -65,7 +65,6 @@ export class GameAddEditComponent implements OnInit {
           developers: [],
           developerIds: [],
           imageUrl: '',
-          img: '',
           completed: false,
           releaseDate: new Date(),
           reviews: [],
@@ -126,7 +125,7 @@ export class GameAddEditComponent implements OnInit {
         releaseDate: this.game.releaseDate,
         price: this.game.price,
         ageRating: this.game.ageRating,
-        imageUrl: this.game.imageUrl || this.game.img || '',
+        imageUrl: this.game.imageUrl,
         developerIds: this.selectedDeveloperIds
       };
 

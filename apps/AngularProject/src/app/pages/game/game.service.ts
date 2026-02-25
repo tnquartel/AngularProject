@@ -15,10 +15,9 @@ export interface IGame {
     rating: number;
     ageRating: string;
     imageUrl?: string;
-    img?: string;
     completed: boolean;
     reviewIds: string[];
-    developerIds: (string | number)[];  // ← Fix: Explicitly typed array
+    developerIds: (string | number)[];
     reviews?: any[];
     developers?: any[];
 }
@@ -112,7 +111,7 @@ export class GameService {
             releaseDate: game.releaseDate,
             price: game.price,
             ageRating: game.ageRating,
-            imageUrl: game.imageUrl || game.img || ''
+            imageUrl: game.imageUrl || ''
         };
         
         this.create(createGame).subscribe();

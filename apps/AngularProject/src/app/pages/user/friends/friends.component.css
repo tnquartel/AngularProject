@@ -3,8 +3,15 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.card {
+.card, .modal-content {
   border-radius: 8px;
+  color: white;
+  border-color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+li {
+  color: white;
   border-color: white;
   background: rgba(0, 0, 0, 0.5);
 }
