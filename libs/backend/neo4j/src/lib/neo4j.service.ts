@@ -18,7 +18,6 @@ export class Neo4jService implements OnApplicationShutdown {
             neo4j.auth.basic(username, password)
         );
 
-        // Test connection
         this.driver.verifyConnectivity()
             .then(() => this.logger.log('Neo4j connected successfully'))
             .catch(err => this.logger.error('Neo4j connection failed:', err));

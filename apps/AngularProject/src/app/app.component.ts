@@ -3,7 +3,6 @@ import { GameService, IGame } from './pages/game/game.service';
 import { DeveloperService } from './pages/developer/developer.service';
 import { forkJoin } from 'rxjs';
 
-// Tijdelijke interface voor Developer
 interface IDeveloper {
   _id?: string;
   id?: number;
@@ -32,7 +31,6 @@ export class AppComponent implements OnInit {
       this.gameService.getGamesAsObservable(),
       this.developerService.getDevelopersAsObservable()
     ]).subscribe(([games, developers]: [IGame[], IDeveloper[]]) => {
-      // Link developers to games
       games.forEach(game => {
         if (!game.developers) {
           game.developers = [];
@@ -43,7 +41,6 @@ export class AppComponent implements OnInit {
         });
       });
   
-      // Link games to developers
       developers.forEach(dev => {
         if (!dev.games) {
           dev.games = [];
@@ -57,7 +54,7 @@ export class AppComponent implements OnInit {
       this.games = games;
       this.developers = developers;
   
-      console.log('Data geladen 🚀', this.games, this.developers);
+      console.log('Data geladen', this.games, this.developers);
     });
   }
 }

@@ -33,35 +33,30 @@ export class ReviewService {
 
     constructor(private http: HttpClient) {}
 
-    // Get all reviews
     getAll(): Observable<IReview[]> {
         return this.http.get<any>(this.apiUrl).pipe(
             map(response => response.results || response)
         );
     }
 
-    // Get reviews for a specific game or developer
     getByEntity(entityId: string): Observable<IReview[]> {
         return this.http.get<any>(`${this.apiUrl}?entityId=${entityId}`).pipe(
             map(response => response.results || response)
         );
     }
 
-    // Get reviews by a specific user
     getByUser(userId: string): Observable<IReview[]> {
         return this.http.get<any>(`${this.apiUrl}?userId=${userId}`).pipe(
             map(response => response.results || response)
         );
     }
 
-    // Get one review
     getById(id: string): Observable<IReview> {
         return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
             map(response => response.results || response)
         );
     }
 
-    // Create review
     create(review: ICreateReview): Observable<IReview> {
         return this.http.post<any>(this.apiUrl, review).pipe(
             map(response => response.results || response),
@@ -69,7 +64,6 @@ export class ReviewService {
         );
     }
 
-    // Update review
     update(id: string, review: Partial<IReview>): Observable<IReview> {
         return this.http.put<any>(`${this.apiUrl}/${id}`, review).pipe(
             map(response => response.results || response),
@@ -77,7 +71,6 @@ export class ReviewService {
         );
     }
 
-    // Delete review
     delete(id: string): Observable<void> {
         return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
             tap(() => console.log('Review deleted'))

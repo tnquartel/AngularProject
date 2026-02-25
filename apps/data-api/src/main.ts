@@ -6,8 +6,6 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import {
-    AllExceptionsFilter,
-    HttpExceptionFilter,
     ApiResponseInterceptor
 } from '@avans-nx-workshop/backend/dto';
 import { AppModule } from './app/app.module';
@@ -15,8 +13,19 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    app.enableCors({
+        origin: [
+            'http://localhost:4200',
+            'https://*.vercel.app',
+            process.env['FRONTEND_URL'] || ''
+        ],
+        credentials: true
+    });
     const globalPrefix = 'api';
     app.setGlobalPrefix(globalPrefix);
+
+    const port = process.env['PORT'] || 3000;
 
     const corsOptions: CorsOptions = {};
     app.enableCors(corsOptions);
@@ -24,14 +33,9 @@ async function bootstrap() {
     app.useGlobalInterceptors(new ApiResponseInterceptor());
     app.useGlobalPipes(new ValidationPipe());
 
-    // General exception handling
-    // app.useGlobalFilters(new HttpExceptionFilter());
+    await app.listen(port, '0.0.0.0');
 
-    const port = process.env.PORT || 3000;
-    await app.listen(port);
-    Logger.log(
-        `🚀 DATA-API server is running on: http://localhost:${port}/${globalPrefix}`
-    );
+    Logger.log(`Application running on: http://localhost:${port}/${globalPrefix}`);
 }
 
 bootstrap();

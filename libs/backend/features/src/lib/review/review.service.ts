@@ -24,12 +24,10 @@ export class ReviewService {
         return review;
     }
 
-    // Find reviews by entity (game or developer)
     async findByEntity(entityId: string): Promise<IReview[]> {
         return this.reviewModel.find({ reviewedEntityId: entityId }).exec();
     }
 
-    // Find reviews by user
     async findByUser(userId: string): Promise<IReview[]> {
         return this.reviewModel.find({ userId: userId }).exec();
     }

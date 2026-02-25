@@ -38,7 +38,6 @@ export class DeveloperService {
         });
     }
 
-    // Nieuwe API methods
     getAll(): Observable<IDeveloper[]> {
         return this.http.get<any>(this.apiUrl).pipe(
             map(response => response.results || response),
@@ -74,8 +73,6 @@ export class DeveloperService {
             tap(() => this.loadDevelopers())
         );
     }
-
-    // ===== OUDE METHODS VOOR BACKWARDS COMPATIBILITY =====
     
     getDevelopers(): IDeveloper[] {
         return this.developersSubject.value;

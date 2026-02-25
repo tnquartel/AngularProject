@@ -24,7 +24,6 @@ export class GameDetailComponent implements OnInit {
         console.log('Loading game with ID:', gameId);
         
         if (gameId) {
-            // Probeer eerst via API
             this.gameService.getById(gameId).subscribe({
                 next: (game) => {
                     console.log('Game loaded from API:', game);
@@ -32,7 +31,6 @@ export class GameDetailComponent implements OnInit {
                 },
                 error: (err) => {
                     console.error('Error loading from API:', err);
-                    // Fallback: probeer via oude method
                     this.game = this.gameService.getGameById(Number(gameId));
                     console.log('Game from old method:', this.game);
                 }

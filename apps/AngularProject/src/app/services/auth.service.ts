@@ -40,7 +40,6 @@ export class AuthService {
         private http: HttpClient,
         private router: Router
     ) {
-        // Check if user is already logged in (token in localStorage)
         const storedUser = localStorage.getItem('currentUser');
         if (storedUser) {
             this.currentUserSubject.next(JSON.parse(storedUser));
@@ -60,7 +59,6 @@ export class AuthService {
             map(response => {
                 const user = response.results || response;
 
-                // ✅ CHECK: Als het een error object is, gooi een error
                 if (user.status === 401 || user.name === 'UnauthorizedException' || !user._id) {
                     throw new Error(user.message || 'Invalid email or password');
                 }
@@ -68,7 +66,6 @@ export class AuthService {
                 return user;
             }),
             tap(user => {
-                // Alleen opslaan als het echt een user is
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 localStorage.setItem('token', user.token);
                 this.currentUserSubject.next(user);
@@ -85,7 +82,6 @@ export class AuthService {
         return this.http.post<any>(`${this.apiUrl}/register`, userData).pipe(
             map(response => response.results || response),
             tap(user => {
-                // Auto-login after register
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 localStorage.setItem('token', user.token);
                 this.currentUserSubject.next(user);
@@ -95,7 +91,6 @@ export class AuthService {
     }
 
     logout(): void {
-        // Remove user from localStorage
         localStorage.removeItem('currentUser');
         localStorage.removeItem('token');
         this.currentUserSubject.next(null);

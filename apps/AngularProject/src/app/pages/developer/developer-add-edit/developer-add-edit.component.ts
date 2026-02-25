@@ -26,12 +26,10 @@ export class DeveloperAddEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.developerId = params.get('id');
-      
-      // Edit mode
+
       if (this.developerId) {
         this.developerExists = true;
-        
-        // Load developer from API
+
         this.developerService.getById(this.developerId).subscribe({
           next: (developer) => {
             this.staticDeveloper = developer;
@@ -48,7 +46,6 @@ export class DeveloperAddEditComponent implements OnInit {
         });
         
       } else {
-        // Create mode
         this.developer = {
           name: '',
           dateFounded: new Date(),

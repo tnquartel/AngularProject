@@ -28,23 +28,23 @@ table {
   border-collapse: collapse;
 
   thead {
-    background-color: #1f2937; // Donkere achtergrond voor de koptekst
+    background-color: #1f2937;
   }
 
   tbody {
-    background-color: black !important;  // Zorg dat de achtergrond zwart is voor tbody
+    background-color: black !important;
   }
 
   tr {
-    background-color: black !important;  // Zorg dat de rijen in tbody zwart zijn
+    background-color: black !important;
     &:nth-child(even) {
-      background-color: #111827; // Afwisselend donkere rijen (grijs-zwart)
+      background-color: #111827;
     }
   }
 
   th, td {
     border: 1px solid white;
-    padding: 0.75rem 1.5rem; // Vergelijkbaar met px-6 py-3/4 in Tailwind
+    padding: 0.75rem 1.5rem;
   }
 }
 

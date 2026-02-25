@@ -40,7 +40,6 @@ export class GameService {
     private gamesSubject = new BehaviorSubject<IGame[]>([]);
 
     constructor(private http: HttpClient) {
-        // Load initial games
         this.loadGames();
     }
 
@@ -50,7 +49,6 @@ export class GameService {
         });
     }
 
-    // Nieuwe API methods
     getAll(): Observable<IGame[]> {
         return this.http.get<any>(this.apiUrl).pipe(
             map(response => response.results || response),
@@ -86,8 +84,6 @@ export class GameService {
             tap(() => this.loadGames())
         );
     }
-
-    // ===== OUDE METHODS VOOR BACKWARDS COMPATIBILITY =====
     
     getGames(): IGame[] {
         return this.gamesSubject.value;
