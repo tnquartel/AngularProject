@@ -7,7 +7,9 @@ import { ICreateReview, IUpdateReview, IReview } from '@avans-nx-workshop/shared
 @Injectable()
 export class ReviewService {
     constructor(
-        @InjectModel(Review.name) private reviewModel: Model<ReviewDocument>
+        @InjectModel(Review.name) private reviewModel: Model<ReviewDocument>,
+        @InjectModel('Game') private gameModel: Model<any>,
+        @InjectModel('Developer') private developerModel: Model<any>
     ) {}
 
     async findAll(): Promise<IReview[]> {
@@ -37,7 +39,21 @@ export class ReviewService {
             ...createReviewDto,
             datePlaced: new Date()
         });
-        return newReview.save();
+        const savedReview = await newReview.save();
+        
+        if (createReviewDto.reviewType === 'game') {
+            await this.gameModel.updateOne(
+                { _id: createReviewDto.reviewedEntityId },
+                { $addToSet: { reviewIds: savedReview._id } }
+            );
+        } else if (createReviewDto.reviewType === 'developer') {
+            await this.developerModel.updateOne(
+                { _id: createReviewDto.reviewedEntityId },
+                { $addToSet: { reviewIds: savedReview._id } }
+            );
+        }
+        
+        return savedReview;
     }
 
     async update(id: string, updateReviewDto: IUpdateReview): Promise<IReview> {
@@ -51,10 +67,24 @@ export class ReviewService {
     }
 
     async delete(id: string): Promise<IReview> {
-        const review = await this.reviewModel.findByIdAndDelete(id).exec();
+        const review = await this.reviewModel.findById(id).exec();
         if (!review) {
             throw new NotFoundException(`Review with ID ${id} not found`);
         }
+
+        if (review.reviewType === 'game') {
+            await this.gameModel.updateOne(
+                { _id: review.reviewedEntityId },
+                { $pull: { reviewIds: review._id } }
+            );
+        } else if (review.reviewType === 'developer') {
+            await this.developerModel.updateOne(
+                { _id: review.reviewedEntityId },
+                { $pull: { reviewIds: review._id } }
+            );
+        }
+        
+        await this.reviewModel.findByIdAndDelete(id).exec();
         return review;
     }
 }

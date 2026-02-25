@@ -12,7 +12,7 @@ export interface IGame {
     imageUrl: string;
     completed: boolean;
     reviewIds: Id[];
-    developerIds: Id[];
+    developerIds?: string[];
 }
 
 export interface IGameInfo {
@@ -24,6 +24,7 @@ export interface IGameInfo {
     imageUrl: string;
 }
 
-export type ICreateGame = Pick<IGame, 'title' | 'summary' | 'genre' | 'releaseDate' | 'price' | 'ageRating' | 'imageUrl'>;
+export type ICreateGame = Pick<IGame, 'title' | 'summary' | 'genre' | 'releaseDate' | 'price' | 'ageRating' | 'imageUrl' | 'developerIds'>;
+
 export type IUpdateGame = Partial<Omit<IGame, '_id'>>;
 export type IUpsertGame = IGame;

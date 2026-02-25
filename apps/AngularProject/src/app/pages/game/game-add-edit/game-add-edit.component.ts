@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { IGame } from '../game.service';
 import { GameService } from '../game.service';
+import { DeveloperService } from '../../developer/developer.service';
 
 @Component({
   selector: 'app-game-add-edit',
@@ -17,21 +18,26 @@ export class GameAddEditComponent implements OnInit {
   faCheck = faCheck;
   faTimes = faTimes;
 
+  // ✅ Add these
+  allDevelopers: any[] = [];
+  selectedDeveloperIds: string[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
+    private developerService: DeveloperService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.loadDevelopers();
+
     this.route.paramMap.subscribe((params) => {
       this.gameId = params.get('id');
 
-      // Edit mode
       if (this.gameId) {
         this.gameExists = true;
 
-        // Load game from API (async)
         this.gameService.getById(this.gameId).subscribe({
           next: (game) => {
             this.staticGame = game;
@@ -40,6 +46,7 @@ export class GameAddEditComponent implements OnInit {
               developers: [],
               reviews: []
             };
+            this.selectedDeveloperIds = (game.developerIds || []).map(id => String(id));
           },
           error: (err) => {
             console.error('Game not found', err);
@@ -49,7 +56,6 @@ export class GameAddEditComponent implements OnInit {
         });
 
       } else {
-        // Create mode
         this.game = {
           title: '',
           summary: '',
@@ -70,6 +76,28 @@ export class GameAddEditComponent implements OnInit {
     });
   }
 
+  loadDevelopers(): void {
+    this.developerService.getAll().subscribe({
+      next: (developers) => {
+        this.allDevelopers = developers;
+      },
+      error: (err) => console.error('Error loading developers:', err)
+    });
+  }
+
+  toggleDeveloper(developerId: string): void {
+    const index = this.selectedDeveloperIds.indexOf(developerId);
+    if (index > -1) {
+      this.selectedDeveloperIds.splice(index, 1);
+    } else {
+      this.selectedDeveloperIds.push(developerId);
+    }
+  }
+
+  isDeveloperSelected(developerId: string): boolean {
+    return this.selectedDeveloperIds.includes(developerId);
+  }
+
   onSubmit(): void {
     if (!this.game) {
       console.error('No game to submit');
@@ -79,6 +107,8 @@ export class GameAddEditComponent implements OnInit {
     console.log('Submit');
     if (this.gameExists && this.game._id) {
       console.log('Update game');
+      this.game.developerIds = this.selectedDeveloperIds;
+      
       this.gameService.update(this.game._id, this.game).subscribe({
         next: () => {
           console.log('Game updated successfully');
@@ -97,10 +127,11 @@ export class GameAddEditComponent implements OnInit {
         releaseDate: this.game.releaseDate,
         price: this.game.price,
         ageRating: this.game.ageRating,
-        imageUrl: this.game.imageUrl || this.game.img || ''
+        imageUrl: this.game.imageUrl || this.game.img || '',
+        developerIds: this.selectedDeveloperIds
       };
 
-      this.gameService.create(createGame).subscribe({
+      this.gameService.create(createGame as any).subscribe({
         next: () => {
           console.log('Game created successfully');
           this.router.navigate(['game']);

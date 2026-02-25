@@ -32,8 +32,25 @@
                                     <input type="number" class="form-control" [(ngModel)]="game!.price"
                                         placeholder="Game price" name="price" #price="ngModel" required />
                                 </p>
-                                <p>ADD DEVELOPERS
-                                </p>
+                                <div class="form-group">
+                                    <label>Developers</label>
+                                    <div class="developer-checkboxes">
+                                        <div *ngFor="let developer of allDevelopers" class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [id]="'dev-' + (developer._id || developer.id)"
+                                                [checked]="isDeveloperSelected(developer._id || developer.id)"
+                                                (change)="toggleDeveloper(developer._id || developer.id)">
+                                            <label class="form-check-label"
+                                                [for]="'dev-' + (developer._id || developer.id)">
+                                                {{ developer.name }}
+                                            </label>
+                                        </div>
+
+                                        <div *ngIf="allDevelopers.length === 0" class="text-muted mt-2">
+                                            No developers available. <a routerLink="/developer/new">Add one</a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <p><label for="genre">Genre</label>
                                     <input type="string" class="form-control" [(ngModel)]="game!.genre"
                                         placeholder="Game genre" name="genre" #genre="ngModel" required />
