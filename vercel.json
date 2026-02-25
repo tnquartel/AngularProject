@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npx nx build AngularProject --configuration=production",
+  "outputDirectory": "dist/apps/AngularProject/browser",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
