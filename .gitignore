@@ -40,3 +40,7 @@ Thumbs.db
 
 .nx/cache
 .angular
+# Environment files with secrets
+**/environment.ts
+**/environment.development.ts
+!**/environment.example.ts
