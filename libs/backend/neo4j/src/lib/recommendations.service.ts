@@ -142,4 +142,25 @@ export class RecommendationsService {
             rating: record.get('rating')
         }));
     }
+
+    async getUserCompletedGames(userId: string): Promise<string[]> {
+        const query = `
+        MATCH (u:User {id: $userId})-[:PLAYED]->(g:Game)
+        RETURN g.id as gameId
+    `;
+
+        const result = await this.neo4jService.runQuery(query, { userId });
+
+        return result.map((record: any) => record.get('gameId'));
+    }
+
+    async removeGamePlayed(userId: string, gameId: string): Promise<void> {
+        const query = `
+        MATCH (u:User {id: $userId})-[r:PLAYED]->(g:Game {id: $gameId})
+        DELETE r
+    `;
+
+        await this.neo4jService.runQuery(query, { userId, gameId });
+        this.logger.log(`Removed PLAYED relationship: User ${userId} -> Game ${gameId}`);
+    }
 }

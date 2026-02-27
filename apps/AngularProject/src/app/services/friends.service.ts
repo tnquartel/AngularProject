@@ -85,4 +85,10 @@ export class FriendsService {
             map(response => response.results || response)
         );
     }
+
+    getUserCompletedGames(userId: string): Observable<string[]> {
+        return this.http.get<any>(`${this.apiUrl}/recommendations/user/${userId}/completed-games`).pipe(
+            map(response => response.results || response)
+        );
+    }
 }

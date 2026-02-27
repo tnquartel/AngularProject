@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { RecommendationsService } from './recommendations.service';
 import { AuthGuard } from '@avans-nx-workshop/backend/auth';
 
 @Controller('recommendations')
 export class RecommendationsController {
-    constructor(private recommendationsService: RecommendationsService) {}
+    constructor(private recommendationsService: RecommendationsService) { }
 
     @Post('game/sync')
     @UseGuards(AuthGuard)
@@ -48,5 +48,15 @@ export class RecommendationsController {
     async getUserGames(@Param('userId') userId: string) {
         const games = await this.recommendationsService.getUserGames(userId);
         return { games };
+    }
+
+    @Get('user/:userId/completed-games')
+    async getUserCompletedGames(@Param('userId') userId: string): Promise<string[]> {
+        return this.recommendationsService.getUserCompletedGames(userId);
+    }
+
+    @Delete('played')
+    async removeGamePlayed(@Body() body: { userId: string; gameId: string }): Promise<void> {
+        return this.recommendationsService.removeGamePlayed(body.userId, body.gameId);
     }
 }

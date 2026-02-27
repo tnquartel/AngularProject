@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService, IGame } from '../game.service';
+import { RecommendationsService } from '../../../services/recommendations.service';
 import { AuthService } from '../../../services/auth.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,6 +21,7 @@ export class GameDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private gameService: GameService,
+        private recommendationsService: RecommendationsService,
         public authService: AuthService
     ) { }
 
@@ -32,20 +34,37 @@ export class GameDetailComponent implements OnInit {
                 next: (game) => {
                     console.log('Game loaded from API:', game);
                     this.game = game;
-
-                    const currentUser = this.authService.currentUserValue;
-                    if (currentUser) {
-                        this.isCompletedByCurrentUser = currentUser.completedGameIds?.includes(gameId) || false;
-                    }
+                    
+                    this.checkCompletedFromNeo4j(gameId);
                 },
                 error: (err) => {
                     console.error('Error loading from API:', err);
-                    this.game = this.gameService.getGameById(Number(gameId));
-                    console.log('Game from old method:', this.game);
                 }
             });
         } else {
             console.error('No game ID found in route');
         }
+    }
+
+    checkCompletedFromNeo4j(gameId: string): void {
+        const currentUser = this.authService.currentUserValue;
+        if (!currentUser) {
+            this.isCompletedByCurrentUser = false;
+            return;
+        }
+
+        console.log('Checking Neo4j for completed games...');
+
+        this.recommendationsService.getUserCompletedGames(currentUser._id).subscribe({
+            next: (completedGameIds) => {
+                console.log('Completed games from Neo4j:', completedGameIds);
+                this.isCompletedByCurrentUser = completedGameIds.includes(gameId);
+                console.log('Is this game completed?', this.isCompletedByCurrentUser);
+            },
+            error: (err) => {
+                console.error('Error fetching completed games:', err);
+                this.isCompletedByCurrentUser = false;
+            }
+        });
     }
 }

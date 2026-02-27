@@ -5,8 +5,8 @@ import { IGame } from '../game.service';
 import { GameService } from '../game.service';
 import { DeveloperService } from '../../developer/developer.service';
 import { UserService } from '../../user/user.service';
+import { RecommendationsService } from '../../../services/recommendations.service';
 import { AuthService } from '../../../services/auth.service';
-import { FriendsService } from '../../../services/friends.service';
 
 @Component({
   selector: 'app-game-add-edit',
@@ -23,7 +23,7 @@ export class GameAddEditComponent implements OnInit {
 
   allDevelopers: any[] = [];
   selectedDeveloperIds: string[] = [];
-
+  
   isCompletedByCurrentUser: boolean = false;
 
   constructor(
@@ -32,7 +32,7 @@ export class GameAddEditComponent implements OnInit {
     private developerService: DeveloperService,
     private userService: UserService,
     public authService: AuthService,
-    private friendsService: FriendsService,
+    private recommendationsService: RecommendationsService,
     private router: Router
   ) { }
 
@@ -50,7 +50,7 @@ export class GameAddEditComponent implements OnInit {
             this.staticGame = game;
             this.game = { ...game };
             this.selectedDeveloperIds = (game.developerIds || []).map(id => String(id));
-
+            
             this.checkCompletedStatus();
             this.syncGameToNeo4j();
           },
@@ -83,9 +83,94 @@ export class GameAddEditComponent implements OnInit {
   checkCompletedStatus(): void {
     const currentUser = this.authService.currentUserValue;
     if (currentUser && this.gameId) {
-      this.isCompletedByCurrentUser = currentUser.completedGameIds?.includes(this.gameId) || false;
-      console.log('Initial completed status:', this.isCompletedByCurrentUser);
+        console.log('🔍 Checking completed status from Neo4j...');
+        
+        this.recommendationsService.getUserCompletedGames(currentUser._id).subscribe({
+            next: (completedGameIds) => {
+                this.isCompletedByCurrentUser = completedGameIds.includes(this.gameId!);
+                console.log('Completed status:', this.isCompletedByCurrentUser);
+            },
+            error: (err) => {
+                console.error('Error checking completed status:', err);
+            }
+        });
     }
+  }
+
+  syncGameToNeo4j(): void {
+    if (!this.game) return;
+    
+    const gameId = this.game._id || '';
+    const title = this.game.title;
+    const genre = this.game.genre;
+    
+    console.log('Syncing game to Neo4j:', gameId, title, genre);
+    
+    this.recommendationsService.syncGame(gameId, title, genre).subscribe({
+        next: () => console.log('Game synced to Neo4j'),
+        error: (err) => console.error('Error syncing game:', err)
+    });
+  }
+
+  toggleCompleted(): void {
+    const currentUser = this.authService.currentUserValue;
+    if (!currentUser || !this.gameId) {
+      console.error('No user or game ID');
+      return;
+    }
+
+    this.isCompletedByCurrentUser = !this.isCompletedByCurrentUser;
+    const newStatus = this.isCompletedByCurrentUser;
+
+    console.log('Toggling to:', newStatus);
+
+    let updatedCompletedGameIds = [...(currentUser.completedGameIds || [])];
+    
+    if (newStatus) {
+      if (!updatedCompletedGameIds.includes(this.gameId)) {
+        updatedCompletedGameIds.push(this.gameId);
+      }
+    } else {
+      updatedCompletedGameIds = updatedCompletedGameIds.filter(id => id !== this.gameId);
+    }
+
+    console.log('📝 Updating completedGameIds:', updatedCompletedGameIds);
+
+    this.userService.update(currentUser._id, { completedGameIds: updatedCompletedGameIds } as any).subscribe({
+      next: (updatedUser) => {
+        console.log('✅ User updated successfully');
+        this.authService.updateCurrentUser(updatedUser);
+        
+        if (newStatus && this.gameId) {
+          console.log('➕ Adding to Neo4j');
+          this.recommendationsService.recordGamePlayed(
+            currentUser._id, 
+            this.gameId,
+            this.game?.rating || 0
+          ).subscribe({
+            next: () => {
+              console.log('Added to Neo4j');
+              this.checkCompletedStatus();
+            },
+            error: (err) => console.error('Error:', err)
+          });
+        } else if (!newStatus && this.gameId) {
+          console.log('Removing from Neo4j');
+          this.recommendationsService.removeGamePlayed(currentUser._id, this.gameId).subscribe({
+            next: () => {
+              console.log('Removed from Neo4j');
+              this.checkCompletedStatus();
+            },
+            error: (err) => console.error('Error:', err)
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error updating user:', err);
+        this.isCompletedByCurrentUser = !newStatus;
+        alert('Failed to update completed status');
+      }
+    });
   }
 
   loadDevelopers(): void {
@@ -108,49 +193,6 @@ export class GameAddEditComponent implements OnInit {
 
   isDeveloperSelected(developerId: string): boolean {
     return this.selectedDeveloperIds.includes(developerId);
-  }
-
-  toggleCompleted(): void {
-    const currentUser = this.authService.currentUserValue;
-    if (!currentUser || !this.gameId) {
-      console.error('No user or game ID');
-      return;
-    }
-
-    this.isCompletedByCurrentUser = !this.isCompletedByCurrentUser;
-    const newStatus = this.isCompletedByCurrentUser;
-
-    console.log('Toggling to:', newStatus);
-
-    let updatedCompletedGameIds = [...(currentUser.completedGameIds || [])];
-
-    if (newStatus) {
-      if (!updatedCompletedGameIds.includes(this.gameId)) {
-        updatedCompletedGameIds.push(this.gameId);
-      }
-    } else {
-      updatedCompletedGameIds = updatedCompletedGameIds.filter(id => id !== this.gameId);
-    }
-
-    console.log('Updating completedGameIds:', updatedCompletedGameIds);
-
-    this.userService.update(currentUser._id, { completedGameIds: updatedCompletedGameIds } as any).subscribe({
-      next: (updatedUser) => {
-        this.authService.updateCurrentUser(updatedUser);
-        if (newStatus && this.gameId) {
-          console.log('Recording game played in Neo4j');
-          this.friendsService.recordGamePlayed(currentUser._id, this.gameId, this.game?.rating || 0).subscribe({
-            next: () => console.log('Game play recorded in Neo4j'),
-            error: (err) => console.error('Error recording game play:', err)
-          });
-        }
-      },
-      error: (err) => {
-        console.error('Error updating user:', err);
-        this.isCompletedByCurrentUser = !newStatus;
-        alert('Failed to update completed status');
-      }
-    });
   }
 
   onSubmit(): void {
@@ -194,19 +236,4 @@ export class GameAddEditComponent implements OnInit {
       });
     }
   }
-
-  syncGameToNeo4j(): void {
-    if (!this.game) return;
-    
-    const gameId = this.game._id || '';
-    const title = this.game.title;
-    const genre = this.game.genre;
-    
-    console.log('Syncing game to Neo4j:', gameId, title, genre);
-    
-    this.friendsService.syncGame(gameId, title, genre).subscribe({
-        next: () => console.log('Game synced to Neo4j'),
-        error: (err) => console.error('Error syncing game:', err)
-    });
-}
 }

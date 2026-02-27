@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IGame } from '../../game.service';
 import { GameService } from '../../game.service';
+import { RecommendationsService } from '../../../../services/recommendations.service';
 import { faCheck, faTimes, faStar } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../services/auth.service';
+
 @Component({
   selector: 'app-game-card',
   templateUrl: './game-card.component.html',
@@ -18,14 +20,34 @@ export class GameCardComponent implements OnInit {
 
   constructor(
     private gameService: GameService,
+    private recommendationsService: RecommendationsService,
     public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.checkCompletedFromNeo4j();
+  }
+
+  checkCompletedFromNeo4j(): void {
     const currentUser = this.authService.currentUserValue;
-    if (currentUser && this.game) {
-      this.isCompletedByCurrentUser = currentUser.completedGameIds?.includes(this.game._id || '') || false;
+    if (!currentUser || !this.game) {
+      this.isCompletedByCurrentUser = false;
+      return;
     }
+
+    console.log('Card: Checking Neo4j for game', this.game._id);
+
+    this.recommendationsService.getUserCompletedGames(currentUser._id).subscribe({
+      next: (completedGameIds) => {
+        const gameId = this.game!._id || '';
+        this.isCompletedByCurrentUser = completedGameIds.includes(gameId);
+        console.log('Card: Is completed?', this.isCompletedByCurrentUser);
+      },
+      error: (err) => {
+        console.error('Card: Error:', err);
+        this.isCompletedByCurrentUser = false;
+      }
+    });
   }
 
   deleteGame(): void {
